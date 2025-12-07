@@ -1,0 +1,1676 @@
+{
+  "main.py": {
+    "filepath": "../test_project/main.py",
+    "module_docstring": "Task Manager CLI Application\nMain entry point for the application",
+    "functions": [
+      {
+        "name": "main",
+        "args": [],
+        "return_type": null,
+        "lineno": 25,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "setup_logger",
+          "handler.list_tasks",
+          "argparse.ArgumentParser",
+          "args.id",
+          "priority",
+          "int",
+          "storage",
+          "handler.add_task",
+          "TaskHandler",
+          "logger.info",
+          "validate_priority",
+          "sys.exit",
+          "print",
+          "handler.complete_task",
+          "args.title",
+          "parser.parse_args",
+          "handler.delete_task",
+          "TaskStorage",
+          "parser.add_argument"
+        ],
+        "docstring": "Main entry point for task manager CLI",
+        "code": "def main():\n    \"\"\"Main entry point for task manager CLI\"\"\"\n    parser = argparse.ArgumentParser(description=\"Simple Task Manager CLI\")\n    parser.add_argument('action', choices=['add', 'list', 'complete', 'delete'])\n    parser.add_argument('--title', help='Task title')\n    parser.add_argument('--priority', help='Task priority (low, medium, high)')\n    parser.add_argument('--id', type=int, help='Task ID')\n\n    args = parser.parse_args()\n\n    # Setup logger\n    logger = setup_logger()\n    logger.info(f\"Starting task manager: {args.action}\")\n\n    # Initialize components\n    storage = TaskStorage()\n    handler = TaskHandler(storage)\n\n    # Execute action\n    if args.action == 'add':\n        if not args.title:\n            print(\"Error: --title required for add action\")\n            sys.exit(1)\n\n        priority = args.priority or 'medium'\n        if not validate_priority(priority):\n            print(f\"Error: Invalid priority '{priority}'\")\n            sys.exit(1)\n\n        task_id = handler.add_task(args.title, priority)\n        print(f\"\u2713 Task added with ID: {task_id}\")\n\n    elif args.action == 'list':\n        tasks = handler.list_tasks()\n        if not tasks:\n            print(\"No tasks found\")\n        else:\n            print(\"\\nCurrent Tasks:\")\n            print(\"-\" * 50)\n            for task in tasks:\n                status = \"\u2713\" if task['completed'] else \"\u25cb\"\n                print(f\"{status} [{task['id']}] {task['title']} (Priority: {task['priority']})\")\n\n    elif args.action == 'complete':\n        if not args.id:\n            print(\"Error: --id required for complete action\")\n            sys.exit(1)\n\n        handler.complete_task(args.id)\n        print(f\"\u2713 Task {args.id} marked as complete\")\n\n    elif args.action == 'delete':\n        if not args.id:\n            print(\"Error: --id required for delete action\")\n            sys.exit(1)\n\n        handler.delete_task(args.id)\n        print(f\"\u2713 Task {args.id} deleted\")",
+        "line_count": 58,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "deprecated_export_to_json",
+        "args": [],
+        "return_type": null,
+        "lineno": 85,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "TaskStorage",
+          "storage.load_all",
+          "json.dumps",
+          "tasks"
+        ],
+        "docstring": null,
+        "code": "def deprecated_export_to_json():\n    storage = TaskStorage()\n    tasks = storage.load_all()\n    return json.dumps(tasks, indent=2)",
+        "line_count": 4,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "helper_function_used_once",
+        "args": [],
+        "return_type": null,
+        "lineno": 91,
+        "decorators": [],
+        "is_async": false,
+        "calls": [],
+        "docstring": null,
+        "code": "def helper_function_used_once():\n    return \"helper\"",
+        "line_count": 2,
+        "needs_llm_summary": false
+      },
+      {
+        "name": "function_with_unreachable_code",
+        "args": [
+          {
+            "name": "value"
+          }
+        ],
+        "return_type": null,
+        "lineno": 95,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "print",
+          "cleanup"
+        ],
+        "docstring": null,
+        "code": "def function_with_unreachable_code(value):\n    if value > 10:\n        return True\n\n    return False\n\n    print(\"This is unreachable\")\n    cleanup()",
+        "line_count": 8,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "empty_placeholder",
+        "args": [],
+        "return_type": null,
+        "lineno": 105,
+        "decorators": [],
+        "is_async": false,
+        "calls": [],
+        "docstring": null,
+        "code": "def empty_placeholder():\n    pass",
+        "line_count": 2,
+        "needs_llm_summary": false
+      },
+      {
+        "name": "another_empty_function",
+        "args": [],
+        "return_type": null,
+        "lineno": 109,
+        "decorators": [],
+        "is_async": false,
+        "calls": [],
+        "docstring": null,
+        "code": "def another_empty_function():\n    return None",
+        "line_count": 2,
+        "needs_llm_summary": false
+      },
+      {
+        "name": "function_with_many_params",
+        "args": [
+          {
+            "name": "a"
+          },
+          {
+            "name": "b"
+          },
+          {
+            "name": "c"
+          },
+          {
+            "name": "d"
+          },
+          {
+            "name": "e"
+          },
+          {
+            "name": "f"
+          },
+          {
+            "name": "g"
+          },
+          {
+            "name": "h"
+          }
+        ],
+        "return_type": null,
+        "lineno": 113,
+        "decorators": [],
+        "is_async": false,
+        "calls": [],
+        "docstring": null,
+        "code": "def function_with_many_params(a, b, c, d, e, f, g, h):\n    return a + b + c + d + e + f + g + h",
+        "line_count": 2,
+        "needs_llm_summary": false
+      },
+      {
+        "name": "test_helper",
+        "args": [],
+        "return_type": null,
+        "lineno": 117,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "helper_function_used_once"
+        ],
+        "docstring": null,
+        "code": "def test_helper():\n    result = helper_function_used_once()\n    return result",
+        "line_count": 3,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [],
+    "imports": [
+      {
+        "module": "sys",
+        "alias": null,
+        "lineno": 7,
+        "type": "import"
+      },
+      {
+        "module": "argparse",
+        "alias": null,
+        "lineno": 8,
+        "type": "import"
+      },
+      {
+        "module": "task_manager.task_handler",
+        "name": "TaskHandler",
+        "alias": null,
+        "lineno": 9,
+        "type": "from_import"
+      },
+      {
+        "module": "task_manager.storage",
+        "name": "TaskStorage",
+        "alias": null,
+        "lineno": 10,
+        "type": "from_import"
+      },
+      {
+        "module": "utils.logger",
+        "name": "setup_logger",
+        "alias": null,
+        "lineno": 11,
+        "type": "from_import"
+      },
+      {
+        "module": "utils.validators",
+        "name": "validate_priority",
+        "alias": null,
+        "lineno": 12,
+        "type": "from_import"
+      },
+      {
+        "module": "json",
+        "alias": null,
+        "lineno": 13,
+        "type": "import"
+      },
+      {
+        "module": "os",
+        "alias": null,
+        "lineno": 14,
+        "type": "import"
+      },
+      {
+        "module": "typing",
+        "name": "Dict",
+        "alias": null,
+        "lineno": 15,
+        "type": "from_import"
+      },
+      {
+        "module": "typing",
+        "name": "List",
+        "alias": null,
+        "lineno": 15,
+        "type": "from_import"
+      },
+      {
+        "module": "typing",
+        "name": "Optional",
+        "alias": null,
+        "lineno": 15,
+        "type": "from_import"
+      },
+      {
+        "module": "datetime",
+        "alias": null,
+        "lineno": 16,
+        "type": "import"
+      }
+    ],
+    "variables": [
+      {
+        "name": "DEBUG_MODE",
+        "assigned_to": "bool",
+        "lineno": 19
+      },
+      {
+        "name": "MAX_RETRIES",
+        "assigned_to": "int",
+        "lineno": 20
+      },
+      {
+        "name": "API_ENDPOINT",
+        "assigned_to": "str",
+        "lineno": 21
+      },
+      {
+        "name": "CACHE_TIMEOUT",
+        "assigned_to": "int",
+        "lineno": 22
+      }
+    ],
+    "is_entry_point": true,
+    "main_block_calls": [
+      "main"
+    ],
+    "module_level_calls": {
+      "function_calls": [
+        "deprecated_export_to_json",
+        "print",
+        "main"
+      ],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [
+        "argparse",
+        "sys",
+        "os",
+        "json",
+        "datetime",
+        "typing"
+      ],
+      "third_party": {
+        "other": [
+          "task_manager",
+          "utils"
+        ]
+      },
+      "tech_stack": []
+    },
+    "line_count": 129
+  },
+  "task_manager/__init__.py": {
+    "filepath": "../test_project/task_manager/__init__.py",
+    "module_docstring": "Task Manager Package\nProvides task management functionality",
+    "functions": [],
+    "classes": [],
+    "imports": [
+      {
+        "module": "task_handler",
+        "name": "TaskHandler",
+        "alias": null,
+        "lineno": 9,
+        "type": "from_import"
+      },
+      {
+        "module": "storage",
+        "name": "TaskStorage",
+        "alias": null,
+        "lineno": 10,
+        "type": "from_import"
+      }
+    ],
+    "variables": [
+      {
+        "name": "__version__",
+        "assigned_to": "str",
+        "lineno": 6
+      },
+      {
+        "name": "__author__",
+        "assigned_to": "str",
+        "lineno": 7
+      },
+      {
+        "name": "__all__",
+        "assigned_to": null,
+        "lineno": 12
+      }
+    ],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [],
+      "third_party": {
+        "other": [
+          "task_handler",
+          "storage"
+        ]
+      },
+      "tech_stack": []
+    },
+    "line_count": 13
+  },
+  "task_manager/storage.py": {
+    "filepath": "../test_project/task_manager/storage.py",
+    "module_docstring": "Storage Module\nHandles data persistence for tasks",
+    "functions": [
+      {
+        "name": "__init__",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "storage_path",
+            "type": "str"
+          }
+        ],
+        "return_type": null,
+        "lineno": 15,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self._load_from_disk",
+          "storage_path",
+          "Path"
+        ],
+        "docstring": null,
+        "code": "def __init__(self, storage_path: str = \".tasks.pkl\"):\n        self.storage_path = Path(storage_path)\n        self.tasks = self._load_from_disk()",
+        "line_count": 3,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "save",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "task"
+          }
+        ],
+        "return_type": "None",
+        "lineno": 19,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "task",
+          "self._persist_to_disk"
+        ],
+        "docstring": "Save a task",
+        "code": "def save(self, task) -> None:\n        \"\"\"Save a task\"\"\"\n        self.tasks[task.id] = task\n        self._persist_to_disk()",
+        "line_count": 4,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "load_all",
+        "args": [
+          {
+            "name": "self"
+          }
+        ],
+        "return_type": "List[Dict]",
+        "lineno": 24,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.tasks.values",
+          "task.to_dict"
+        ],
+        "docstring": "Load all tasks",
+        "code": "def load_all(self) -> List[Dict]:\n        \"\"\"Load all tasks\"\"\"\n        return [task.to_dict() for task in self.tasks.values()]",
+        "line_count": 3,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "load_by_id",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "task_id",
+            "type": "int"
+          }
+        ],
+        "return_type": null,
+        "lineno": 28,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.tasks.get",
+          "task_id"
+        ],
+        "docstring": "Load a specific task by ID",
+        "code": "def load_by_id(self, task_id: int):\n        \"\"\"Load a specific task by ID\"\"\"\n        return self.tasks.get(task_id)",
+        "line_count": 3,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "update",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "task"
+          }
+        ],
+        "return_type": "None",
+        "lineno": 32,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "task",
+          "self._persist_to_disk"
+        ],
+        "docstring": "Update an existing task",
+        "code": "def update(self, task) -> None:\n        \"\"\"Update an existing task\"\"\"\n        if task.id in self.tasks:\n            self.tasks[task.id] = task\n            self._persist_to_disk()",
+        "line_count": 5,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "delete",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "task_id",
+            "type": "int"
+          }
+        ],
+        "return_type": "bool",
+        "lineno": 38,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self._persist_to_disk"
+        ],
+        "docstring": "Delete a task",
+        "code": "def delete(self, task_id: int) -> bool:\n        \"\"\"Delete a task\"\"\"\n        if task_id in self.tasks:\n            del self.tasks[task_id]\n            self._persist_to_disk()\n            return True\n        return False",
+        "line_count": 7,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "_load_from_disk",
+        "args": [
+          {
+            "name": "self"
+          }
+        ],
+        "return_type": "Dict",
+        "lineno": 46,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "f",
+          "self.storage_path.exists",
+          "self.storage_path",
+          "pickle.load",
+          "print",
+          "open"
+        ],
+        "docstring": "Load tasks from disk",
+        "code": "def _load_from_disk(self) -> Dict:\n        \"\"\"Load tasks from disk\"\"\"\n        if self.storage_path.exists():\n            try:\n                with open(self.storage_path, 'rb') as f:\n                    return pickle.load(f)\n            except Exception as e:\n                print(f\"Error loading tasks: {e}\")\n                return {}\n        return {}",
+        "line_count": 10,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "_persist_to_disk",
+        "args": [
+          {
+            "name": "self"
+          }
+        ],
+        "return_type": "None",
+        "lineno": 57,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "f",
+          "self.storage_path",
+          "pickle.dump",
+          "print",
+          "open",
+          "self.tasks"
+        ],
+        "docstring": "Save tasks to disk",
+        "code": "def _persist_to_disk(self) -> None:\n        \"\"\"Save tasks to disk\"\"\"\n        try:\n            with open(self.storage_path, 'wb') as f:\n                pickle.dump(self.tasks, f)\n        except Exception as e:\n            print(f\"Error saving tasks: {e}\")",
+        "line_count": 7,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "clear_all",
+        "args": [
+          {
+            "name": "self"
+          }
+        ],
+        "return_type": "None",
+        "lineno": 65,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self._persist_to_disk"
+        ],
+        "docstring": "Clear all tasks (for testing)",
+        "code": "def clear_all(self) -> None:\n        \"\"\"Clear all tasks (for testing)\"\"\"\n        self.tasks = {}\n        self._persist_to_disk()",
+        "line_count": 4,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "__init__",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "db_path",
+            "type": "str"
+          }
+        ],
+        "return_type": null,
+        "lineno": 78,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "db_path"
+        ],
+        "docstring": null,
+        "code": "def __init__(self, db_path: str):\n        self.db_path = db_path",
+        "line_count": 2,
+        "needs_llm_summary": false
+      },
+      {
+        "name": "connect",
+        "args": [
+          {
+            "name": "self"
+          }
+        ],
+        "return_type": null,
+        "lineno": 81,
+        "decorators": [],
+        "is_async": false,
+        "calls": [],
+        "docstring": "Connect to database",
+        "code": "def connect(self):\n        \"\"\"Connect to database\"\"\"\n        pass",
+        "line_count": 3,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "execute_query",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "query",
+            "type": "str"
+          }
+        ],
+        "return_type": null,
+        "lineno": 85,
+        "decorators": [],
+        "is_async": false,
+        "calls": [],
+        "docstring": "Execute SQL query",
+        "code": "def execute_query(self, query: str):\n        \"\"\"Execute SQL query\"\"\"\n        pass",
+        "line_count": 3,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [
+      {
+        "name": "TaskStorage",
+        "methods": [
+          "__init__",
+          "save",
+          "load_all",
+          "load_by_id",
+          "update",
+          "delete",
+          "_load_from_disk",
+          "_persist_to_disk",
+          "clear_all"
+        ],
+        "base_classes": [],
+        "lineno": 12,
+        "docstring": "Handles task storage and retrieval"
+      },
+      {
+        "name": "DatabaseStorage",
+        "methods": [
+          "__init__",
+          "connect",
+          "execute_query"
+        ],
+        "base_classes": [],
+        "lineno": 72,
+        "docstring": "Alternative storage backend using SQLite\nThis was planned but never implemented"
+      }
+    ],
+    "imports": [
+      {
+        "module": "os",
+        "alias": null,
+        "lineno": 6,
+        "type": "import"
+      },
+      {
+        "module": "pickle",
+        "alias": null,
+        "lineno": 7,
+        "type": "import"
+      },
+      {
+        "module": "typing",
+        "name": "List",
+        "alias": null,
+        "lineno": 8,
+        "type": "from_import"
+      },
+      {
+        "module": "typing",
+        "name": "Dict",
+        "alias": null,
+        "lineno": 8,
+        "type": "from_import"
+      },
+      {
+        "module": "typing",
+        "name": "Optional",
+        "alias": null,
+        "lineno": 8,
+        "type": "from_import"
+      },
+      {
+        "module": "pathlib",
+        "name": "Path",
+        "alias": null,
+        "lineno": 9,
+        "type": "from_import"
+      }
+    ],
+    "variables": [],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [
+        "pickle",
+        "pathlib",
+        "os",
+        "typing"
+      ],
+      "third_party": {},
+      "tech_stack": []
+    },
+    "line_count": 88
+  },
+  "task_manager/task_handler.py": {
+    "filepath": "../test_project/task_manager/task_handler.py",
+    "module_docstring": "Task Handler Module\nHandles all task-related operations (add, update, delete, complete)",
+    "functions": [
+      {
+        "name": "__init__",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "task_id",
+            "type": "int"
+          },
+          {
+            "name": "title",
+            "type": "str"
+          },
+          {
+            "name": "priority",
+            "type": "str"
+          }
+        ],
+        "return_type": null,
+        "lineno": 15,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "priority",
+          "title",
+          "datetime.now",
+          "task_id"
+        ],
+        "docstring": null,
+        "code": "def __init__(self, task_id: int, title: str, priority: str = 'medium'):\n        self.id = task_id\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.created_at = datetime.now()\n        self.completed_at = None",
+        "line_count": 7,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "to_dict",
+        "args": [
+          {
+            "name": "self"
+          }
+        ],
+        "return_type": "Dict",
+        "lineno": 23,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.completed_at.isoformat",
+          "self.created_at.isoformat"
+        ],
+        "docstring": "Convert task to dictionary",
+        "code": "def to_dict(self) -> Dict:\n        \"\"\"Convert task to dictionary\"\"\"\n        return {\n            'id': self.id,\n            'title': self.title,\n            'priority': self.priority,\n            'completed': self.completed,\n            'created_at': self.created_at.isoformat(),\n            'completed_at': self.completed_at.isoformat() if self.completed_at else None\n        }",
+        "line_count": 10,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "mark_complete",
+        "args": [
+          {
+            "name": "self"
+          }
+        ],
+        "return_type": null,
+        "lineno": 34,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "datetime.now"
+        ],
+        "docstring": "Mark task as completed",
+        "code": "def mark_complete(self):\n        \"\"\"Mark task as completed\"\"\"\n        self.completed = True\n        self.completed_at = datetime.now()",
+        "line_count": 4,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "__init__",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "storage",
+            "type": "TaskStorage"
+          }
+        ],
+        "return_type": null,
+        "lineno": 43,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "storage",
+          "max",
+          "self.storage.load_all"
+        ],
+        "docstring": null,
+        "code": "def __init__(self, storage: TaskStorage):\n        self.storage = storage\n        # Calculate next ID based on existing tasks\n        existing_tasks = self.storage.load_all()\n        if existing_tasks:\n            self._next_id = max(task['id'] for task in existing_tasks) + 1\n        else:\n            self._next_id = 1",
+        "line_count": 8,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "add_task",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "title",
+            "type": "str"
+          },
+          {
+            "name": "priority",
+            "type": "str"
+          }
+        ],
+        "return_type": "int",
+        "lineno": 52,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "validate_task_title",
+          "task",
+          "Task",
+          "priority",
+          "title",
+          "ValueError",
+          "self._next_id",
+          "self.storage.save"
+        ],
+        "docstring": "Add a new task",
+        "code": "def add_task(self, title: str, priority: str = 'medium') -> int:\n        \"\"\"Add a new task\"\"\"\n        if not validate_task_title(title):\n            raise ValueError(\"Invalid task title\")\n\n        task = Task(self._next_id, title, priority)\n        self.storage.save(task)\n        self._next_id += 1\n        return task.id",
+        "line_count": 9,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "list_tasks",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "include_completed",
+            "type": "bool"
+          }
+        ],
+        "return_type": "List[Dict]",
+        "lineno": 62,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.storage.load_all",
+          "sorted",
+          "tasks"
+        ],
+        "docstring": "List all tasks",
+        "code": "def list_tasks(self, include_completed: bool = True) -> List[Dict]:\n        \"\"\"List all tasks\"\"\"\n        tasks = self.storage.load_all()\n\n        if not include_completed:\n            tasks = [t for t in tasks if not t['completed']]\n\n        return sorted(tasks, key=lambda x: x['id'])",
+        "line_count": 8,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "complete_task",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "task_id",
+            "type": "int"
+          }
+        ],
+        "return_type": "bool",
+        "lineno": 71,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.storage.load_by_id",
+          "task_id",
+          "task.mark_complete",
+          "task",
+          "self.storage.update"
+        ],
+        "docstring": "Mark a task as completed",
+        "code": "def complete_task(self, task_id: int) -> bool:\n        \"\"\"Mark a task as completed\"\"\"\n        task = self.storage.load_by_id(task_id)\n        if task:\n            task.mark_complete()\n            self.storage.update(task)\n            return True\n        return False",
+        "line_count": 8,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "delete_task",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "task_id",
+            "type": "int"
+          }
+        ],
+        "return_type": "bool",
+        "lineno": 80,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.storage.delete",
+          "task_id"
+        ],
+        "docstring": "Delete a task",
+        "code": "def delete_task(self, task_id: int) -> bool:\n        \"\"\"Delete a task\"\"\"\n        return self.storage.delete(task_id)",
+        "line_count": 3,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "get_task_by_priority",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "priority",
+            "type": "str"
+          }
+        ],
+        "return_type": "List[Dict]",
+        "lineno": 84,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.list_tasks"
+        ],
+        "docstring": "Get tasks filtered by priority",
+        "code": "def get_task_by_priority(self, priority: str) -> List[Dict]:\n        \"\"\"Get tasks filtered by priority\"\"\"\n        all_tasks = self.list_tasks()\n        return [t for t in all_tasks if t['priority'] == priority]",
+        "line_count": 4,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "archive_completed_tasks",
+        "args": [
+          {
+            "name": "self"
+          }
+        ],
+        "return_type": null,
+        "lineno": 90,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.list_tasks"
+        ],
+        "docstring": "This function was meant to archive old completed tasks\nbut the feature was never finished",
+        "code": "def archive_completed_tasks(self):\n        \"\"\"\n        This function was meant to archive old completed tasks\n        but the feature was never finished\n        \"\"\"\n        completed = [t for t in self.list_tasks() if t['completed']]\n        # TODO: Implement archival logic\n        pass",
+        "line_count": 8,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [
+      {
+        "name": "Task",
+        "methods": [
+          "__init__",
+          "to_dict",
+          "mark_complete"
+        ],
+        "base_classes": [],
+        "lineno": 12,
+        "docstring": "Represents a single task"
+      },
+      {
+        "name": "TaskHandler",
+        "methods": [
+          "__init__",
+          "add_task",
+          "list_tasks",
+          "complete_task",
+          "delete_task",
+          "get_task_by_priority",
+          "archive_completed_tasks"
+        ],
+        "base_classes": [],
+        "lineno": 40,
+        "docstring": "Handles task operations"
+      }
+    ],
+    "imports": [
+      {
+        "module": "typing",
+        "name": "List",
+        "alias": null,
+        "lineno": 6,
+        "type": "from_import"
+      },
+      {
+        "module": "typing",
+        "name": "Dict",
+        "alias": null,
+        "lineno": 6,
+        "type": "from_import"
+      },
+      {
+        "module": "typing",
+        "name": "Optional",
+        "alias": null,
+        "lineno": 6,
+        "type": "from_import"
+      },
+      {
+        "module": "datetime",
+        "name": "datetime",
+        "alias": null,
+        "lineno": 7,
+        "type": "from_import"
+      },
+      {
+        "module": "storage",
+        "name": "TaskStorage",
+        "alias": null,
+        "lineno": 8,
+        "type": "from_import"
+      },
+      {
+        "module": "utils.validators",
+        "name": "validate_task_title",
+        "alias": null,
+        "lineno": 9,
+        "type": "from_import"
+      }
+    ],
+    "variables": [],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [
+        "typing",
+        "datetime"
+      ],
+      "third_party": {
+        "other": [
+          "storage",
+          "utils"
+        ]
+      },
+      "tech_stack": []
+    },
+    "line_count": 98
+  },
+  "utils/__init__.py": {
+    "filepath": "../test_project/utils/__init__.py",
+    "module_docstring": "Utilities Package\nCommon utility functions and helpers",
+    "functions": [],
+    "classes": [],
+    "imports": [
+      {
+        "module": "logger",
+        "name": "setup_logger",
+        "alias": null,
+        "lineno": 6,
+        "type": "from_import"
+      },
+      {
+        "module": "validators",
+        "name": "validate_priority",
+        "alias": null,
+        "lineno": 7,
+        "type": "from_import"
+      },
+      {
+        "module": "validators",
+        "name": "validate_task_title",
+        "alias": null,
+        "lineno": 7,
+        "type": "from_import"
+      }
+    ],
+    "variables": [
+      {
+        "name": "__all__",
+        "assigned_to": null,
+        "lineno": 9
+      }
+    ],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [],
+      "third_party": {
+        "other": [
+          "logger",
+          "validators"
+        ]
+      },
+      "tech_stack": []
+    },
+    "line_count": 10
+  },
+  "utils/logger.py": {
+    "filepath": "../test_project/utils/logger.py",
+    "module_docstring": "Logger Module\nProvides logging functionality for the application",
+    "functions": [
+      {
+        "name": "setup_logger",
+        "args": [
+          {
+            "name": "name",
+            "type": "str"
+          },
+          {
+            "name": "level",
+            "type": "int"
+          }
+        ],
+        "return_type": null,
+        "lineno": 11,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "logging.Formatter",
+          "handler",
+          "handler.setLevel",
+          "sys.stdout",
+          "logging.getLogger",
+          "logger.addHandler",
+          "name",
+          "handler.setFormatter",
+          "level",
+          "logger.setLevel",
+          "formatter",
+          "logging.StreamHandler"
+        ],
+        "docstring": "Set up and configure logger\n\nArgs:\n    name: Logger name\n    level: Logging level\n\nReturns:\n    Configured logger instance",
+        "code": "def setup_logger(name: str = 'task_manager', level: int = logging.INFO):\n    \"\"\"\n    Set up and configure logger\n\n    Args:\n        name: Logger name\n        level: Logging level\n\n    Returns:\n        Configured logger instance\n    \"\"\"\n    logger = logging.getLogger(name)\n    logger.setLevel(level)\n\n    # Console handler\n    handler = logging.StreamHandler(sys.stdout)\n    handler.setLevel(level)\n\n    # Formatter\n    formatter = logging.Formatter(\n        '%(asctime)s - %(name)s - %(levelname)s - %(message)s',\n        datefmt='%Y-%m-%d %H:%M:%S'\n    )\n    handler.setFormatter(formatter)\n\n    logger.addHandler(handler)\n    return logger",
+        "line_count": 27,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "get_logger",
+        "args": [
+          {
+            "name": "name",
+            "type": "str"
+          }
+        ],
+        "return_type": null,
+        "lineno": 40,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "logging.getLogger",
+          "name"
+        ],
+        "docstring": "Get existing logger instance",
+        "code": "def get_logger(name: str = 'task_manager'):\n    \"\"\"Get existing logger instance\"\"\"\n    return logging.getLogger(name)",
+        "line_count": 3,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "log_to_file",
+        "args": [
+          {
+            "name": "message",
+            "type": "str"
+          },
+          {
+            "name": "filename",
+            "type": "str"
+          }
+        ],
+        "return_type": null,
+        "lineno": 46,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "filename",
+          "f.write",
+          "open",
+          "datetime.now",
+          "unknown.strftime"
+        ],
+        "docstring": "Log message to file\nThis function was created but never integrated",
+        "code": "def log_to_file(message: str, filename: str = 'app.log'):\n    \"\"\"\n    Log message to file\n    This function was created but never integrated\n    \"\"\"\n    with open(filename, 'a') as f:\n        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')\n        f.write(f\"{timestamp} - {message}\\n\")",
+        "line_count": 8,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [],
+    "imports": [
+      {
+        "module": "logging",
+        "alias": null,
+        "lineno": 6,
+        "type": "import"
+      },
+      {
+        "module": "sys",
+        "alias": null,
+        "lineno": 7,
+        "type": "import"
+      },
+      {
+        "module": "datetime",
+        "name": "datetime",
+        "alias": null,
+        "lineno": 8,
+        "type": "from_import"
+      }
+    ],
+    "variables": [],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [
+        "sys",
+        "datetime",
+        "logging"
+      ],
+      "third_party": {},
+      "tech_stack": []
+    },
+    "line_count": 54
+  },
+  "utils/validators.py": {
+    "filepath": "../test_project/utils/validators.py",
+    "module_docstring": "Validators Module\nInput validation functions",
+    "functions": [
+      {
+        "name": "validate_priority",
+        "args": [
+          {
+            "name": "priority",
+            "type": "str"
+          }
+        ],
+        "return_type": "bool",
+        "lineno": 10,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "priority.lower"
+        ],
+        "docstring": "Validate task priority\n\nArgs:\n    priority: Priority string to validate\n\nReturns:\n    True if valid, False otherwise",
+        "code": "def validate_priority(priority: str) -> bool:\n    \"\"\"\n    Validate task priority\n\n    Args:\n        priority: Priority string to validate\n\n    Returns:\n        True if valid, False otherwise\n    \"\"\"\n    valid_priorities = ['low', 'medium', 'high']\n    return priority.lower() in valid_priorities",
+        "line_count": 12,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "validate_task_title",
+        "args": [
+          {
+            "name": "title",
+            "type": "str"
+          }
+        ],
+        "return_type": "bool",
+        "lineno": 24,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "title",
+          "len",
+          "title.strip"
+        ],
+        "docstring": "Validate task title\n\nArgs:\n    title: Task title to validate\n\nReturns:\n    True if valid, False otherwise",
+        "code": "def validate_task_title(title: str) -> bool:\n    \"\"\"\n    Validate task title\n\n    Args:\n        title: Task title to validate\n\n    Returns:\n        True if valid, False otherwise\n    \"\"\"\n    if not title or len(title.strip()) == 0:\n        return False\n\n    if len(title) > 200:\n        return False\n\n    return True",
+        "line_count": 17,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "validate_email",
+        "args": [
+          {
+            "name": "email",
+            "type": "str"
+          }
+        ],
+        "return_type": "bool",
+        "lineno": 43,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "pattern",
+          "re.match",
+          "bool",
+          "email"
+        ],
+        "docstring": "Validate email format\n\nArgs:\n    email: Email address to validate\n\nReturns:\n    True if valid email format, False otherwise",
+        "code": "def validate_email(email: str) -> bool:\n    \"\"\"\n    Validate email format\n\n    Args:\n        email: Email address to validate\n\n    Returns:\n        True if valid email format, False otherwise\n    \"\"\"\n    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n    return bool(re.match(pattern, email))",
+        "line_count": 12,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "validate_phone_number",
+        "args": [
+          {
+            "name": "phone",
+            "type": "str"
+          }
+        ],
+        "return_type": "bool",
+        "lineno": 58,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "phone.replace",
+          "pattern",
+          "re.match",
+          "bool",
+          "unknown.replace"
+        ],
+        "docstring": "Validate phone number (US format)\nWas created for future user profile feature",
+        "code": "def validate_phone_number(phone: str) -> bool:\n    \"\"\"\n    Validate phone number (US format)\n    Was created for future user profile feature\n    \"\"\"\n    pattern = r'^\\+?1?\\d{10}$'\n    return bool(re.match(pattern, phone.replace('-', '').replace(' ', '')))",
+        "line_count": 7,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "sanitize_input",
+        "args": [
+          {
+            "name": "text",
+            "type": "str"
+          }
+        ],
+        "return_type": "str",
+        "lineno": 67,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "char",
+          "text.replace",
+          "text.strip"
+        ],
+        "docstring": "Sanitize user input\nPlanned for security but never integrated",
+        "code": "def sanitize_input(text: str) -> str:\n    \"\"\"\n    Sanitize user input\n    Planned for security but never integrated\n    \"\"\"\n    # Remove potentially dangerous characters\n    dangerous_chars = ['<', '>', ';', '&', '|']\n    for char in dangerous_chars:\n        text = text.replace(char, '')\n    return text.strip()",
+        "line_count": 10,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [],
+    "imports": [
+      {
+        "module": "re",
+        "alias": null,
+        "lineno": 6,
+        "type": "import"
+      },
+      {
+        "module": "typing",
+        "name": "Optional",
+        "alias": null,
+        "lineno": 7,
+        "type": "from_import"
+      }
+    ],
+    "variables": [],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [
+        "re",
+        "typing"
+      ],
+      "third_party": {},
+      "tech_stack": []
+    },
+    "line_count": 77
+  },
+  "__analysis_summary__": {
+    "total_modules": 6,
+    "total_functions": 35,
+    "total_classes": 4,
+    "dead_code_candidates": {
+      "unreferenced_functions": [
+        {
+          "name": "function_with_unreachable_code",
+          "module": "main.py",
+          "lineno": 95
+        },
+        {
+          "name": "empty_placeholder",
+          "module": "main.py",
+          "lineno": 105
+        },
+        {
+          "name": "another_empty_function",
+          "module": "main.py",
+          "lineno": 109
+        },
+        {
+          "name": "function_with_many_params",
+          "module": "main.py",
+          "lineno": 113
+        },
+        {
+          "name": "test_helper",
+          "module": "main.py",
+          "lineno": 117
+        },
+        {
+          "name": "clear_all",
+          "module": "task_manager/storage.py",
+          "lineno": 65
+        },
+        {
+          "name": "connect",
+          "module": "task_manager/storage.py",
+          "lineno": 81
+        },
+        {
+          "name": "execute_query",
+          "module": "task_manager/storage.py",
+          "lineno": 85
+        },
+        {
+          "name": "get_task_by_priority",
+          "module": "task_manager/task_handler.py",
+          "lineno": 84
+        },
+        {
+          "name": "archive_completed_tasks",
+          "module": "task_manager/task_handler.py",
+          "lineno": 90
+        },
+        {
+          "name": "get_logger",
+          "module": "utils/logger.py",
+          "lineno": 40
+        },
+        {
+          "name": "log_to_file",
+          "module": "utils/logger.py",
+          "lineno": 46
+        },
+        {
+          "name": "validate_email",
+          "module": "utils/validators.py",
+          "lineno": 43
+        },
+        {
+          "name": "validate_phone_number",
+          "module": "utils/validators.py",
+          "lineno": 58
+        },
+        {
+          "name": "sanitize_input",
+          "module": "utils/validators.py",
+          "lineno": 67
+        }
+      ],
+      "unused_classes": [
+        {
+          "name": "DatabaseStorage",
+          "module": "task_manager/storage.py",
+          "lineno": 72
+        }
+      ],
+      "unused_imports": [
+        {
+          "module": "main.py",
+          "import_statement": "import os",
+          "lineno": 14,
+          "imported_module": "os",
+          "symbols": [
+            "os"
+          ],
+          "needs_llm": false
+        },
+        {
+          "module": "main.py",
+          "import_statement": "import typing",
+          "lineno": 15,
+          "imported_module": "typing",
+          "symbols": [
+            "Dict"
+          ],
+          "needs_llm": false
+        },
+        {
+          "module": "main.py",
+          "import_statement": "import typing",
+          "lineno": 15,
+          "imported_module": "typing",
+          "symbols": [
+            "List"
+          ],
+          "needs_llm": false
+        },
+        {
+          "module": "main.py",
+          "import_statement": "import typing",
+          "lineno": 15,
+          "imported_module": "typing",
+          "symbols": [
+            "Optional"
+          ],
+          "needs_llm": false
+        },
+        {
+          "module": "main.py",
+          "import_statement": "import datetime",
+          "lineno": 16,
+          "imported_module": "datetime",
+          "symbols": [
+            "datetime"
+          ],
+          "needs_llm": false
+        },
+        {
+          "module": "task_manager/storage.py",
+          "import_statement": "import os",
+          "lineno": 6,
+          "imported_module": "os",
+          "symbols": [
+            "os"
+          ],
+          "needs_llm": false
+        },
+        {
+          "module": "task_manager/storage.py",
+          "import_statement": "import typing",
+          "lineno": 8,
+          "imported_module": "typing",
+          "symbols": [
+            "Optional"
+          ],
+          "needs_llm": false
+        },
+        {
+          "module": "task_manager/task_handler.py",
+          "import_statement": "import typing",
+          "lineno": 6,
+          "imported_module": "typing",
+          "symbols": [
+            "Optional"
+          ],
+          "needs_llm": false
+        },
+        {
+          "module": "utils/validators.py",
+          "import_statement": "import typing",
+          "lineno": 7,
+          "imported_module": "typing",
+          "symbols": [
+            "Optional"
+          ],
+          "needs_llm": false
+        }
+      ],
+      "unused_global_variables": [
+        {
+          "module": "main.py",
+          "name": "DEBUG_MODE",
+          "lineno": 19,
+          "assigned_to": "bool",
+          "needs_llm": true
+        },
+        {
+          "module": "main.py",
+          "name": "MAX_RETRIES",
+          "lineno": 20,
+          "assigned_to": "int",
+          "needs_llm": true
+        },
+        {
+          "module": "main.py",
+          "name": "API_ENDPOINT",
+          "lineno": 21,
+          "assigned_to": "str",
+          "needs_llm": true
+        },
+        {
+          "module": "main.py",
+          "name": "CACHE_TIMEOUT",
+          "lineno": 22,
+          "assigned_to": "int",
+          "needs_llm": true
+        }
+      ],
+      "unreachable_code": [
+        {
+          "lineno": 101,
+          "reason": "Code after return/raise/break/continue",
+          "code_preview": "print(\"This is unreachable\")",
+          "module": "main.py",
+          "function": "function_with_unreachable_code",
+          "needs_llm": true
+        },
+        {
+          "lineno": 102,
+          "reason": "Code after return/raise/break/continue",
+          "code_preview": "cleanup()",
+          "module": "main.py",
+          "function": "function_with_unreachable_code",
+          "needs_llm": true
+        },
+        {
+          "module": "main.py",
+          "function": "<module-level>",
+          "lineno": 122,
+          "reason": "Code in \"if False:\" block",
+          "code_preview": "if False:\n    print('Disabled feature')\n    deprecated_export_to_json()",
+          "needs_llm": true
+        }
+      ],
+      "suspicious_patterns": [
+        {
+          "module": "main.py",
+          "name": "empty_placeholder",
+          "lineno": 105,
+          "pattern_type": "empty_function",
+          "details": "Function is empty or only contains pass/return None",
+          "needs_llm": true
+        },
+        {
+          "module": "main.py",
+          "name": "another_empty_function",
+          "lineno": 109,
+          "pattern_type": "empty_function",
+          "details": "Function is empty or only contains pass/return None",
+          "needs_llm": true
+        },
+        {
+          "module": "main.py",
+          "name": "function_with_many_params",
+          "lineno": 113,
+          "pattern_type": "too_many_parameters",
+          "details": "Function has 8 parameters - consider parameter object",
+          "needs_llm": true
+        },
+        {
+          "module": "task_manager/storage.py",
+          "name": "delete",
+          "lineno": 38,
+          "pattern_type": "similar_function_names",
+          "details": "Similar to delete_task in task_manager/task_handler.py - possible duplicate logic",
+          "needs_llm": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,48 @@
+graph TD
+    subgraph flask
+        g_Core_3a8c9aa0["Core Framework - __init__.py, app.py, app.py, blueprints.py, blueprints.py, +4 more"]
+        style g_Core_3a8c9aa0 fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Request/Response_86fd6f4e["Request/Response Handling - sessions.py, templating.py, views.py, wrappers.py"]
+        style g_Request/Response_86fd6f4e fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Application_60dbf48c["Application Entry and CLI - __main__.py, cli.py"]
+        style g_Application_60dbf48c fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Configuration_a8d42af4["Configuration and Settings - config.py"]
+        style g_Configuration_a8d42af4 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_JSON_d70c1814["JSON Handling - __init__.py, provider.py, tag.py"]
+        style g_JSON_d70c1814 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Utilities_b95e0d68["Utilities and Helpers - debughelpers.py, helpers.py, logging.py, signals.py"]
+        style g_Utilities_b95e0d68 fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Testing_40f60f59["Testing Infrastructure - testing.py"]
+        style g_Testing_40f60f59 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Documentation_5b6cf869["Documentation - conf.py"]
+        style g_Documentation_5b6cf869 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_f9e71fcc["Example - Tutorial Blog App - __init__.py, auth.py, blog.py, db.py"]
+        style g_Example:_f9e71fcc fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_d7a3df57["Example - Celery Background Tasks - __init__.py, make_celery.py, tasks.py, views.py"]
+        style g_Example:_d7a3df57 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_7f1e2e24["Example - JavaScript Integration - __init__.py, views.py"]
+        style g_Example:_7f1e2e24 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Example:_d7a3df57 --> g_Request/Response_86fd6f4e
+    g_Example:_7f1e2e24 --> g_Core_3a8c9aa0
+    g_Core_3a8c9aa0 --> g_Application_60dbf48c
+    g_Core_3a8c9aa0 --> g_Utilities_b95e0d68
+    g_Core_3a8c9aa0 --> g_Request/Response_86fd6f4e
+    g_Core_3a8c9aa0 --> g_Configuration_a8d42af4
+    g_Core_3a8c9aa0 --> g_Testing_40f60f59
+    g_Application_60dbf48c --> g_Utilities_b95e0d68
+    g_Application_60dbf48c --> g_Core_3a8c9aa0
+    g_Configuration_a8d42af4 --> g_Core_3a8c9aa0
+    g_Utilities_b95e0d68 --> g_Core_3a8c9aa0
+    g_Utilities_b95e0d68 --> g_Request/Response_86fd6f4e
+    g_JSON_d70c1814 --> g_Core_3a8c9aa0
+    g_JSON_d70c1814 --> g_Request/Response_86fd6f4e
+    g_Request/Response_86fd6f4e --> g_Utilities_b95e0d68
+    g_Request/Response_86fd6f4e --> g_Core_3a8c9aa0
+    g_Testing_40f60f59 --> g_Application_60dbf48c
+    g_Testing_40f60f59 --> g_Core_3a8c9aa0
+    g_Testing_40f60f59 --> g_Request/Response_86fd6f4e
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

@@ -1,0 +1,102 @@
+graph TD
+    subgraph rich
+        g_Application_60dbf48c["Application Entry and CLI - __init__.py, __main__.py, setup.py"]
+        style g_Application_60dbf48c fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Core_87cfb662["Core Rendering Engine - abc.py, console.py, live.py, live_render.py, measure.py, +3 more"]
+        style g_Core_87cfb662 fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Text_185f827b["Text and Styling System - _cell_widths.py, cells.py, color.py, color_triplet.py, default_styles.py, +7 more"]
+        style g_Text_185f827b fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Layout_75cfb7d4["Layout and Display Components - align.py, columns.py, constrain.py, containers.py, layout.py, +6 more"]
+        style g_Layout_75cfb7d4 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Progress_ddb7fea9["Progress and Status Indicators - _spinners.py, bar.py, progress.py, progress_bar.py, spinner.py, +1 more"]
+        style g_Progress_ddb7fea9 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Content_7ea98630["Content Formatting and Syntax - _emoji_codes.py, _emoji_replace.py, emoji.py, highlighter.py, json.py, +4 more"]
+        style g_Content_7ea98630 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Input_19514234["Input and Interaction - pager.py, prompt.py"]
+        style g_Input_19514234 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Error_b7c7eb6d["Error Handling and Debugging - _inspect.py, _log_render.py, diagnose.py, errors.py, logging.py, +2 more"]
+        style g_Error_b7c7eb6d fill:#C0392B,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Platform_00a8f67c["Platform and Terminal Integration - _extension.py, _fileno.py, _null_file.py, _win32_console.py, _windows.py, +5 more"]
+        style g_Platform_00a8f67c fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Data_0b349340["Data Structures and Utilities - _export_format.py, _loop.py, _palettes.py, _pick.py, _ratio.py, +6 more"]
+        style g_Data_0b349340 fill:#9B59B6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Examples_94f78db2["Examples and Demonstrations - attrs.py, bars.py, columns.py, cp_progress.py, downloader.py, +31 more"]
+        style g_Examples_94f78db2 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Benchmarking_e847ff0f["Benchmarking and Performance - __init__.py, benchmarks.py, profile_divide.py, profile_pretty.py, snippets.py, +1 more"]
+        style g_Benchmarking_e847ff0f fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Build_5ea72e89["Build Tools and Code Generation - make_emoji.py, make_terminal_widths.py"]
+        style g_Build_5ea72e89 fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Documentation_5b6cf869["Documentation - conf.py"]
+        style g_Documentation_5b6cf869 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Benchmarking_e847ff0f --> g_Text_185f827b
+    g_Benchmarking_e847ff0f --> g_Data_0b349340
+    g_Benchmarking_e847ff0f --> g_Core_87cfb662
+    g_Benchmarking_e847ff0f --> g_Content_7ea98630
+    g_Benchmarking_e847ff0f --> g_Layout_75cfb7d4
+    g_Examples_94f78db2 --> g_Text_185f827b
+    g_Examples_94f78db2 --> g_Data_0b349340
+    g_Examples_94f78db2 --> g_Core_87cfb662
+    g_Examples_94f78db2 --> g_Content_7ea98630
+    g_Examples_94f78db2 --> g_Error_b7c7eb6d
+    g_Examples_94f78db2 --> g_Progress_ddb7fea9
+    g_Examples_94f78db2 --> g_Layout_75cfb7d4
+    g_Application_60dbf48c --> g_Text_185f827b
+    g_Application_60dbf48c --> g_Error_b7c7eb6d
+    g_Application_60dbf48c --> g_Core_87cfb662
+    g_Application_60dbf48c --> g_Content_7ea98630
+    g_Application_60dbf48c --> g_Platform_00a8f67c
+    g_Application_60dbf48c --> g_Layout_75cfb7d4
+    g_Content_7ea98630 --> g_Text_185f827b
+    g_Content_7ea98630 --> g_Data_0b349340
+    g_Content_7ea98630 --> g_Core_87cfb662
+    g_Content_7ea98630 --> g_Platform_00a8f67c
+    g_Content_7ea98630 --> g_Layout_75cfb7d4
+    g_Platform_00a8f67c --> g_Text_185f827b
+    g_Platform_00a8f67c --> g_Core_87cfb662
+    g_Platform_00a8f67c --> g_Error_b7c7eb6d
+    g_Platform_00a8f67c --> g_Content_7ea98630
+    g_Error_b7c7eb6d --> g_Text_185f827b
+    g_Error_b7c7eb6d --> g_Data_0b349340
+    g_Error_b7c7eb6d --> g_Core_87cfb662
+    g_Error_b7c7eb6d --> g_Content_7ea98630
+    g_Error_b7c7eb6d --> g_Platform_00a8f67c
+    g_Error_b7c7eb6d --> g_Layout_75cfb7d4
+    g_Data_0b349340 --> g_Text_185f827b
+    g_Data_0b349340 --> g_Core_87cfb662
+    g_Data_0b349340 --> g_Layout_75cfb7d4
+    g_Core_87cfb662 --> g_Text_185f827b
+    g_Core_87cfb662 --> g_Data_0b349340
+    g_Core_87cfb662 --> g_Error_b7c7eb6d
+    g_Core_87cfb662 --> g_Content_7ea98630
+    g_Core_87cfb662 --> g_Progress_ddb7fea9
+    g_Core_87cfb662 --> g_Input_19514234
+    g_Core_87cfb662 --> g_Platform_00a8f67c
+    g_Core_87cfb662 --> g_Layout_75cfb7d4
+    g_Layout_75cfb7d4 --> g_Text_185f827b
+    g_Layout_75cfb7d4 --> g_Data_0b349340
+    g_Layout_75cfb7d4 --> g_Core_87cfb662
+    g_Layout_75cfb7d4 --> g_Content_7ea98630
+    g_Layout_75cfb7d4 --> g_Error_b7c7eb6d
+    g_Layout_75cfb7d4 --> g_Platform_00a8f67c
+    g_Progress_ddb7fea9 --> g_Text_185f827b
+    g_Progress_ddb7fea9 --> g_Data_0b349340
+    g_Progress_ddb7fea9 --> g_Core_87cfb662
+    g_Progress_ddb7fea9 --> g_Content_7ea98630
+    g_Progress_ddb7fea9 --> g_Platform_00a8f67c
+    g_Progress_ddb7fea9 --> g_Layout_75cfb7d4
+    g_Text_185f827b --> g_Data_0b349340
+    g_Text_185f827b --> g_Core_87cfb662
+    g_Text_185f827b --> g_Content_7ea98630
+    g_Text_185f827b --> g_Error_b7c7eb6d
+    g_Text_185f827b --> g_Platform_00a8f67c
+    g_Text_185f827b --> g_Layout_75cfb7d4
+    g_Input_19514234 --> g_Application_60dbf48c
+    g_Input_19514234 --> g_Text_185f827b
+    g_Input_19514234 --> g_Core_87cfb662
+    g_Build_5ea72e89 --> g_Content_7ea98630
+    g_Build_5ea72e89 --> g_Progress_ddb7fea9
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

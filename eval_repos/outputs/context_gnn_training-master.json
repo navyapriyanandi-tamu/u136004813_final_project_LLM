@@ -1,0 +1,1055 @@
+{
+  "repo_name": "gnn_training-master",
+  "ast_results": {
+    "inference.py": {
+      "filepath": "../gnn_training-master/inference.py",
+      "module_docstring": null,
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "module": "torch",
+          "alias": null,
+          "lineno": 1,
+          "type": "import"
+        },
+        {
+          "module": "model",
+          "name": "GCN",
+          "alias": null,
+          "lineno": 2,
+          "type": "from_import"
+        },
+        {
+          "module": "torch_geometric.datasets",
+          "name": "Planetoid",
+          "alias": null,
+          "lineno": 3,
+          "type": "from_import"
+        },
+        {
+          "module": "torch_geometric.transforms",
+          "name": "NormalizeFeatures",
+          "alias": null,
+          "lineno": 4,
+          "type": "from_import"
+        }
+      ],
+      "variables": [
+        {
+          "name": "dataset",
+          "assigned_to": "Planetoid",
+          "lineno": 6
+        },
+        {
+          "name": "data",
+          "assigned_to": null,
+          "lineno": 7
+        },
+        {
+          "name": "device",
+          "assigned_to": "torch.device",
+          "lineno": 10
+        },
+        {
+          "name": "model",
+          "assigned_to": "unknown.to",
+          "lineno": 11
+        }
+      ],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [
+          "model.load_state_dict",
+          "GCN",
+          "dataset.num_node_features",
+          "data.to",
+          "torch.no_grad",
+          "torch.cuda.is_available",
+          "unknown.to",
+          "device",
+          "torch.load",
+          "print",
+          "Planetoid",
+          "predictions.tolist",
+          "NormalizeFeatures",
+          "model",
+          "logits.argmax",
+          "dataset.num_classes",
+          "torch.device",
+          "model.eval"
+        ],
+        "class_instantiations": [
+          "NormalizeFeatures",
+          "GCN",
+          "Planetoid"
+        ]
+      },
+      "dependency_classification": {
+        "stdlib": [],
+        "third_party": {
+          "ai": [
+            "torch"
+          ],
+          "other": [
+            "model",
+            "torch_geometric"
+          ]
+        },
+        "tech_stack": [
+          "Ai"
+        ]
+      },
+      "line_count": 21
+    },
+    "main.py": {
+      "filepath": "../gnn_training-master/main.py",
+      "module_docstring": null,
+      "functions": [
+        {
+          "name": "train",
+          "args": [],
+          "return_type": null,
+          "lineno": 21,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "F.nll_loss",
+            "optimizer.zero_grad",
+            "loss.backward",
+            "loss.item",
+            "optimizer.step",
+            "model.train",
+            "model",
+            "data"
+          ],
+          "docstring": null,
+          "code": "def train():\n    model.train()\n    optimizer.zero_grad()\n    out = model(data)\n    loss = F.nll_loss(out[data.train_mask], data.y[data.train_mask])  # Loss only on training nodes\n    loss.backward()\n    optimizer.step()\n    return loss.item()",
+          "line_count": 8,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "evaluate",
+          "args": [],
+          "return_type": null,
+          "lineno": 31,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "data.test_mask.sum",
+            "torch.no_grad",
+            "unknown.item",
+            "unknown.sum",
+            "logits.argmax",
+            "model",
+            "data",
+            "model.eval"
+          ],
+          "docstring": null,
+          "code": "def evaluate():\n    model.eval()\n    with torch.no_grad():\n        logits = model(data)\n        pred = logits.argmax(dim=1)  # Get class with highest probability\n        acc = (pred[data.test_mask] == data.y[data.test_mask]).sum().item() / data.test_mask.sum().item()\n    return acc",
+          "line_count": 7,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "module": "torch",
+          "alias": null,
+          "lineno": 1,
+          "type": "import"
+        },
+        {
+          "module": "torch.nn.functional",
+          "alias": "F",
+          "lineno": 2,
+          "type": "import"
+        },
+        {
+          "module": "torch_geometric.datasets",
+          "name": "Planetoid",
+          "alias": null,
+          "lineno": 3,
+          "type": "from_import"
+        },
+        {
+          "module": "torch_geometric.loader",
+          "name": "DataLoader",
+          "alias": null,
+          "lineno": 4,
+          "type": "from_import"
+        },
+        {
+          "module": "torch_geometric.transforms",
+          "name": "NormalizeFeatures",
+          "alias": null,
+          "lineno": 5,
+          "type": "from_import"
+        },
+        {
+          "module": "torch.optim",
+          "name": "Adam",
+          "alias": null,
+          "lineno": 6,
+          "type": "from_import"
+        },
+        {
+          "module": "model",
+          "name": "GCN",
+          "alias": null,
+          "lineno": 7,
+          "type": "from_import"
+        }
+      ],
+      "variables": [
+        {
+          "name": "dataset",
+          "assigned_to": "Planetoid",
+          "lineno": 10
+        },
+        {
+          "name": "device",
+          "assigned_to": "torch.device",
+          "lineno": 13
+        },
+        {
+          "name": "model",
+          "assigned_to": "unknown.to",
+          "lineno": 14
+        },
+        {
+          "name": "data",
+          "assigned_to": "unknown.to",
+          "lineno": 15
+        },
+        {
+          "name": "optimizer",
+          "assigned_to": "Adam",
+          "lineno": 18
+        },
+        {
+          "name": "best_acc",
+          "assigned_to": "int",
+          "lineno": 40
+        }
+      ],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [
+          "GCN",
+          "dataset.num_node_features",
+          "train",
+          "model.parameters",
+          "torch.cuda.is_available",
+          "unknown.to",
+          "device",
+          "evaluate",
+          "Adam",
+          "Planetoid",
+          "print",
+          "NormalizeFeatures",
+          "torch.save",
+          "acc",
+          "dataset.num_classes",
+          "model.state_dict",
+          "torch.device",
+          "range"
+        ],
+        "class_instantiations": [
+          "Adam",
+          "NormalizeFeatures",
+          "GCN",
+          "Planetoid"
+        ]
+      },
+      "dependency_classification": {
+        "stdlib": [],
+        "third_party": {
+          "ai": [
+            "torch"
+          ],
+          "other": [
+            "torch_geometric",
+            "model"
+          ]
+        },
+        "tech_stack": [
+          "Ai"
+        ]
+      },
+      "line_count": 52
+    },
+    "model.py": {
+      "filepath": "../gnn_training-master/model.py",
+      "module_docstring": null,
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "num_node_features"
+            },
+            {
+              "name": "num_classes"
+            }
+          ],
+          "return_type": null,
+          "lineno": 6,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "super",
+            "GCN",
+            "GCNConv",
+            "self",
+            "num_node_features",
+            "unknown.__init__",
+            "num_classes"
+          ],
+          "docstring": null,
+          "code": "def __init__(self, num_node_features, num_classes):\n        super(GCN, self).__init__()\n        self.conv1 = GCNConv(num_node_features, 16)\n        self.conv2 = GCNConv(16, num_classes)",
+          "line_count": 4,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "forward",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "data"
+            }
+          ],
+          "return_type": null,
+          "lineno": 11,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.conv1",
+            "x",
+            "self.conv2",
+            "F.relu",
+            "F.log_softmax",
+            "edge_index"
+          ],
+          "docstring": null,
+          "code": "def forward(self, data):\n        x, edge_index = data.x, data.edge_index\n        x = self.conv1(x, edge_index)\n        x = F.relu(x)\n        x = self.conv2(x, edge_index)\n        return F.log_softmax(x, dim=1)",
+          "line_count": 6,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [
+        {
+          "name": "GCN",
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "base_classes": [
+            "torch.nn.Module"
+          ],
+          "lineno": 5,
+          "docstring": null
+        }
+      ],
+      "imports": [
+        {
+          "module": "torch",
+          "alias": null,
+          "lineno": 1,
+          "type": "import"
+        },
+        {
+          "module": "torch.nn.functional",
+          "alias": "F",
+          "lineno": 2,
+          "type": "import"
+        },
+        {
+          "module": "torch_geometric.nn",
+          "name": "GCNConv",
+          "alias": null,
+          "lineno": 3,
+          "type": "from_import"
+        }
+      ],
+      "variables": [],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [],
+        "third_party": {
+          "ai": [
+            "torch"
+          ],
+          "other": [
+            "torch_geometric"
+          ]
+        },
+        "tech_stack": [
+          "Ai"
+        ]
+      },
+      "line_count": 17
+    },
+    "qm9_model.py": {
+      "filepath": "../gnn_training-master/qm9_model.py",
+      "module_docstring": null,
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "num_node_features"
+            },
+            {
+              "name": "num_classes"
+            }
+          ],
+          "return_type": null,
+          "lineno": 6,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "super",
+            "GCNConv",
+            "self",
+            "QM9_GCN",
+            "num_node_features",
+            "unknown.__init__",
+            "num_classes"
+          ],
+          "docstring": null,
+          "code": "def __init__(self, num_node_features, num_classes):\n        super(QM9_GCN, self).__init__()\n        self.conv1 = GCNConv(num_node_features, 32)  \n        self.conv2 = GCNConv(32, 32)  \n        self.conv3 = GCNConv(32, num_classes)",
+          "line_count": 5,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "forward",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "data"
+            }
+          ],
+          "return_type": null,
+          "lineno": 12,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.conv1",
+            "x",
+            "self.conv2",
+            "F.relu",
+            "self.conv3",
+            "F.log_softmax",
+            "edge_index"
+          ],
+          "docstring": null,
+          "code": "def forward(self, data):\n        x, edge_index, edge_attr = data.x, data.edge_index, data.edge_attr\n        x = self.conv1(x, edge_index)\n        x = F.relu(x)\n        x = self.conv2(x, edge_index)\n        x = F.relu(x)\n        x = self.conv3(x, edge_index)\n        return F.log_softmax(x, dim=1)",
+          "line_count": 8,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [
+        {
+          "name": "QM9_GCN",
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "base_classes": [
+            "torch.nn.Module"
+          ],
+          "lineno": 5,
+          "docstring": null
+        }
+      ],
+      "imports": [
+        {
+          "module": "torch",
+          "alias": null,
+          "lineno": 1,
+          "type": "import"
+        },
+        {
+          "module": "torch.nn.functional",
+          "alias": "F",
+          "lineno": 2,
+          "type": "import"
+        },
+        {
+          "module": "torch_geometric.nn",
+          "name": "GCNConv",
+          "alias": null,
+          "lineno": 3,
+          "type": "from_import"
+        }
+      ],
+      "variables": [],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [],
+        "third_party": {
+          "ai": [
+            "torch"
+          ],
+          "other": [
+            "torch_geometric"
+          ]
+        },
+        "tech_stack": [
+          "Ai"
+        ]
+      },
+      "line_count": 20
+    },
+    "qm9_train.py": {
+      "filepath": "../gnn_training-master/qm9_train.py",
+      "module_docstring": null,
+      "functions": [
+        {
+          "name": "train",
+          "args": [],
+          "return_type": null,
+          "lineno": 59,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "unknown.squeeze",
+            "optimizer.zero_grad",
+            "data.to",
+            "loss.backward",
+            "loss.item",
+            "optimizer.step",
+            "train_loader",
+            "device",
+            "F.mse_loss",
+            "model",
+            "len",
+            "model.train",
+            "out",
+            "data"
+          ],
+          "docstring": null,
+          "code": "def train():\n    model.train()\n    total_loss = 0\n    for data in train_loader:\n        data = data.to(device)\n        optimizer.zero_grad()\n        out = model(data).squeeze()  \n        loss = F.mse_loss(out, data.y[:, 0])  \n        loss.backward()\n        optimizer.step()\n        total_loss += loss.item()\n    return total_loss / len(train_loader)",
+          "line_count": 12,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "evaluate",
+          "args": [
+            {
+              "name": "loader"
+            }
+          ],
+          "return_type": null,
+          "lineno": 73,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "unknown.squeeze",
+            "data.to",
+            "loader",
+            "loss.item",
+            "torch.no_grad",
+            "device",
+            "F.mse_loss",
+            "model",
+            "len",
+            "mae.item",
+            "out",
+            "mae_metric",
+            "data",
+            "model.eval"
+          ],
+          "docstring": null,
+          "code": "def evaluate(loader):\n    model.eval()\n    total_loss = 0\n    total_mae = 0\n    with torch.no_grad():\n        for data in loader:\n            data = data.to(device)\n            out = model(data).squeeze()\n            loss = F.mse_loss(out, data.y[:, 0])\n            total_loss += loss.item()\n            \n            mae = mae_metric(out, data.y[:, 0])\n            total_mae += mae.item()\n\n    avg_loss = total_loss / len(loader)\n    avg_mae = total_mae / len(loader)\n    return avg_loss, avg_mae",
+          "line_count": 17,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "__init__",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "num_node_features"
+            },
+            {
+              "name": "hidden_dim"
+            },
+            {
+              "name": "output_dim"
+            }
+          ],
+          "return_type": null,
+          "lineno": 33,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "super",
+            "GCN",
+            "GCNConv",
+            "hidden_dim",
+            "self",
+            "num_node_features",
+            "unknown.__init__",
+            "output_dim"
+          ],
+          "docstring": null,
+          "code": "def __init__(self, num_node_features, hidden_dim, output_dim):\n        super(GCN, self).__init__()\n        self.conv1 = GCNConv(num_node_features, hidden_dim)\n        self.conv2 = GCNConv(hidden_dim, output_dim)",
+          "line_count": 4,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "forward",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "data"
+            }
+          ],
+          "return_type": null,
+          "lineno": 38,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "data.batch",
+            "self.conv1",
+            "global_mean_pool",
+            "x",
+            "self.conv2",
+            "F.relu",
+            "edge_index"
+          ],
+          "docstring": null,
+          "code": "def forward(self, data):\n        x, edge_index = data.x, data.edge_index\n        x = self.conv1(x, edge_index)\n        x = F.relu(x)\n        x = self.conv2(x, edge_index)\n\n        # Aggregate node features correctly for batch processing\n        x = global_mean_pool(x, data.batch)  \n        return x",
+          "line_count": 9,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [
+        {
+          "name": "GCN",
+          "methods": [
+            "__init__",
+            "forward"
+          ],
+          "base_classes": [
+            "torch.nn.Module"
+          ],
+          "lineno": 32,
+          "docstring": null
+        }
+      ],
+      "imports": [
+        {
+          "module": "torch",
+          "alias": null,
+          "lineno": 1,
+          "type": "import"
+        },
+        {
+          "module": "torch.nn.functional",
+          "alias": "F",
+          "lineno": 2,
+          "type": "import"
+        },
+        {
+          "module": "torch_geometric.datasets",
+          "name": "QM9",
+          "alias": null,
+          "lineno": 3,
+          "type": "from_import"
+        },
+        {
+          "module": "torch_geometric.loader",
+          "name": "DataLoader",
+          "alias": null,
+          "lineno": 4,
+          "type": "from_import"
+        },
+        {
+          "module": "torch_geometric.nn",
+          "name": "GCNConv",
+          "alias": null,
+          "lineno": 5,
+          "type": "from_import"
+        },
+        {
+          "module": "torch_geometric.nn",
+          "name": "global_mean_pool",
+          "alias": null,
+          "lineno": 6,
+          "type": "from_import"
+        },
+        {
+          "module": "torch.optim",
+          "name": "Adam",
+          "alias": null,
+          "lineno": 7,
+          "type": "from_import"
+        },
+        {
+          "module": "torchmetrics.regression",
+          "name": "MeanAbsoluteError",
+          "alias": null,
+          "lineno": 8,
+          "type": "from_import"
+        }
+      ],
+      "variables": [
+        {
+          "name": "dataset",
+          "assigned_to": "QM9",
+          "lineno": 11
+        },
+        {
+          "name": "num_features",
+          "assigned_to": null,
+          "lineno": 14
+        },
+        {
+          "name": "num_targets",
+          "assigned_to": null,
+          "lineno": 15
+        },
+        {
+          "name": "num_train",
+          "assigned_to": "int",
+          "lineno": 19
+        },
+        {
+          "name": "num_val",
+          "assigned_to": "int",
+          "lineno": 20
+        },
+        {
+          "name": "num_test",
+          "assigned_to": null,
+          "lineno": 21
+        },
+        {
+          "name": "batch_size",
+          "assigned_to": "int",
+          "lineno": 26
+        },
+        {
+          "name": "train_loader",
+          "assigned_to": "DataLoader",
+          "lineno": 27
+        },
+        {
+          "name": "val_loader",
+          "assigned_to": "DataLoader",
+          "lineno": 28
+        },
+        {
+          "name": "test_loader",
+          "assigned_to": "DataLoader",
+          "lineno": 29
+        },
+        {
+          "name": "device",
+          "assigned_to": "torch.device",
+          "lineno": 51
+        },
+        {
+          "name": "model",
+          "assigned_to": "unknown.to",
+          "lineno": 52
+        },
+        {
+          "name": "optimizer",
+          "assigned_to": "Adam",
+          "lineno": 55
+        },
+        {
+          "name": "mae_metric",
+          "assigned_to": "unknown.to",
+          "lineno": 56
+        },
+        {
+          "name": "best_val_loss",
+          "assigned_to": "float",
+          "lineno": 92
+        }
+      ],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [
+          "train",
+          "model.parameters",
+          "test_loader",
+          "print",
+          "torch.manual_seed",
+          "dataset",
+          "batch_size",
+          "QM9",
+          "MeanAbsoluteError",
+          "num_features",
+          "dataset.num_node_features",
+          "Adam",
+          "val_loss",
+          "torch.device",
+          "DataLoader",
+          "train_dataset",
+          "range",
+          "GCN",
+          "torch.cuda.is_available",
+          "device",
+          "val_dataset",
+          "torch.save",
+          "len",
+          "model.state_dict",
+          "float",
+          "test_dataset",
+          "torch.utils.data.random_split",
+          "unknown.to",
+          "int",
+          "evaluate",
+          "val_loader"
+        ],
+        "class_instantiations": [
+          "GCN",
+          "MeanAbsoluteError",
+          "Adam",
+          "QM9",
+          "DataLoader"
+        ]
+      },
+      "dependency_classification": {
+        "stdlib": [],
+        "third_party": {
+          "ai": [
+            "torch"
+          ],
+          "other": [
+            "torch_geometric",
+            "torchmetrics"
+          ]
+        },
+        "tech_stack": [
+          "Ai"
+        ]
+      },
+      "line_count": 107
+    },
+    "utils.py": {
+      "filepath": "../gnn_training-master/utils.py",
+      "module_docstring": null,
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "variables": [],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [],
+        "third_party": {},
+        "tech_stack": []
+      },
+      "line_count": 1
+    },
+    "__analysis_summary__": {
+      "total_modules": 5,
+      "total_functions": 4,
+      "total_classes": 2,
+      "dead_code_candidates": {
+        "unreferenced_functions": [],
+        "unused_classes": [],
+        "unused_imports": [
+          {
+            "module": "main.py",
+            "import_statement": "import torch_geometric.loader",
+            "lineno": 4,
+            "imported_module": "torch_geometric.loader",
+            "symbols": [
+              "DataLoader"
+            ],
+            "needs_llm": false
+          }
+        ],
+        "unused_global_variables": [
+          {
+            "module": "qm9_train.py",
+            "name": "num_targets",
+            "lineno": 15,
+            "assigned_to": null,
+            "needs_llm": true
+          }
+        ],
+        "unreachable_code": [],
+        "suspicious_patterns": []
+      }
+    }
+  },
+  "function_summaries": {
+    "main.py": {
+      "train": {
+        "human": "Trains a machine learning model for one iteration by showing it training examples and adjusting its internal parameters to improve accuracy. The function calculates how wrong the model's predictions are (the \"loss\"), then updates the model to make better predictions next time. It only uses the designated training data, not the entire dataset, and reports back how much error there was.",
+        "technical": "Executes single training epoch for a graph neural network model. Sets model to training mode, zeros gradients, performs forward pass on entire graph data, computes negative log-likelihood loss only on nodes marked by `data.train_mask`, backpropagates gradients, and updates model parameters via optimizer step. Returns scalar loss value for monitoring. Operates on global `model`, `optimizer`, and `data` objects."
+      },
+      "evaluate": {
+        "human": "Tests how well a machine learning model performs on data it hasn't seen before. The function runs the model on test data, compares its predictions to the correct answers, and calculates what percentage it got right. This helps determine if the model learned properly and can make accurate predictions on new information.",
+        "technical": "Sets model to evaluation mode via `model.eval()`, disables gradient computation with `torch.no_grad()` context manager, runs forward pass to get logits, extracts predicted classes using `argmax(dim=1)`, filters predictions and labels using `data.test_mask`, computes accuracy as ratio of correct predictions to total test samples, and returns the accuracy as a Python float via `.item()`."
+      }
+    },
+    "model.py": {
+      "__init__": {
+        "human": "Sets up a Graph Convolutional Network (GCN) for analyzing graph-structured data, like social networks or molecules. Creates a two-layer neural network that processes nodes in a graph, starting with the original node features and gradually transforming them to predict which category each node belongs to. The network narrows down information from the input features through 16 intermediate values to the final number of possible categories.",
+        "technical": "Initializes a GCN model by calling parent class constructor and instantiating two GCNConv layers. First convolutional layer transforms input node features (num_node_features dimensions) to 16-dimensional hidden representation. Second layer maps the 16-dimensional output to final classification space (num_classes dimensions). Stores both layers as instance attributes (self.conv1, self.conv2) for use in forward pass."
+      },
+      "forward": {
+        "human": "This function processes graph data through a two-layer neural network to classify nodes. It takes graph information (node features and connections), applies two rounds of learning transformations with an activation step in between, and outputs probability predictions for each node's category. This is commonly used for tasks like classifying users in social networks or categorizing molecules in chemistry.",
+        "technical": "Implements forward pass of a 2-layer Graph Convolutional Network (GCN). Extracts node features (x) and edge connections (edge_index) from input data object, applies first graph convolution (conv1), ReLU activation, second convolution (conv2), and returns log-softmax probabilities over dimension 1. Uses PyTorch Geometric's message-passing framework for graph-structured data processing."
+      }
+    },
+    "qm9_model.py": {
+      "__init__": {
+        "human": "Sets up a neural network designed to analyze molecular graphs from the QM9 dataset. Creates a three-layer processing pipeline where each layer learns increasingly complex patterns from the molecular structure. The network starts by reading basic atom features and gradually transforms them into predictions about molecular properties.",
+        "technical": "Initializes a Graph Convolutional Network (GCN) with three sequential GCNConv layers. First layer transforms input node features to 32-dimensional embeddings, second layer maintains 32 dimensions for deeper feature extraction, and third layer maps to output classes. Calls parent class (QM9_GCN) constructor via super(). Stores three convolutional layers as instance attributes (conv1, conv2, conv3) for forward pass execution."
+      },
+      "forward": {
+        "human": "This function processes graph data through a neural network to classify nodes. It takes information about nodes and their connections, passes them through three layers of processing with activation functions in between, and produces probability scores for what category each node belongs to. Think of it like analyzing a social network to predict user interests based on their connections.",
+        "technical": "Implements forward pass of a 3-layer Graph Convolutional Network (GCN). Extracts node features (x), edge connectivity (edge_index), and edge attributes from input data object. Applies three sequential graph convolution layers (conv1, conv2, conv3) with ReLU activations after first two layers. Returns log-softmax probabilities over classes (dim=1) for node classification tasks. Uses PyTorch Geometric's data structure and functional API."
+      }
+    },
+    "qm9_train.py": {
+      "train": {
+        "human": "This function trains a machine learning model by showing it examples from a training dataset. For each example, the model makes a prediction, measures how wrong it was, and adjusts itself to do better next time. After going through all the training data once, it reports the average error across all examples so you can track if the model is improving.",
+        "technical": "Executes one training epoch using PyTorch. Sets model to training mode, iterates through train_loader batches, moves data to specified device (CPU/GPU), performs forward pass with model output squeezed to 1D, computes MSE loss against first column of labels (data.y[:, 0]), backpropagates gradients, updates weights via optimizer, and returns mean loss across all batches. Uses standard PyTorch training loop pattern with zero_grad/forward/backward/step cycle."
+      },
+      "evaluate": {
+        "human": "Tests how well a machine learning model performs on a dataset without making any changes to the model. It runs the model on test data, measures how far off its predictions are from the actual values using two different scoring methods (MSE and MAE), and calculates the average scores across all the test examples to show overall accuracy.",
+        "technical": "Sets model to evaluation mode via `model.eval()`, disables gradient computation with `torch.no_grad()`, and iterates through data batches from the loader. Transfers each batch to the specified device, runs forward pass through the model with `.squeeze()` to remove extra dimensions, computes MSE loss via `F.mse_loss()` and MAE via `mae_metric()` against `data.y[:, 0]` targets. Accumulates losses and returns averaged MSE and MAE metrics over all batches."
+      },
+      "__init__": {
+        "human": "Sets up a two-layer Graph Convolutional Network (GCN) for processing graph-structured data. This is the initialization step that creates the neural network architecture by defining two processing layers - the first layer transforms the input graph features into a hidden representation, and the second layer produces the final output. Think of it as building a two-stage filter for analyzing connected data like social networks or molecules.",
+        "technical": "Constructor for a GCN class that initializes a two-layer graph convolutional neural network. Calls parent class constructor via `super()`, then instantiates two `GCNConv` layers: `conv1` transforms input features (dimension `num_node_features`) to hidden representation (dimension `hidden_dim`), and `conv2` maps hidden representation to output (dimension `output_dim`). Stores both convolutional layers as instance attributes for use in forward pass."
+      },
+      "forward": {
+        "human": "This function processes graph data through a two-layer neural network to create a summary representation. It takes graph information (nodes and their connections), applies two rounds of learning transformations with an activation step in between, then combines all the node information into a single output vector for each graph in the batch. This is commonly used for tasks like classifying or comparing entire graphs.",
+        "technical": "Implements forward pass of a 2-layer Graph Convolutional Network (GCN). Extracts node features (x) and edge connections (edge_index) from input data, applies conv1 layer followed by ReLU activation, then conv2 layer. Uses global_mean_pool to aggregate node-level features into graph-level representation by averaging nodes within each graph (grouped by data.batch). Returns pooled tensor suitable for graph-level prediction tasks."
+      }
+    }
+  },
+  "module_summaries": {
+    "inference.py": {
+      "human": "This module performs inference or evaluation tasks for a graph neural network model. It loads a pre-trained model, fetches a graph dataset (likely from PyTorch Geometric's built-in datasets), applies transformations to the data, and runs predictions or evaluations. The module serves as an entry point for testing or deploying a trained GNN model on graph-structured data.",
+      "technical": "Imports PyTorch for tensor operations, a custom `model` module (likely containing GNN architecture), and PyTorch Geometric's dataset and transform utilities. With 21 lines, it likely instantiates a dataset object, applies preprocessing transforms, loads model weights using `torch.load()`, and executes forward passes for inference. Acts as a standalone script for model evaluation separate from training pipelines."
+    },
+    "main.py": {
+      "human": "This module is the main training script for a graph neural network that learns to classify nodes in a graph dataset. It orchestrates the complete machine learning workflow: loading graph data (like social networks or citation networks), repeatedly training the model to recognize patterns, and testing how accurately it can classify new nodes. The module runs the training loop, showing the model examples over and over until it learns, then evaluates whether it can correctly predict labels for nodes it hasn't seen before. It's essentially the \"control center\" that brings together the model, data, and learning process.",
+      "technical": "Implements the training and evaluation pipeline for a PyTorch Geometric graph neural network application. Serves as the entry point script that coordinates model training via the `train()` function (performing forward pass, loss computation with NLL loss on train_mask nodes, and backpropagation) and model validation via `evaluate()` function (computing accuracy on test_mask nodes). Depends on torch_geometric for graph datasets/loaders/transforms, imports a custom `model` module for the GNN architecture, and operates on global state objects (model, optimizer, data). Provides the standard supervised learning loop structure for node classification tasks on graph-structured data."
+    },
+    "model.py": {
+      "human": "This module implements a Graph Convolutional Network (GCN) for classifying nodes in graph-structured data like social networks, molecular structures, or citation networks. It provides a neural network that understands relationships between connected entities, learning patterns from both individual node properties and their connections to neighbors. The model processes graphs through two layers of learning, gradually refining information to predict what category each node belongs to. This is useful for tasks like identifying user interests in social networks or classifying types of atoms in molecules.",
+      "technical": "Implements a GCN class extending PyTorch's nn.Module for node classification on graph-structured data. Provides a 2-layer graph convolutional architecture using torch_geometric's GCNConv layers with configurable input features and output classes. The forward() method defines the primary API, accepting PyTorch Geometric Data objects and returning log-softmax predictions. Uses a 16-dimensional hidden layer with ReLU activation between convolutions. Depends on torch_geometric.nn for graph convolution operations and torch.nn.functional for activation/normalization. Designed as a baseline GCN model for semi-supervised node classification tasks in graph neural network pipelines."
+    },
+    "qm9_model.py": {
+      "human": "This module implements a neural network that analyzes molecular structures from the QM9 chemistry dataset. It processes molecules as graphs where atoms are nodes and chemical bonds are edges, learning to predict molecular properties or classify atoms. The network reads basic atomic features and progressively learns more complex chemical patterns through three layers of analysis, ultimately producing predictions about the molecule. It's designed specifically for computational chemistry tasks where understanding molecular structure is essential.",
+      "technical": "Implements QM9_GCN class, a three-layer Graph Convolutional Network for molecular graph analysis. Extends torch.nn.Module and uses torch_geometric's GCNConv layers for graph-based learning. Architecture consists of input layer (n_features \u2192 32), hidden layer (32 \u2192 32), and output layer (32 \u2192 n_classes) with ReLU activations between layers. Provides forward() method accepting PyTorch Geometric Data objects containing node features, edge indices, and edge attributes. Returns log-softmax probabilities for node classification tasks. Depends on PyTorch core, torch.nn.functional for activations, and torch_geometric.nn for graph convolution operations."
+    },
+    "qm9_train.py": {
+      "human": "This module trains a machine learning model to predict molecular properties from the QM9 dataset, which contains information about chemical molecules. It implements a Graph Convolutional Network (GCN) that treats molecules as graphs where atoms are nodes and bonds are edges. The module handles the complete training workflow: teaching the model to recognize patterns in molecular structures, testing how accurate its predictions are, and measuring performance using standard error metrics. This is useful for computational chemistry applications where predicting molecular properties quickly can accelerate drug discovery or materials research.",
+      "technical": "Implements a PyTorch Geometric-based training pipeline for graph-level regression on molecular data. The GCN class defines a 2-layer graph convolutional architecture using GCNConv layers with global mean pooling for graph-level predictions. Provides train() and evaluate() functions implementing standard PyTorch training/evaluation loops with MSE loss optimization and MAE metric tracking via torchmetrics. Depends on torch_geometric for graph neural network primitives (GCNConv, global_mean_pool) and data handling (datasets, DataLoader). Targets single-output regression by predicting data.y[:, 0] from molecular graph structures, suitable for QM9 property prediction tasks."
+    },
+    "utils.py": {
+      "human": "This is an empty or placeholder module file.",
+      "technical": "Module 'utils.py' contains no significant code (empty file or single comment/blank line)."
+    }
+  },
+  "repo_summary": {
+    "human": "This is a Graph Neural Network (GNN) training toolkit for learning patterns in graph-structured data like social networks, citation networks, and molecular structures. It provides ready-to-use implementations for training models that can classify nodes in graphs or predict properties of molecules from chemistry datasets. The repository includes two main applications: a general-purpose node classification system for standard graph datasets, and a specialized molecular property prediction system for computational chemistry using the QM9 dataset. Researchers and developers working with graph data or molecular modeling would use this to quickly train and deploy GNN models without building the infrastructure from scratch. It's particularly useful for tasks like predicting user interests in social networks, classifying research papers in citation networks, or predicting chemical properties of molecules.",
+    "technical": "Implements a PyTorch Geometric-based training framework with two parallel pipelines: general node classification (main.py + model.py) and molecular property prediction (qm9_train.py + qm9_model.py). Architecture follows standard supervised learning patterns with separate training/evaluation functions, using GCNConv layers as the core graph convolution primitive. The general pipeline uses 2-layer GCN with 16-dimensional hidden representations for semi-supervised node classification with NLL loss, while the molecular pipeline uses 3-layer GCN with 32-dimensional hidden layers and global mean pooling for graph-level regression with MSE loss. Both pipelines share the same technology stack: PyTorch for tensor operations, PyTorch Geometric for graph neural network primitives and dataset handling, and torchmetrics for evaluation. The inference.py module provides deployment capability for trained models. Modular design separates model definitions from training logic, enabling easy experimentation with different architectures while maintaining consistent training workflows."
+  },
+  "dead_code_analysis": {
+    "unreferenced_functions": [],
+    "unused_classes": [],
+    "unused_imports": [],
+    "unused_global_variables": [
+      {
+        "module": "qm9_train.py",
+        "name": "num_targets",
+        "lineno": 15,
+        "assigned_to": null,
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 85,
+          "category": "genuinely_unused",
+          "reason": "Variable is defined at line 15 but never referenced anywhere in the codebase. This appears to be leftover from development or refactoring.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Variable defined but no usage found in any code paths",
+            "No evidence of external usage or framework integration"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 85,
+        "reason": "Variable is defined at line 15 but never referenced anywhere in the codebase. This appears to be leftover from development or refactoring.",
+        "recommendation": "safe_to_delete"
+      }
+    ],
+    "unreachable_code": [],
+    "suspicious_patterns": [],
+    "summary": {
+      "total_analyzed": 1,
+      "confirmed_dead_code": 1,
+      "false_positives": 0,
+      "uncertain": 0,
+      "avg_confidence": 85.0
+    }
+  },
+  "logical_groups": {
+    "Application Entry": [
+      "main.py",
+      "qm9_train.py",
+      "inference.py"
+    ],
+    "Models": [
+      "model.py",
+      "qm9_model.py"
+    ],
+    "Utilities": [
+      "utils.py"
+    ]
+  },
+  "audio_narration": {
+    "audio_file": "/Users/navyan/Desktop/LLM-Project/repospeak/audio/gnn_training-master_summary.mp3",
+    "script_file": "/Users/navyan/Desktop/LLM-Project/repospeak/audio/gnn_training-master_audio_script.txt",
+    "audio_text": "Imagine you're trying to understand connections... connections between friends on social media, connections between research papers that cite each other, or even connections between atoms in a molecule. That's where this toolkit comes in.\n\nThink of Graph Neural Networks, or GNNs, as pattern detectives for connected data. You know how you can often guess someone's interests by looking at their friend group? GNNs work similarly... they learn patterns by examining how things are connected to each other, not just looking at them in isolation.\n\nThis repository is essentially a ready-made training gym for these pattern detectives. Instead of building all the equipment from scratch, researchers and developers can walk in and start training immediately.\n\nSo what can you actually do with it? First, there's a general-purpose system for classifying nodes in any graph. Picture a social network where you want to predict which users might be interested in hiking... the system looks at who's connected to whom and learns those patterns.\n\nNext, there's a specialized tool for chemistry nerds... and I mean that in the best way. It works with molecular structures, predicting chemical properties by understanding how atoms bond together. This uses something called the QM9 dataset, which is basically a massive collection of molecular information.\n\nThe beauty here is speed and simplicity. Whether you're trying to recommend research papers to scientists, suggest friends on a social platform, or predict if a new drug molecule will be stable... you don't need to reinvent the wheel. The infrastructure is already built.\n\nIt's like having a professional kitchen already set up when you want to cook... you just bring your ingredients, which in this case, is your graph data... and start creating.",
+    "word_count": 281,
+    "estimated_duration_minutes": 1.9
+  }
+}

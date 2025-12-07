@@ -1,0 +1,717 @@
+🔗 MODULE DEPENDENCY GRAPH
+============================================================
+📦 benchmarks.py
+  ├─> benchmarks.py
+  ├─> color.py
+  ├─> console.py
+  ├─> pretty.py
+  ├─> segment.py
+  ├─> style.py
+  ├─> syntax.py
+  ├─> table.py
+  └─> text.py
+
+📦 attrs.py
+  ├─> console.py
+  ├─> pretty.py
+  ├─> table.py
+  └─> text.py
+
+📦 bars.py
+  ├─> align.py
+  ├─> bar.py
+  └─> color.py
+
+📦 columns.py
+  ├─> columns.py
+  ├─> console.py
+  ├─> json.py
+  └─> panel.py
+
+📦 cp_progress.py
+  └─> progress.py
+
+📦 downloader.py
+  └─> progress.py
+
+📦 dynamic_progress.py
+  ├─> console.py
+  ├─> live.py
+  ├─> panel.py
+  └─> progress.py
+
+📦 exception.py
+  └─> console.py
+
+📦 export.py
+  ├─> console.py
+  └─> table.py
+
+📦 file_progress.py
+  └─> progress.py
+
+📦 fullscreen.py
+  ├─> align.py
+  ├─> console.py
+  ├─> layout.py
+  ├─> live.py
+  ├─> panel.py
+  ├─> progress.py
+  ├─> syntax.py
+  └─> table.py
+
+📦 group.py
+  ├─> console.py
+  └─> panel.py
+
+📦 group2.py
+  ├─> console.py
+  └─> panel.py
+
+📦 highlighter.py
+  ├─> console.py
+  ├─> highlighter.py
+  └─> theme.py
+
+📦 jobs.py
+  ├─> panel.py
+  └─> progress.py
+
+📦 justify.py
+  └─> console.py
+
+📦 justify2.py
+  ├─> console.py
+  └─> panel.py
+
+📦 layout.py
+  ├─> align.py
+  ├─> console.py
+  ├─> layout.py
+  ├─> live.py
+  └─> text.py
+
+📦 listdir.py
+  ├─> columns.py
+  └─> text.py
+
+📦 live_progress.py
+  ├─> live.py
+  ├─> panel.py
+  ├─> progress.py
+  └─> table.py
+
+📦 log.py
+  ├─> console.py
+  ├─> highlighter.py
+  ├─> style.py
+  └─> theme.py
+
+📦 overflow.py
+  └─> console.py
+
+📦 padding.py
+  └─> padding.py
+
+📦 print_calendar.py
+  ├─> align.py
+  ├─> columns.py
+  ├─> console.py
+  ├─> table.py
+  └─> text.py
+
+📦 rainbow.py
+  └─> highlighter.py
+
+📦 recursive_error.py
+  └─> console.py
+
+📦 repr.py
+  └─> repr.py
+
+📦 save_table_svg.py
+  ├─> console.py
+  └─> table.py
+
+📦 screen.py
+  ├─> align.py
+  ├─> console.py
+  └─> panel.py
+
+📦 spinners.py
+  ├─> columns.py
+  ├─> live.py
+  ├─> panel.py
+  ├─> spinner.py
+  └─> text.py
+
+📦 status.py
+  └─> console.py
+
+📦 suppress.py
+  └─> traceback.py
+
+📦 table.py
+  ├─> console.py
+  └─> table.py
+
+📦 table_movie.py
+  ├─> align.py
+  ├─> console.py
+  ├─> live.py
+  ├─> table.py
+  └─> text.py
+
+📦 top_lite_simulator.py
+  ├─> console.py
+  ├─> live.py
+  └─> table.py
+
+📦 tree.py
+  ├─> filesize.py
+  ├─> markup.py
+  ├─> text.py
+  └─> tree.py
+
+📦 __init__.py
+  ├─> _extension.py
+  ├─> _inspect.py
+  └─> console.py
+
+📦 __main__.py
+  ├─> color.py
+  ├─> console.py
+  ├─> markdown.py
+  ├─> measure.py
+  ├─> panel.py
+  ├─> pretty.py
+  ├─> segment.py
+  ├─> style.py
+  ├─> syntax.py
+  ├─> table.py
+  └─> text.py
+
+📦 _emoji_replace.py
+  └─> _emoji_codes.py
+
+📦 _extension.py
+  ├─> pretty.py
+  └─> traceback.py
+
+📦 _inspect.py
+  ├─> console.py
+  ├─> control.py
+  ├─> highlighter.py
+  ├─> jupyter.py
+  ├─> panel.py
+  ├─> pretty.py
+  ├─> table.py
+  └─> text.py
+
+📦 _log_render.py
+  ├─> console.py
+  ├─> containers.py
+  ├─> table.py
+  └─> text.py
+
+📦 _palettes.py
+  └─> palette.py
+
+📦 _win32_console.py
+  ├─> color.py
+  ├─> console.py
+  └─> style.py
+
+📦 _windows.py
+  └─> _win32_console.py
+
+📦 _windows_renderer.py
+  ├─> _win32_console.py
+  └─> segment.py
+
+📦 _wrap.py
+  ├─> _loop.py
+  ├─> cells.py
+  └─> console.py
+
+📦 abc.py
+  ├─> abc.py
+  └─> text.py
+
+📦 align.py
+  ├─> console.py
+  ├─> constrain.py
+  ├─> highlighter.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> panel.py
+  ├─> segment.py
+  └─> style.py
+
+📦 ansi.py
+  ├─> color.py
+  ├─> console.py
+  ├─> style.py
+  └─> text.py
+
+📦 bar.py
+  ├─> color.py
+  ├─> console.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> segment.py
+  └─> style.py
+
+📦 box.py
+  ├─> _loop.py
+  ├─> box.py
+  ├─> columns.py
+  ├─> console.py
+  ├─> panel.py
+  ├─> table.py
+  └─> text.py
+
+📦 cells.py
+  └─> _cell_widths.py
+
+📦 color.py
+  ├─> _palettes.py
+  ├─> color_triplet.py
+  ├─> console.py
+  ├─> repr.py
+  ├─> style.py
+  ├─> table.py
+  ├─> terminal_theme.py
+  └─> text.py
+
+📦 columns.py
+  ├─> align.py
+  ├─> console.py
+  ├─> constrain.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> padding.py
+  ├─> table.py
+  └─> text.py
+
+📦 console.py
+  ├─> _emoji_replace.py
+  ├─> _export_format.py
+  ├─> _fileno.py
+  ├─> _log_render.py
+  ├─> _null_file.py
+  ├─> _win32_console.py
+  ├─> _windows.py
+  ├─> _windows_renderer.py
+  ├─> abc.py
+  ├─> align.py
+  ├─> cells.py
+  ├─> color.py
+  ├─> control.py
+  ├─> emoji.py
+  ├─> errors.py
+  ├─> highlighter.py
+  ├─> json.py
+  ├─> jupyter.py
+  ├─> live.py
+  ├─> markup.py
+  ├─> measure.py
+  ├─> pager.py
+  ├─> pretty.py
+  ├─> protocol.py
+  ├─> region.py
+  ├─> rule.py
+  ├─> scope.py
+  ├─> screen.py
+  ├─> segment.py
+  ├─> status.py
+  ├─> style.py
+  ├─> styled.py
+  ├─> terminal_theme.py
+  ├─> text.py
+  ├─> theme.py
+  ├─> themes.py
+  └─> traceback.py
+
+📦 constrain.py
+  ├─> console.py
+  ├─> jupyter.py
+  └─> measure.py
+
+📦 containers.py
+  ├─> cells.py
+  ├─> console.py
+  ├─> measure.py
+  └─> text.py
+
+📦 control.py
+  ├─> console.py
+  └─> segment.py
+
+📦 default_styles.py
+  ├─> console.py
+  ├─> style.py
+  ├─> table.py
+  └─> text.py
+
+📦 diagnose.py
+  ├─> console.py
+  ├─> panel.py
+  └─> pretty.py
+
+📦 emoji.py
+  ├─> _emoji_codes.py
+  ├─> _emoji_replace.py
+  ├─> columns.py
+  ├─> console.py
+  ├─> jupyter.py
+  ├─> segment.py
+  └─> style.py
+
+📦 file_proxy.py
+  ├─> ansi.py
+  ├─> console.py
+  └─> text.py
+
+📦 highlighter.py
+  ├─> abc.py
+  ├─> console.py
+  ├─> json.py
+  └─> text.py
+
+📦 json.py
+  ├─> console.py
+  ├─> highlighter.py
+  ├─> json.py
+  └─> text.py
+
+📦 jupyter.py
+  ├─> console.py
+  ├─> segment.py
+  └─> terminal_theme.py
+
+📦 layout.py
+  ├─> _ratio.py
+  ├─> abc.py
+  ├─> align.py
+  ├─> console.py
+  ├─> highlighter.py
+  ├─> panel.py
+  ├─> pretty.py
+  ├─> region.py
+  ├─> repr.py
+  ├─> segment.py
+  ├─> style.py
+  ├─> styled.py
+  ├─> table.py
+  └─> tree.py
+
+📦 live.py
+  ├─> align.py
+  ├─> console.py
+  ├─> control.py
+  ├─> file_proxy.py
+  ├─> jupyter.py
+  ├─> live.py
+  ├─> live_render.py
+  ├─> panel.py
+  ├─> rule.py
+  ├─> screen.py
+  ├─> syntax.py
+  ├─> table.py
+  └─> text.py
+
+📦 live_render.py
+  ├─> _loop.py
+  ├─> console.py
+  ├─> control.py
+  ├─> segment.py
+  ├─> style.py
+  └─> text.py
+
+📦 logging.py
+  ├─> _log_render.py
+  ├─> _null_file.py
+  ├─> console.py
+  ├─> highlighter.py
+  ├─> logging.py
+  ├─> text.py
+  └─> traceback.py
+
+📦 markdown.py
+  ├─> _loop.py
+  ├─> _stack.py
+  ├─> box.py
+  ├─> console.py
+  ├─> containers.py
+  ├─> jupyter.py
+  ├─> panel.py
+  ├─> rule.py
+  ├─> segment.py
+  ├─> style.py
+  ├─> syntax.py
+  ├─> table.py
+  └─> text.py
+
+📦 markup.py
+  ├─> _emoji_replace.py
+  ├─> emoji.py
+  ├─> errors.py
+  ├─> style.py
+  ├─> table.py
+  └─> text.py
+
+📦 measure.py
+  ├─> console.py
+  ├─> errors.py
+  └─> protocol.py
+
+📦 padding.py
+  ├─> console.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> segment.py
+  └─> style.py
+
+📦 pager.py
+  ├─> __main__.py
+  ├─> abc.py
+  └─> console.py
+
+📦 palette.py
+  ├─> color.py
+  ├─> color_triplet.py
+  ├─> console.py
+  ├─> segment.py
+  ├─> style.py
+  ├─> table.py
+  └─> text.py
+
+📦 panel.py
+  ├─> align.py
+  ├─> box.py
+  ├─> cells.py
+  ├─> console.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> padding.py
+  ├─> segment.py
+  ├─> style.py
+  └─> text.py
+
+📦 pretty.py
+  ├─> _loop.py
+  ├─> _pick.py
+  ├─> abc.py
+  ├─> cells.py
+  ├─> console.py
+  ├─> highlighter.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> repr.py
+  └─> text.py
+
+📦 progress.py
+  ├─> abc.py
+  ├─> console.py
+  ├─> filesize.py
+  ├─> highlighter.py
+  ├─> jupyter.py
+  ├─> live.py
+  ├─> panel.py
+  ├─> progress_bar.py
+  ├─> rule.py
+  ├─> spinner.py
+  ├─> style.py
+  ├─> syntax.py
+  ├─> table.py
+  └─> text.py
+
+📦 progress_bar.py
+  ├─> color.py
+  ├─> color_triplet.py
+  ├─> console.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> segment.py
+  └─> style.py
+
+📦 prompt.py
+  ├─> console.py
+  └─> text.py
+
+📦 protocol.py
+  └─> console.py
+
+📦 repr.py
+  └─> console.py
+
+📦 rule.py
+  ├─> align.py
+  ├─> cells.py
+  ├─> console.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> style.py
+  └─> text.py
+
+📦 scope.py
+  ├─> console.py
+  ├─> highlighter.py
+  ├─> panel.py
+  ├─> pretty.py
+  ├─> table.py
+  └─> text.py
+
+📦 screen.py
+  ├─> _loop.py
+  ├─> console.py
+  ├─> segment.py
+  └─> style.py
+
+📦 segment.py
+  ├─> cells.py
+  ├─> console.py
+  ├─> logging.py
+  ├─> repr.py
+  ├─> style.py
+  ├─> syntax.py
+  └─> text.py
+
+📦 spinner.py
+  ├─> _spinners.py
+  ├─> console.py
+  ├─> live.py
+  ├─> measure.py
+  ├─> style.py
+  ├─> table.py
+  └─> text.py
+
+📦 status.py
+  ├─> console.py
+  ├─> jupyter.py
+  ├─> live.py
+  ├─> spinner.py
+  └─> style.py
+
+📦 style.py
+  ├─> color.py
+  ├─> errors.py
+  ├─> repr.py
+  └─> terminal_theme.py
+
+📦 styled.py
+  ├─> console.py
+  ├─> measure.py
+  ├─> panel.py
+  ├─> segment.py
+  └─> style.py
+
+📦 syntax.py
+  ├─> _loop.py
+  ├─> abc.py
+  ├─> cells.py
+  ├─> color.py
+  ├─> console.py
+  ├─> containers.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> padding.py
+  ├─> segment.py
+  ├─> style.py
+  └─> text.py
+
+📦 table.py
+  ├─> _loop.py
+  ├─> _pick.py
+  ├─> _ratio.py
+  ├─> _timer.py
+  ├─> align.py
+  ├─> box.py
+  ├─> console.py
+  ├─> errors.py
+  ├─> highlighter.py
+  ├─> jupyter.py
+  ├─> measure.py
+  ├─> padding.py
+  ├─> protocol.py
+  ├─> segment.py
+  ├─> style.py
+  └─> text.py
+
+📦 terminal_theme.py
+  ├─> color_triplet.py
+  └─> palette.py
+
+📦 text.py
+  ├─> _loop.py
+  ├─> _pick.py
+  ├─> _wrap.py
+  ├─> align.py
+  ├─> ansi.py
+  ├─> cells.py
+  ├─> console.py
+  ├─> containers.py
+  ├─> control.py
+  ├─> emoji.py
+  ├─> jupyter.py
+  ├─> markup.py
+  ├─> measure.py
+  ├─> segment.py
+  └─> style.py
+
+📦 theme.py
+  ├─> default_styles.py
+  └─> style.py
+
+📦 themes.py
+  ├─> default_styles.py
+  └─> theme.py
+
+📦 traceback.py
+  ├─> _loop.py
+  ├─> columns.py
+  ├─> console.py
+  ├─> constrain.py
+  ├─> highlighter.py
+  ├─> panel.py
+  ├─> pretty.py
+  ├─> scope.py
+  ├─> style.py
+  ├─> syntax.py
+  ├─> text.py
+  ├─> theme.py
+  └─> traceback.py
+
+📦 tree.py
+  ├─> _loop.py
+  ├─> console.py
+  ├─> jupyter.py
+  ├─> markdown.py
+  ├─> measure.py
+  ├─> panel.py
+  ├─> segment.py
+  ├─> style.py
+  ├─> styled.py
+  ├─> syntax.py
+  └─> table.py
+
+📦 make_emoji.py
+  └─> emoji.py
+
+📦 make_terminal_widths.py
+  └─> progress.py
+
+📦 profile_divide.py
+  └─> segment.py
+
+📦 profile_pretty.py
+  ├─> console.py
+  ├─> json.py
+  └─> pretty.py
+
+📦 stress_test_pretty.py
+  ├─> _timer.py
+  ├─> console.py
+  ├─> panel.py
+  └─> pretty.py

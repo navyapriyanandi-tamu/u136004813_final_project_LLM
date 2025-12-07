@@ -1,0 +1,11 @@
+Imagine having a personal assistant who never forgets... but instead of an expensive app with flashy graphics, this one lives entirely in your computer's text-based terminal. That's exactly what the test_project repository offers.
+
+Think of this as a digital notepad that's always within reach. You know how some people swear by physical sticky notes on their desk? This is the programmer's version of that... except these sticky notes can't fall behind your desk or get coffee-stained.
+
+Here's how it works. First, you can add tasks whenever something pops into your head... and here's the clever part... you can assign priority levels. So that urgent deadline gets flagged differently than "remember to water the plants." Next, you can view all your tasks at a glance, like spreading out all those sticky notes in front of you. When you've finished something, mark it complete... giving you that satisfying sense of accomplishment. And finally, delete tasks you no longer need.
+
+But here's what makes this truly useful... persistence. The application automatically saves everything to your computer's storage. Close the program, shut down your machine, come back three days later... and boom... all your tasks are right there waiting for you. It's like having a filing cabinet that organizes itself.
+
+The system also includes validation... think of this as spell-check, but for task data... ensuring everything you enter is properly formatted and safe to store. No corrupted files, no lost information.
+
+This is perfect for developers, system administrators, or anyone comfortable with a C-L-I... that's command-line interface... who wants task management without the bloat of heavy applications. Sometimes the simplest tools are the most powerful.

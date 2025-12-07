@@ -1,0 +1,2466 @@
+{
+  "repo_name": "test_project",
+  "ast_results": {
+    "main.py": {
+      "filepath": "../test_project/main.py",
+      "module_docstring": "Task Manager CLI Application\nMain entry point for the application",
+      "functions": [
+        {
+          "name": "main",
+          "args": [],
+          "return_type": null,
+          "lineno": 25,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "setup_logger",
+            "handler.list_tasks",
+            "argparse.ArgumentParser",
+            "args.id",
+            "priority",
+            "int",
+            "storage",
+            "handler.add_task",
+            "TaskHandler",
+            "logger.info",
+            "validate_priority",
+            "sys.exit",
+            "print",
+            "handler.complete_task",
+            "args.title",
+            "parser.parse_args",
+            "handler.delete_task",
+            "TaskStorage",
+            "parser.add_argument"
+          ],
+          "docstring": "Main entry point for task manager CLI",
+          "code": "def main():\n    \"\"\"Main entry point for task manager CLI\"\"\"\n    parser = argparse.ArgumentParser(description=\"Simple Task Manager CLI\")\n    parser.add_argument('action', choices=['add', 'list', 'complete', 'delete'])\n    parser.add_argument('--title', help='Task title')\n    parser.add_argument('--priority', help='Task priority (low, medium, high)')\n    parser.add_argument('--id', type=int, help='Task ID')\n\n    args = parser.parse_args()\n\n    # Setup logger\n    logger = setup_logger()\n    logger.info(f\"Starting task manager: {args.action}\")\n\n    # Initialize components\n    storage = TaskStorage()\n    handler = TaskHandler(storage)\n\n    # Execute action\n    if args.action == 'add':\n        if not args.title:\n            print(\"Error: --title required for add action\")\n            sys.exit(1)\n\n        priority = args.priority or 'medium'\n        if not validate_priority(priority):\n            print(f\"Error: Invalid priority '{priority}'\")\n            sys.exit(1)\n\n        task_id = handler.add_task(args.title, priority)\n        print(f\"\u2713 Task added with ID: {task_id}\")\n\n    elif args.action == 'list':\n        tasks = handler.list_tasks()\n        if not tasks:\n            print(\"No tasks found\")\n        else:\n            print(\"\\nCurrent Tasks:\")\n            print(\"-\" * 50)\n            for task in tasks:\n                status = \"\u2713\" if task['completed'] else \"\u25cb\"\n                print(f\"{status} [{task['id']}] {task['title']} (Priority: {task['priority']})\")\n\n    elif args.action == 'complete':\n        if not args.id:\n            print(\"Error: --id required for complete action\")\n            sys.exit(1)\n\n        handler.complete_task(args.id)\n        print(f\"\u2713 Task {args.id} marked as complete\")\n\n    elif args.action == 'delete':\n        if not args.id:\n            print(\"Error: --id required for delete action\")\n            sys.exit(1)\n\n        handler.delete_task(args.id)\n        print(f\"\u2713 Task {args.id} deleted\")",
+          "line_count": 58,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "deprecated_export_to_json",
+          "args": [],
+          "return_type": null,
+          "lineno": 85,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "TaskStorage",
+            "storage.load_all",
+            "json.dumps",
+            "tasks"
+          ],
+          "docstring": null,
+          "code": "def deprecated_export_to_json():\n    storage = TaskStorage()\n    tasks = storage.load_all()\n    return json.dumps(tasks, indent=2)",
+          "line_count": 4,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "helper_function_used_once",
+          "args": [],
+          "return_type": null,
+          "lineno": 91,
+          "decorators": [],
+          "is_async": false,
+          "calls": [],
+          "docstring": null,
+          "code": "def helper_function_used_once():\n    return \"helper\"",
+          "line_count": 2,
+          "needs_llm_summary": false
+        },
+        {
+          "name": "function_with_unreachable_code",
+          "args": [
+            {
+              "name": "value"
+            }
+          ],
+          "return_type": null,
+          "lineno": 95,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "print",
+            "cleanup"
+          ],
+          "docstring": null,
+          "code": "def function_with_unreachable_code(value):\n    if value > 10:\n        return True\n\n    return False\n\n    print(\"This is unreachable\")\n    cleanup()",
+          "line_count": 8,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "empty_placeholder",
+          "args": [],
+          "return_type": null,
+          "lineno": 105,
+          "decorators": [],
+          "is_async": false,
+          "calls": [],
+          "docstring": null,
+          "code": "def empty_placeholder():\n    pass",
+          "line_count": 2,
+          "needs_llm_summary": false
+        },
+        {
+          "name": "another_empty_function",
+          "args": [],
+          "return_type": null,
+          "lineno": 109,
+          "decorators": [],
+          "is_async": false,
+          "calls": [],
+          "docstring": null,
+          "code": "def another_empty_function():\n    return None",
+          "line_count": 2,
+          "needs_llm_summary": false
+        },
+        {
+          "name": "function_with_many_params",
+          "args": [
+            {
+              "name": "a"
+            },
+            {
+              "name": "b"
+            },
+            {
+              "name": "c"
+            },
+            {
+              "name": "d"
+            },
+            {
+              "name": "e"
+            },
+            {
+              "name": "f"
+            },
+            {
+              "name": "g"
+            },
+            {
+              "name": "h"
+            }
+          ],
+          "return_type": null,
+          "lineno": 113,
+          "decorators": [],
+          "is_async": false,
+          "calls": [],
+          "docstring": null,
+          "code": "def function_with_many_params(a, b, c, d, e, f, g, h):\n    return a + b + c + d + e + f + g + h",
+          "line_count": 2,
+          "needs_llm_summary": false
+        },
+        {
+          "name": "test_helper",
+          "args": [],
+          "return_type": null,
+          "lineno": 117,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "helper_function_used_once"
+          ],
+          "docstring": null,
+          "code": "def test_helper():\n    result = helper_function_used_once()\n    return result",
+          "line_count": 3,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "module": "sys",
+          "alias": null,
+          "lineno": 7,
+          "type": "import"
+        },
+        {
+          "module": "argparse",
+          "alias": null,
+          "lineno": 8,
+          "type": "import"
+        },
+        {
+          "module": "task_manager.task_handler",
+          "name": "TaskHandler",
+          "alias": null,
+          "lineno": 9,
+          "type": "from_import"
+        },
+        {
+          "module": "task_manager.storage",
+          "name": "TaskStorage",
+          "alias": null,
+          "lineno": 10,
+          "type": "from_import"
+        },
+        {
+          "module": "utils.logger",
+          "name": "setup_logger",
+          "alias": null,
+          "lineno": 11,
+          "type": "from_import"
+        },
+        {
+          "module": "utils.validators",
+          "name": "validate_priority",
+          "alias": null,
+          "lineno": 12,
+          "type": "from_import"
+        },
+        {
+          "module": "json",
+          "alias": null,
+          "lineno": 13,
+          "type": "import"
+        },
+        {
+          "module": "os",
+          "alias": null,
+          "lineno": 14,
+          "type": "import"
+        },
+        {
+          "module": "typing",
+          "name": "Dict",
+          "alias": null,
+          "lineno": 15,
+          "type": "from_import"
+        },
+        {
+          "module": "typing",
+          "name": "List",
+          "alias": null,
+          "lineno": 15,
+          "type": "from_import"
+        },
+        {
+          "module": "typing",
+          "name": "Optional",
+          "alias": null,
+          "lineno": 15,
+          "type": "from_import"
+        },
+        {
+          "module": "datetime",
+          "alias": null,
+          "lineno": 16,
+          "type": "import"
+        }
+      ],
+      "variables": [
+        {
+          "name": "DEBUG_MODE",
+          "assigned_to": "bool",
+          "lineno": 19
+        },
+        {
+          "name": "MAX_RETRIES",
+          "assigned_to": "int",
+          "lineno": 20
+        },
+        {
+          "name": "API_ENDPOINT",
+          "assigned_to": "str",
+          "lineno": 21
+        },
+        {
+          "name": "CACHE_TIMEOUT",
+          "assigned_to": "int",
+          "lineno": 22
+        }
+      ],
+      "is_entry_point": true,
+      "main_block_calls": [
+        "main"
+      ],
+      "module_level_calls": {
+        "function_calls": [
+          "deprecated_export_to_json",
+          "print",
+          "main"
+        ],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [
+          "argparse",
+          "sys",
+          "os",
+          "json",
+          "datetime",
+          "typing"
+        ],
+        "third_party": {
+          "other": [
+            "task_manager",
+            "utils"
+          ]
+        },
+        "tech_stack": []
+      },
+      "line_count": 129
+    },
+    "task_manager/__init__.py": {
+      "filepath": "../test_project/task_manager/__init__.py",
+      "module_docstring": "Task Manager Package\nProvides task management functionality",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "module": "task_handler",
+          "name": "TaskHandler",
+          "alias": null,
+          "lineno": 9,
+          "type": "from_import"
+        },
+        {
+          "module": "storage",
+          "name": "TaskStorage",
+          "alias": null,
+          "lineno": 10,
+          "type": "from_import"
+        }
+      ],
+      "variables": [
+        {
+          "name": "__version__",
+          "assigned_to": "str",
+          "lineno": 6
+        },
+        {
+          "name": "__author__",
+          "assigned_to": "str",
+          "lineno": 7
+        },
+        {
+          "name": "__all__",
+          "assigned_to": null,
+          "lineno": 12
+        }
+      ],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [],
+        "third_party": {
+          "other": [
+            "task_handler",
+            "storage"
+          ]
+        },
+        "tech_stack": []
+      },
+      "line_count": 13
+    },
+    "task_manager/storage.py": {
+      "filepath": "../test_project/task_manager/storage.py",
+      "module_docstring": "Storage Module\nHandles data persistence for tasks",
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "storage_path",
+              "type": "str"
+            }
+          ],
+          "return_type": null,
+          "lineno": 15,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self._load_from_disk",
+            "storage_path",
+            "Path"
+          ],
+          "docstring": null,
+          "code": "def __init__(self, storage_path: str = \".tasks.pkl\"):\n        self.storage_path = Path(storage_path)\n        self.tasks = self._load_from_disk()",
+          "line_count": 3,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "save",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "task"
+            }
+          ],
+          "return_type": "None",
+          "lineno": 19,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "task",
+            "self._persist_to_disk"
+          ],
+          "docstring": "Save a task",
+          "code": "def save(self, task) -> None:\n        \"\"\"Save a task\"\"\"\n        self.tasks[task.id] = task\n        self._persist_to_disk()",
+          "line_count": 4,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "load_all",
+          "args": [
+            {
+              "name": "self"
+            }
+          ],
+          "return_type": "List[Dict]",
+          "lineno": 24,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.tasks.values",
+            "task.to_dict"
+          ],
+          "docstring": "Load all tasks",
+          "code": "def load_all(self) -> List[Dict]:\n        \"\"\"Load all tasks\"\"\"\n        return [task.to_dict() for task in self.tasks.values()]",
+          "line_count": 3,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "load_by_id",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "task_id",
+              "type": "int"
+            }
+          ],
+          "return_type": null,
+          "lineno": 28,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.tasks.get",
+            "task_id"
+          ],
+          "docstring": "Load a specific task by ID",
+          "code": "def load_by_id(self, task_id: int):\n        \"\"\"Load a specific task by ID\"\"\"\n        return self.tasks.get(task_id)",
+          "line_count": 3,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "update",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "task"
+            }
+          ],
+          "return_type": "None",
+          "lineno": 32,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "task",
+            "self._persist_to_disk"
+          ],
+          "docstring": "Update an existing task",
+          "code": "def update(self, task) -> None:\n        \"\"\"Update an existing task\"\"\"\n        if task.id in self.tasks:\n            self.tasks[task.id] = task\n            self._persist_to_disk()",
+          "line_count": 5,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "delete",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "task_id",
+              "type": "int"
+            }
+          ],
+          "return_type": "bool",
+          "lineno": 38,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self._persist_to_disk"
+          ],
+          "docstring": "Delete a task",
+          "code": "def delete(self, task_id: int) -> bool:\n        \"\"\"Delete a task\"\"\"\n        if task_id in self.tasks:\n            del self.tasks[task_id]\n            self._persist_to_disk()\n            return True\n        return False",
+          "line_count": 7,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "_load_from_disk",
+          "args": [
+            {
+              "name": "self"
+            }
+          ],
+          "return_type": "Dict",
+          "lineno": 46,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "f",
+            "self.storage_path.exists",
+            "self.storage_path",
+            "pickle.load",
+            "print",
+            "open"
+          ],
+          "docstring": "Load tasks from disk",
+          "code": "def _load_from_disk(self) -> Dict:\n        \"\"\"Load tasks from disk\"\"\"\n        if self.storage_path.exists():\n            try:\n                with open(self.storage_path, 'rb') as f:\n                    return pickle.load(f)\n            except Exception as e:\n                print(f\"Error loading tasks: {e}\")\n                return {}\n        return {}",
+          "line_count": 10,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "_persist_to_disk",
+          "args": [
+            {
+              "name": "self"
+            }
+          ],
+          "return_type": "None",
+          "lineno": 57,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "f",
+            "self.storage_path",
+            "pickle.dump",
+            "print",
+            "open",
+            "self.tasks"
+          ],
+          "docstring": "Save tasks to disk",
+          "code": "def _persist_to_disk(self) -> None:\n        \"\"\"Save tasks to disk\"\"\"\n        try:\n            with open(self.storage_path, 'wb') as f:\n                pickle.dump(self.tasks, f)\n        except Exception as e:\n            print(f\"Error saving tasks: {e}\")",
+          "line_count": 7,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "clear_all",
+          "args": [
+            {
+              "name": "self"
+            }
+          ],
+          "return_type": "None",
+          "lineno": 65,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self._persist_to_disk"
+          ],
+          "docstring": "Clear all tasks (for testing)",
+          "code": "def clear_all(self) -> None:\n        \"\"\"Clear all tasks (for testing)\"\"\"\n        self.tasks = {}\n        self._persist_to_disk()",
+          "line_count": 4,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "__init__",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "db_path",
+              "type": "str"
+            }
+          ],
+          "return_type": null,
+          "lineno": 78,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "db_path"
+          ],
+          "docstring": null,
+          "code": "def __init__(self, db_path: str):\n        self.db_path = db_path",
+          "line_count": 2,
+          "needs_llm_summary": false
+        },
+        {
+          "name": "connect",
+          "args": [
+            {
+              "name": "self"
+            }
+          ],
+          "return_type": null,
+          "lineno": 81,
+          "decorators": [],
+          "is_async": false,
+          "calls": [],
+          "docstring": "Connect to database",
+          "code": "def connect(self):\n        \"\"\"Connect to database\"\"\"\n        pass",
+          "line_count": 3,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "execute_query",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "query",
+              "type": "str"
+            }
+          ],
+          "return_type": null,
+          "lineno": 85,
+          "decorators": [],
+          "is_async": false,
+          "calls": [],
+          "docstring": "Execute SQL query",
+          "code": "def execute_query(self, query: str):\n        \"\"\"Execute SQL query\"\"\"\n        pass",
+          "line_count": 3,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [
+        {
+          "name": "TaskStorage",
+          "methods": [
+            "__init__",
+            "save",
+            "load_all",
+            "load_by_id",
+            "update",
+            "delete",
+            "_load_from_disk",
+            "_persist_to_disk",
+            "clear_all"
+          ],
+          "base_classes": [],
+          "lineno": 12,
+          "docstring": "Handles task storage and retrieval"
+        },
+        {
+          "name": "DatabaseStorage",
+          "methods": [
+            "__init__",
+            "connect",
+            "execute_query"
+          ],
+          "base_classes": [],
+          "lineno": 72,
+          "docstring": "Alternative storage backend using SQLite\nThis was planned but never implemented"
+        }
+      ],
+      "imports": [
+        {
+          "module": "os",
+          "alias": null,
+          "lineno": 6,
+          "type": "import"
+        },
+        {
+          "module": "pickle",
+          "alias": null,
+          "lineno": 7,
+          "type": "import"
+        },
+        {
+          "module": "typing",
+          "name": "List",
+          "alias": null,
+          "lineno": 8,
+          "type": "from_import"
+        },
+        {
+          "module": "typing",
+          "name": "Dict",
+          "alias": null,
+          "lineno": 8,
+          "type": "from_import"
+        },
+        {
+          "module": "typing",
+          "name": "Optional",
+          "alias": null,
+          "lineno": 8,
+          "type": "from_import"
+        },
+        {
+          "module": "pathlib",
+          "name": "Path",
+          "alias": null,
+          "lineno": 9,
+          "type": "from_import"
+        }
+      ],
+      "variables": [],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [
+          "pickle",
+          "pathlib",
+          "os",
+          "typing"
+        ],
+        "third_party": {},
+        "tech_stack": []
+      },
+      "line_count": 88
+    },
+    "task_manager/task_handler.py": {
+      "filepath": "../test_project/task_manager/task_handler.py",
+      "module_docstring": "Task Handler Module\nHandles all task-related operations (add, update, delete, complete)",
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "task_id",
+              "type": "int"
+            },
+            {
+              "name": "title",
+              "type": "str"
+            },
+            {
+              "name": "priority",
+              "type": "str"
+            }
+          ],
+          "return_type": null,
+          "lineno": 15,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "priority",
+            "title",
+            "datetime.now",
+            "task_id"
+          ],
+          "docstring": null,
+          "code": "def __init__(self, task_id: int, title: str, priority: str = 'medium'):\n        self.id = task_id\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.created_at = datetime.now()\n        self.completed_at = None",
+          "line_count": 7,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "to_dict",
+          "args": [
+            {
+              "name": "self"
+            }
+          ],
+          "return_type": "Dict",
+          "lineno": 23,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.completed_at.isoformat",
+            "self.created_at.isoformat"
+          ],
+          "docstring": "Convert task to dictionary",
+          "code": "def to_dict(self) -> Dict:\n        \"\"\"Convert task to dictionary\"\"\"\n        return {\n            'id': self.id,\n            'title': self.title,\n            'priority': self.priority,\n            'completed': self.completed,\n            'created_at': self.created_at.isoformat(),\n            'completed_at': self.completed_at.isoformat() if self.completed_at else None\n        }",
+          "line_count": 10,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "mark_complete",
+          "args": [
+            {
+              "name": "self"
+            }
+          ],
+          "return_type": null,
+          "lineno": 34,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "datetime.now"
+          ],
+          "docstring": "Mark task as completed",
+          "code": "def mark_complete(self):\n        \"\"\"Mark task as completed\"\"\"\n        self.completed = True\n        self.completed_at = datetime.now()",
+          "line_count": 4,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "__init__",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "storage",
+              "type": "TaskStorage"
+            }
+          ],
+          "return_type": null,
+          "lineno": 43,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "storage",
+            "max",
+            "self.storage.load_all"
+          ],
+          "docstring": null,
+          "code": "def __init__(self, storage: TaskStorage):\n        self.storage = storage\n        # Calculate next ID based on existing tasks\n        existing_tasks = self.storage.load_all()\n        if existing_tasks:\n            self._next_id = max(task['id'] for task in existing_tasks) + 1\n        else:\n            self._next_id = 1",
+          "line_count": 8,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "add_task",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "title",
+              "type": "str"
+            },
+            {
+              "name": "priority",
+              "type": "str"
+            }
+          ],
+          "return_type": "int",
+          "lineno": 52,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "validate_task_title",
+            "task",
+            "Task",
+            "priority",
+            "title",
+            "ValueError",
+            "self._next_id",
+            "self.storage.save"
+          ],
+          "docstring": "Add a new task",
+          "code": "def add_task(self, title: str, priority: str = 'medium') -> int:\n        \"\"\"Add a new task\"\"\"\n        if not validate_task_title(title):\n            raise ValueError(\"Invalid task title\")\n\n        task = Task(self._next_id, title, priority)\n        self.storage.save(task)\n        self._next_id += 1\n        return task.id",
+          "line_count": 9,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "list_tasks",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "include_completed",
+              "type": "bool"
+            }
+          ],
+          "return_type": "List[Dict]",
+          "lineno": 62,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.storage.load_all",
+            "sorted",
+            "tasks"
+          ],
+          "docstring": "List all tasks",
+          "code": "def list_tasks(self, include_completed: bool = True) -> List[Dict]:\n        \"\"\"List all tasks\"\"\"\n        tasks = self.storage.load_all()\n\n        if not include_completed:\n            tasks = [t for t in tasks if not t['completed']]\n\n        return sorted(tasks, key=lambda x: x['id'])",
+          "line_count": 8,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "complete_task",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "task_id",
+              "type": "int"
+            }
+          ],
+          "return_type": "bool",
+          "lineno": 71,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.storage.load_by_id",
+            "task_id",
+            "task.mark_complete",
+            "task",
+            "self.storage.update"
+          ],
+          "docstring": "Mark a task as completed",
+          "code": "def complete_task(self, task_id: int) -> bool:\n        \"\"\"Mark a task as completed\"\"\"\n        task = self.storage.load_by_id(task_id)\n        if task:\n            task.mark_complete()\n            self.storage.update(task)\n            return True\n        return False",
+          "line_count": 8,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "delete_task",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "task_id",
+              "type": "int"
+            }
+          ],
+          "return_type": "bool",
+          "lineno": 80,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.storage.delete",
+            "task_id"
+          ],
+          "docstring": "Delete a task",
+          "code": "def delete_task(self, task_id: int) -> bool:\n        \"\"\"Delete a task\"\"\"\n        return self.storage.delete(task_id)",
+          "line_count": 3,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "get_task_by_priority",
+          "args": [
+            {
+              "name": "self"
+            },
+            {
+              "name": "priority",
+              "type": "str"
+            }
+          ],
+          "return_type": "List[Dict]",
+          "lineno": 84,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.list_tasks"
+          ],
+          "docstring": "Get tasks filtered by priority",
+          "code": "def get_task_by_priority(self, priority: str) -> List[Dict]:\n        \"\"\"Get tasks filtered by priority\"\"\"\n        all_tasks = self.list_tasks()\n        return [t for t in all_tasks if t['priority'] == priority]",
+          "line_count": 4,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "archive_completed_tasks",
+          "args": [
+            {
+              "name": "self"
+            }
+          ],
+          "return_type": null,
+          "lineno": 90,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "self.list_tasks"
+          ],
+          "docstring": "This function was meant to archive old completed tasks\nbut the feature was never finished",
+          "code": "def archive_completed_tasks(self):\n        \"\"\"\n        This function was meant to archive old completed tasks\n        but the feature was never finished\n        \"\"\"\n        completed = [t for t in self.list_tasks() if t['completed']]\n        # TODO: Implement archival logic\n        pass",
+          "line_count": 8,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [
+        {
+          "name": "Task",
+          "methods": [
+            "__init__",
+            "to_dict",
+            "mark_complete"
+          ],
+          "base_classes": [],
+          "lineno": 12,
+          "docstring": "Represents a single task"
+        },
+        {
+          "name": "TaskHandler",
+          "methods": [
+            "__init__",
+            "add_task",
+            "list_tasks",
+            "complete_task",
+            "delete_task",
+            "get_task_by_priority",
+            "archive_completed_tasks"
+          ],
+          "base_classes": [],
+          "lineno": 40,
+          "docstring": "Handles task operations"
+        }
+      ],
+      "imports": [
+        {
+          "module": "typing",
+          "name": "List",
+          "alias": null,
+          "lineno": 6,
+          "type": "from_import"
+        },
+        {
+          "module": "typing",
+          "name": "Dict",
+          "alias": null,
+          "lineno": 6,
+          "type": "from_import"
+        },
+        {
+          "module": "typing",
+          "name": "Optional",
+          "alias": null,
+          "lineno": 6,
+          "type": "from_import"
+        },
+        {
+          "module": "datetime",
+          "name": "datetime",
+          "alias": null,
+          "lineno": 7,
+          "type": "from_import"
+        },
+        {
+          "module": "storage",
+          "name": "TaskStorage",
+          "alias": null,
+          "lineno": 8,
+          "type": "from_import"
+        },
+        {
+          "module": "utils.validators",
+          "name": "validate_task_title",
+          "alias": null,
+          "lineno": 9,
+          "type": "from_import"
+        }
+      ],
+      "variables": [],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [
+          "typing",
+          "datetime"
+        ],
+        "third_party": {
+          "other": [
+            "storage",
+            "utils"
+          ]
+        },
+        "tech_stack": []
+      },
+      "line_count": 98
+    },
+    "utils/__init__.py": {
+      "filepath": "../test_project/utils/__init__.py",
+      "module_docstring": "Utilities Package\nCommon utility functions and helpers",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "module": "logger",
+          "name": "setup_logger",
+          "alias": null,
+          "lineno": 6,
+          "type": "from_import"
+        },
+        {
+          "module": "validators",
+          "name": "validate_priority",
+          "alias": null,
+          "lineno": 7,
+          "type": "from_import"
+        },
+        {
+          "module": "validators",
+          "name": "validate_task_title",
+          "alias": null,
+          "lineno": 7,
+          "type": "from_import"
+        }
+      ],
+      "variables": [
+        {
+          "name": "__all__",
+          "assigned_to": null,
+          "lineno": 9
+        }
+      ],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [],
+        "third_party": {
+          "other": [
+            "logger",
+            "validators"
+          ]
+        },
+        "tech_stack": []
+      },
+      "line_count": 10
+    },
+    "utils/logger.py": {
+      "filepath": "../test_project/utils/logger.py",
+      "module_docstring": "Logger Module\nProvides logging functionality for the application",
+      "functions": [
+        {
+          "name": "setup_logger",
+          "args": [
+            {
+              "name": "name",
+              "type": "str"
+            },
+            {
+              "name": "level",
+              "type": "int"
+            }
+          ],
+          "return_type": null,
+          "lineno": 11,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "logging.Formatter",
+            "handler",
+            "handler.setLevel",
+            "sys.stdout",
+            "logging.getLogger",
+            "logger.addHandler",
+            "name",
+            "handler.setFormatter",
+            "level",
+            "logger.setLevel",
+            "formatter",
+            "logging.StreamHandler"
+          ],
+          "docstring": "Set up and configure logger\n\nArgs:\n    name: Logger name\n    level: Logging level\n\nReturns:\n    Configured logger instance",
+          "code": "def setup_logger(name: str = 'task_manager', level: int = logging.INFO):\n    \"\"\"\n    Set up and configure logger\n\n    Args:\n        name: Logger name\n        level: Logging level\n\n    Returns:\n        Configured logger instance\n    \"\"\"\n    logger = logging.getLogger(name)\n    logger.setLevel(level)\n\n    # Console handler\n    handler = logging.StreamHandler(sys.stdout)\n    handler.setLevel(level)\n\n    # Formatter\n    formatter = logging.Formatter(\n        '%(asctime)s - %(name)s - %(levelname)s - %(message)s',\n        datefmt='%Y-%m-%d %H:%M:%S'\n    )\n    handler.setFormatter(formatter)\n\n    logger.addHandler(handler)\n    return logger",
+          "line_count": 27,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "get_logger",
+          "args": [
+            {
+              "name": "name",
+              "type": "str"
+            }
+          ],
+          "return_type": null,
+          "lineno": 40,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "logging.getLogger",
+            "name"
+          ],
+          "docstring": "Get existing logger instance",
+          "code": "def get_logger(name: str = 'task_manager'):\n    \"\"\"Get existing logger instance\"\"\"\n    return logging.getLogger(name)",
+          "line_count": 3,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "log_to_file",
+          "args": [
+            {
+              "name": "message",
+              "type": "str"
+            },
+            {
+              "name": "filename",
+              "type": "str"
+            }
+          ],
+          "return_type": null,
+          "lineno": 46,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "filename",
+            "f.write",
+            "open",
+            "datetime.now",
+            "unknown.strftime"
+          ],
+          "docstring": "Log message to file\nThis function was created but never integrated",
+          "code": "def log_to_file(message: str, filename: str = 'app.log'):\n    \"\"\"\n    Log message to file\n    This function was created but never integrated\n    \"\"\"\n    with open(filename, 'a') as f:\n        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')\n        f.write(f\"{timestamp} - {message}\\n\")",
+          "line_count": 8,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "module": "logging",
+          "alias": null,
+          "lineno": 6,
+          "type": "import"
+        },
+        {
+          "module": "sys",
+          "alias": null,
+          "lineno": 7,
+          "type": "import"
+        },
+        {
+          "module": "datetime",
+          "name": "datetime",
+          "alias": null,
+          "lineno": 8,
+          "type": "from_import"
+        }
+      ],
+      "variables": [],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [
+          "sys",
+          "datetime",
+          "logging"
+        ],
+        "third_party": {},
+        "tech_stack": []
+      },
+      "line_count": 54
+    },
+    "utils/validators.py": {
+      "filepath": "../test_project/utils/validators.py",
+      "module_docstring": "Validators Module\nInput validation functions",
+      "functions": [
+        {
+          "name": "validate_priority",
+          "args": [
+            {
+              "name": "priority",
+              "type": "str"
+            }
+          ],
+          "return_type": "bool",
+          "lineno": 10,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "priority.lower"
+          ],
+          "docstring": "Validate task priority\n\nArgs:\n    priority: Priority string to validate\n\nReturns:\n    True if valid, False otherwise",
+          "code": "def validate_priority(priority: str) -> bool:\n    \"\"\"\n    Validate task priority\n\n    Args:\n        priority: Priority string to validate\n\n    Returns:\n        True if valid, False otherwise\n    \"\"\"\n    valid_priorities = ['low', 'medium', 'high']\n    return priority.lower() in valid_priorities",
+          "line_count": 12,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "validate_task_title",
+          "args": [
+            {
+              "name": "title",
+              "type": "str"
+            }
+          ],
+          "return_type": "bool",
+          "lineno": 24,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "title",
+            "len",
+            "title.strip"
+          ],
+          "docstring": "Validate task title\n\nArgs:\n    title: Task title to validate\n\nReturns:\n    True if valid, False otherwise",
+          "code": "def validate_task_title(title: str) -> bool:\n    \"\"\"\n    Validate task title\n\n    Args:\n        title: Task title to validate\n\n    Returns:\n        True if valid, False otherwise\n    \"\"\"\n    if not title or len(title.strip()) == 0:\n        return False\n\n    if len(title) > 200:\n        return False\n\n    return True",
+          "line_count": 17,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "validate_email",
+          "args": [
+            {
+              "name": "email",
+              "type": "str"
+            }
+          ],
+          "return_type": "bool",
+          "lineno": 43,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "pattern",
+            "re.match",
+            "bool",
+            "email"
+          ],
+          "docstring": "Validate email format\n\nArgs:\n    email: Email address to validate\n\nReturns:\n    True if valid email format, False otherwise",
+          "code": "def validate_email(email: str) -> bool:\n    \"\"\"\n    Validate email format\n\n    Args:\n        email: Email address to validate\n\n    Returns:\n        True if valid email format, False otherwise\n    \"\"\"\n    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n    return bool(re.match(pattern, email))",
+          "line_count": 12,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "validate_phone_number",
+          "args": [
+            {
+              "name": "phone",
+              "type": "str"
+            }
+          ],
+          "return_type": "bool",
+          "lineno": 58,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "phone.replace",
+            "pattern",
+            "re.match",
+            "bool",
+            "unknown.replace"
+          ],
+          "docstring": "Validate phone number (US format)\nWas created for future user profile feature",
+          "code": "def validate_phone_number(phone: str) -> bool:\n    \"\"\"\n    Validate phone number (US format)\n    Was created for future user profile feature\n    \"\"\"\n    pattern = r'^\\+?1?\\d{10}$'\n    return bool(re.match(pattern, phone.replace('-', '').replace(' ', '')))",
+          "line_count": 7,
+          "needs_llm_summary": true
+        },
+        {
+          "name": "sanitize_input",
+          "args": [
+            {
+              "name": "text",
+              "type": "str"
+            }
+          ],
+          "return_type": "str",
+          "lineno": 67,
+          "decorators": [],
+          "is_async": false,
+          "calls": [
+            "char",
+            "text.replace",
+            "text.strip"
+          ],
+          "docstring": "Sanitize user input\nPlanned for security but never integrated",
+          "code": "def sanitize_input(text: str) -> str:\n    \"\"\"\n    Sanitize user input\n    Planned for security but never integrated\n    \"\"\"\n    # Remove potentially dangerous characters\n    dangerous_chars = ['<', '>', ';', '&', '|']\n    for char in dangerous_chars:\n        text = text.replace(char, '')\n    return text.strip()",
+          "line_count": 10,
+          "needs_llm_summary": true
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "module": "re",
+          "alias": null,
+          "lineno": 6,
+          "type": "import"
+        },
+        {
+          "module": "typing",
+          "name": "Optional",
+          "alias": null,
+          "lineno": 7,
+          "type": "from_import"
+        }
+      ],
+      "variables": [],
+      "is_entry_point": false,
+      "main_block_calls": [],
+      "module_level_calls": {
+        "function_calls": [],
+        "class_instantiations": []
+      },
+      "dependency_classification": {
+        "stdlib": [
+          "re",
+          "typing"
+        ],
+        "third_party": {},
+        "tech_stack": []
+      },
+      "line_count": 77
+    },
+    "__analysis_summary__": {
+      "total_modules": 6,
+      "total_functions": 35,
+      "total_classes": 4,
+      "dead_code_candidates": {
+        "unreferenced_functions": [
+          {
+            "name": "function_with_unreachable_code",
+            "module": "main.py",
+            "lineno": 95
+          },
+          {
+            "name": "empty_placeholder",
+            "module": "main.py",
+            "lineno": 105
+          },
+          {
+            "name": "another_empty_function",
+            "module": "main.py",
+            "lineno": 109
+          },
+          {
+            "name": "function_with_many_params",
+            "module": "main.py",
+            "lineno": 113
+          },
+          {
+            "name": "test_helper",
+            "module": "main.py",
+            "lineno": 117
+          },
+          {
+            "name": "clear_all",
+            "module": "task_manager/storage.py",
+            "lineno": 65
+          },
+          {
+            "name": "connect",
+            "module": "task_manager/storage.py",
+            "lineno": 81
+          },
+          {
+            "name": "execute_query",
+            "module": "task_manager/storage.py",
+            "lineno": 85
+          },
+          {
+            "name": "get_task_by_priority",
+            "module": "task_manager/task_handler.py",
+            "lineno": 84
+          },
+          {
+            "name": "archive_completed_tasks",
+            "module": "task_manager/task_handler.py",
+            "lineno": 90
+          },
+          {
+            "name": "get_logger",
+            "module": "utils/logger.py",
+            "lineno": 40
+          },
+          {
+            "name": "log_to_file",
+            "module": "utils/logger.py",
+            "lineno": 46
+          },
+          {
+            "name": "validate_email",
+            "module": "utils/validators.py",
+            "lineno": 43
+          },
+          {
+            "name": "validate_phone_number",
+            "module": "utils/validators.py",
+            "lineno": 58
+          },
+          {
+            "name": "sanitize_input",
+            "module": "utils/validators.py",
+            "lineno": 67
+          }
+        ],
+        "unused_classes": [
+          {
+            "name": "DatabaseStorage",
+            "module": "task_manager/storage.py",
+            "lineno": 72
+          }
+        ],
+        "unused_imports": [
+          {
+            "module": "main.py",
+            "import_statement": "import os",
+            "lineno": 14,
+            "imported_module": "os",
+            "symbols": [
+              "os"
+            ],
+            "needs_llm": false
+          },
+          {
+            "module": "main.py",
+            "import_statement": "import typing",
+            "lineno": 15,
+            "imported_module": "typing",
+            "symbols": [
+              "Dict"
+            ],
+            "needs_llm": false
+          },
+          {
+            "module": "main.py",
+            "import_statement": "import typing",
+            "lineno": 15,
+            "imported_module": "typing",
+            "symbols": [
+              "List"
+            ],
+            "needs_llm": false
+          },
+          {
+            "module": "main.py",
+            "import_statement": "import typing",
+            "lineno": 15,
+            "imported_module": "typing",
+            "symbols": [
+              "Optional"
+            ],
+            "needs_llm": false
+          },
+          {
+            "module": "main.py",
+            "import_statement": "import datetime",
+            "lineno": 16,
+            "imported_module": "datetime",
+            "symbols": [
+              "datetime"
+            ],
+            "needs_llm": false
+          },
+          {
+            "module": "task_manager/storage.py",
+            "import_statement": "import os",
+            "lineno": 6,
+            "imported_module": "os",
+            "symbols": [
+              "os"
+            ],
+            "needs_llm": false
+          },
+          {
+            "module": "task_manager/storage.py",
+            "import_statement": "import typing",
+            "lineno": 8,
+            "imported_module": "typing",
+            "symbols": [
+              "Optional"
+            ],
+            "needs_llm": false
+          },
+          {
+            "module": "task_manager/task_handler.py",
+            "import_statement": "import typing",
+            "lineno": 6,
+            "imported_module": "typing",
+            "symbols": [
+              "Optional"
+            ],
+            "needs_llm": false
+          },
+          {
+            "module": "utils/validators.py",
+            "import_statement": "import typing",
+            "lineno": 7,
+            "imported_module": "typing",
+            "symbols": [
+              "Optional"
+            ],
+            "needs_llm": false
+          }
+        ],
+        "unused_global_variables": [
+          {
+            "module": "main.py",
+            "name": "DEBUG_MODE",
+            "lineno": 19,
+            "assigned_to": "bool",
+            "needs_llm": true
+          },
+          {
+            "module": "main.py",
+            "name": "MAX_RETRIES",
+            "lineno": 20,
+            "assigned_to": "int",
+            "needs_llm": true
+          },
+          {
+            "module": "main.py",
+            "name": "API_ENDPOINT",
+            "lineno": 21,
+            "assigned_to": "str",
+            "needs_llm": true
+          },
+          {
+            "module": "main.py",
+            "name": "CACHE_TIMEOUT",
+            "lineno": 22,
+            "assigned_to": "int",
+            "needs_llm": true
+          }
+        ],
+        "unreachable_code": [
+          {
+            "lineno": 101,
+            "reason": "Code after return/raise/break/continue",
+            "code_preview": "print(\"This is unreachable\")",
+            "module": "main.py",
+            "function": "function_with_unreachable_code",
+            "needs_llm": true
+          },
+          {
+            "lineno": 102,
+            "reason": "Code after return/raise/break/continue",
+            "code_preview": "cleanup()",
+            "module": "main.py",
+            "function": "function_with_unreachable_code",
+            "needs_llm": true
+          },
+          {
+            "module": "main.py",
+            "function": "<module-level>",
+            "lineno": 122,
+            "reason": "Code in \"if False:\" block",
+            "code_preview": "if False:\n    print('Disabled feature')\n    deprecated_export_to_json()",
+            "needs_llm": true
+          }
+        ],
+        "suspicious_patterns": [
+          {
+            "module": "main.py",
+            "name": "empty_placeholder",
+            "lineno": 105,
+            "pattern_type": "empty_function",
+            "details": "Function is empty or only contains pass/return None",
+            "needs_llm": true
+          },
+          {
+            "module": "main.py",
+            "name": "another_empty_function",
+            "lineno": 109,
+            "pattern_type": "empty_function",
+            "details": "Function is empty or only contains pass/return None",
+            "needs_llm": true
+          },
+          {
+            "module": "main.py",
+            "name": "function_with_many_params",
+            "lineno": 113,
+            "pattern_type": "too_many_parameters",
+            "details": "Function has 8 parameters - consider parameter object",
+            "needs_llm": true
+          },
+          {
+            "module": "task_manager/storage.py",
+            "name": "delete",
+            "lineno": 38,
+            "pattern_type": "similar_function_names",
+            "details": "Similar to delete_task in task_manager/task_handler.py - possible duplicate logic",
+            "needs_llm": true
+          }
+        ]
+      }
+    }
+  },
+  "function_summaries": {
+    "main.py": {
+      "main": {
+        "human": "This is the main control center for a command-line task management application. It lets users manage their to-do list by typing commands to add new tasks (with titles and priority levels), view all existing tasks, mark tasks as complete, or delete tasks they no longer need. The program reads what the user wants to do, checks if they provided all necessary information, performs the requested action, and shows a confirmation message.",
+        "technical": "Implements CLI argument parsing using argparse to handle four actions (add/list/complete/delete) with optional flags for title, priority, and task ID. Initializes TaskStorage and TaskHandler instances for data persistence and business logic. Validates required arguments per action (title for add, id for complete/delete), calls validate_priority() for priority validation, and invokes corresponding handler methods (add_task, list_tasks, complete_task, delete_task). Logs operations via setup_logger() and exits with sys.exit(1) on validation errors."
+      },
+      "deprecated_export_to_json": {
+        "human": "This function retrieves all saved tasks from storage and converts them into a text format (JSON) that can be easily shared or saved to a file. It's marked as \"deprecated,\" meaning it's an older version that shouldn't be used anymore but still exists for compatibility. The function loads all tasks and formats them in a readable, indented structure.",
+        "technical": "Instantiates TaskStorage object, calls load_all() to retrieve all tasks from storage, then serializes the task data to JSON string format using json.dumps() with 2-space indentation. Returns the formatted JSON string. Note: Function signature declares None return type but actually returns a string, indicating a type annotation error."
+      },
+      "function_with_unreachable_code": {
+        "human": "This function checks if a number is greater than 10 and tells you yes or no. It's like a simple test that returns \"True\" if the number passes (is bigger than 10) or \"False\" if it doesn't. However, the function has a flaw: it contains code at the end that will never run because the function always exits before reaching it.",
+        "technical": "Compares input value against threshold of 10, returning boolean True if greater, False otherwise. Contains unreachable code after the final return statement (lines 7-8) including a print() call and cleanup() function invocation that will never execute due to control flow. Function signature indicates Any type for input but implementation assumes numeric comparison capability. No side effects occur in practice since unreachable code never runs."
+      },
+      "test_helper": {
+        "human": "This is a test function that checks whether a helper function works correctly. It calls another function once, captures what that function produces, and gives back the result. It's used to verify that the helper function behaves as expected during testing.",
+        "technical": "Calls `helper_function_used_once()` and stores its return value in a local variable `result`. Returns that result to the caller. Note: The function signature declares `-> None` return type but actually returns a value, creating a type annotation inconsistency. No error handling or validation is performed on the helper function's output."
+      }
+    },
+    "task_manager/storage.py": {
+      "__init__": {
+        "human": "Sets up a task storage system when creating a new task manager object. It remembers where to save tasks (defaulting to a file called \".tasks.pkl\") and immediately loads any previously saved tasks from that location so you can continue working with your existing tasks.",
+        "technical": "Constructor that initializes a task storage object with a configurable file path. Converts the string path to a Path object and stores it in self.storage_path. Calls self._load_from_disk() to deserialize and populate self.tasks with previously persisted task data from the pickle file, or returns empty/default state if file doesn't exist."
+      },
+      "save": {
+        "human": "Stores a task in the system's memory and makes sure it's permanently saved to the computer's storage. When you add or update a task, this function keeps it both in the active working memory (for quick access) and writes it to disk (so it survives if the program closes or restarts).",
+        "technical": "Adds or updates a task object in the in-memory `self.tasks` dictionary using the task's ID as the key, then immediately calls `self._persist_to_disk()` to write the entire task collection to persistent storage. Returns None. Side effects: modifies instance state (tasks dict) and triggers disk I/O operation for data persistence."
+      },
+      "load_all": {
+        "human": "Retrieves all tasks that are currently stored in the system and prepares them for viewing or export. This allows users to see their complete task list at once, converting each task from its internal storage format into a standard format that can be easily displayed, saved to a file, or sent to another system.",
+        "technical": "Iterates through all task objects stored in the `self.tasks` dictionary (accessed via `.values()`), converts each task object to a dictionary representation using the `to_dict()` method, and returns the results as a list. Performs a simple list comprehension transformation with no filtering or side effects. Returns `List[Dict]` containing serialized task data suitable for JSON export or API responses."
+      },
+      "load_by_id": {
+        "human": "Retrieves a single task from the system's task collection using its unique identification number. This allows you to look up and access a specific task when you know its ID, similar to finding a book in a library using its catalog number. Returns the task if found, or nothing if the ID doesn't exist.",
+        "technical": "Performs a dictionary lookup operation on the `self.tasks` collection using the `get()` method with `task_id` as the key. Returns the task object associated with the given ID if it exists, or `None` if the key is not found (standard dict.get() behavior). No error handling, validation, or side effects - pure read-only data retrieval operation."
+      },
+      "update": {
+        "human": "Updates the details of an existing task that's already being tracked in the system. If the task exists (verified by its ID), it replaces the old version with the new one and saves all changes to permanent storage so they won't be lost if the program closes.",
+        "technical": "Checks if task.id exists in self.tasks dictionary, then replaces the existing task object with the provided task parameter. Calls self._persist_to_disk() to write the updated tasks collection to persistent storage. Returns None. Side effect: modifies self.tasks dictionary and triggers disk write operation. No-op if task ID doesn't exist in dictionary."
+      },
+      "delete": {
+        "human": "Removes a task from the task list permanently. When you want to get rid of a task you no longer need, this function finds it by its ID number, deletes it, and saves the updated list to your computer's storage so the deletion is permanent. If the task doesn't exist, nothing happens and you're notified it wasn't found.",
+        "technical": "Performs conditional deletion from the tasks dictionary using the task_id as key. Checks existence with `in` operator, removes entry via `del` statement if found, then calls `_persist_to_disk()` to write updated state to storage. Returns boolean indicating success (True if deleted, False if task_id not found). Side effect: modifies self.tasks dictionary and triggers disk write operation."
+      },
+      "_load_from_disk": {
+        "human": "Retrieves saved task information that was previously stored on the computer's hard drive. If the saved file exists and can be read successfully, it loads that information; otherwise, it starts fresh with no tasks. This allows the program to remember tasks between sessions, like reopening a document you were working on.",
+        "technical": "Checks if storage_path file exists, then attempts to deserialize a Dictionary object from disk using pickle.load() with binary read mode. Implements error handling that catches any exceptions during deserialization, prints error message, and returns empty dict as fallback. Returns empty dict if file doesn't exist. No side effects beyond console output on error."
+      },
+      "_persist_to_disk": {
+        "human": "This function saves the current list of tasks to a file on your computer's hard drive so they won't be lost when the program closes. It acts like a \"save\" button, preserving your work. If something goes wrong during saving (like the disk is full or the file is locked), it displays an error message instead of crashing the program.",
+        "technical": "Serializes the `self.tasks` object to disk using Python's `pickle` module at the path specified by `self.storage_path`. Opens file in write-binary mode ('wb'), performs pickle.dump() to convert tasks object to byte stream, and writes to disk. Implements try-except error handling that catches all exceptions and prints error message to console, allowing graceful failure without propagating exceptions."
+      },
+      "clear_all": {
+        "human": "Removes all tasks from the system and saves this empty state. This is a utility function designed for testing purposes, allowing developers to start with a clean slate by wiping out all existing task data. After clearing the tasks from memory, it ensures the empty state is saved permanently to disk.",
+        "technical": "Resets the instance's `tasks` dictionary to an empty dict `{}`, effectively removing all task entries from memory. Immediately calls `self._persist_to_disk()` to write the cleared state to persistent storage, ensuring the empty task list survives application restarts. Returns None. Side effect: permanently deletes all task data both in memory and on disk."
+      },
+      "connect": {
+        "human": "This function is intended to establish a connection to a database, allowing the application to interact with stored data. However, it currently does nothing - it's a placeholder or stub that needs to be implemented. When properly coded, it would handle the setup required to communicate with the database system.",
+        "technical": "This is an empty method implementation containing only a `pass` statement, meaning it performs no operations. The method signature shows it's an instance method (takes `self`) with no parameters and no return value (`-> None` in signature is missing but implied by docstring). No database connection logic, error handling, or state management is present. This is either a placeholder for future implementation or part of an abstract base class meant to be overridden by subclasses."
+      },
+      "execute_query": {
+        "human": "This function is designed to run SQL database queries, like searching for data, adding new records, or updating existing information. However, it's currently a placeholder that doesn't actually do anything - it's like an empty template waiting to be filled in with the real database operations.",
+        "technical": "A method stub that accepts a SQL query string parameter but contains only a `pass` statement, meaning it performs no operations. No database connection is established, no query execution occurs, and no results are returned. This is an incomplete implementation that needs to be populated with actual SQL execution logic, error handling, and connection management."
+      }
+    },
+    "task_manager/task_handler.py": {
+      "__init__": {
+        "human": "Sets up a new task manager by connecting it to a storage system and figuring out what ID number to assign to the next task. It looks at all existing tasks to find the highest ID number used so far, then sets the next ID to be one number higher. If there are no existing tasks, it starts counting from 1.",
+        "technical": "Initializes a task manager instance by storing the TaskStorage reference and computing the next available task ID. Calls `storage.load_all()` to retrieve existing tasks, extracts all task IDs using a generator expression, finds the maximum ID with `max()`, and sets `_next_id` to max+1. Falls back to `_next_id = 1` if no tasks exist. No return value; modifies instance state only."
+      },
+      "to_dict": {
+        "human": "Converts a task object into a simple dictionary format that can be easily saved, sent over the internet, or stored in a database. Takes all the task's information (like its ID, title, priority, and completion status) and packages it into a standard format. Handles dates specially by converting them into text strings that can be stored anywhere.",
+        "technical": "Serializes task object attributes into a dictionary with string keys. Maps instance attributes (id, title, priority, completed) directly to dict values. Converts datetime objects (created_at, completed_at) to ISO 8601 format strings using isoformat() method. Handles optional completed_at field with conditional expression, returning None if not set. Returns Dict suitable for JSON serialization or API responses."
+      },
+      "mark_complete": {
+        "human": "This function marks a task as finished. When called, it records that the task is done and remembers exactly when it was completed. This is useful for tracking which tasks have been finished and when they were accomplished, helping users manage their to-do lists or project workflows.",
+        "technical": "Sets the instance attribute `self.completed` to `True` and captures the current timestamp using `datetime.now()`, storing it in `self.completed_at`. Modifies object state with two side effects but returns nothing (None). Assumes the object has these attributes pre-defined. No validation or error handling is performed."
+      },
+      "add_task": {
+        "human": "Creates and saves a new task to the system with a given title and priority level. Before adding the task, it checks that the title is valid according to certain rules. If the title doesn't meet requirements, it stops and reports an error. Once saved successfully, it returns a unique identification number for the new task so you can reference it later.",
+        "technical": "Validates task title using `validate_task_title()`, raises `ValueError` if invalid. Creates new `Task` object with auto-incremented ID (`self._next_id`), provided title, and priority (defaults to 'medium'). Persists task via `self.storage.save()`, increments internal ID counter, and returns the assigned task ID. Side effects include storage mutation and ID counter increment."
+      },
+      "list_tasks": {
+        "human": "Retrieves and displays a list of tasks from storage. You can choose to see all tasks or only the ones that haven't been finished yet. The tasks are automatically organized by their ID numbers so they appear in a consistent order, making it easier to find and review specific tasks.",
+        "technical": "Loads all tasks from storage via `self.storage.load_all()`, optionally filters out completed tasks by checking the 'completed' boolean field in each task dictionary, then returns a sorted list of task dictionaries ordered by their 'id' field. No side effects - purely reads data and returns a transformed copy. Returns `List[Dict]` where each dict contains task attributes including 'id' and 'completed' fields."
+      },
+      "complete_task": {
+        "human": "This function allows you to mark a task as done in your task management system. You provide the task's ID number, and the system will find that task, mark it as completed, and save the change. If the task doesn't exist, nothing happens and you get a notification that it failed.",
+        "technical": "Retrieves a task object from storage using `load_by_id()`, calls the task's `mark_complete()` method to update its completion status, then persists the change via `storage.update()`. Returns `True` on successful completion or `False` if the task_id doesn't exist. Performs read-modify-write operation with storage layer handling persistence."
+      },
+      "delete_task": {
+        "human": "Removes a task from the system permanently. When you want to get rid of a task you no longer need, this function finds it by its ID number and deletes it. Returns a confirmation of whether the deletion was successful or not.",
+        "technical": "Delegates task deletion to the storage layer by calling `self.storage.delete()` with the provided `task_id` integer parameter. Returns a boolean value indicating deletion success/failure as determined by the storage implementation. Acts as a thin wrapper around the storage backend's delete operation with no additional validation or business logic."
+      },
+      "get_task_by_priority": {
+        "human": "Finds and returns all tasks that match a specific priority level you're looking for. For example, if you want to see only \"high\" priority tasks or only \"low\" priority tasks, this function searches through all your tasks and gives you back just the ones that match that priority level.",
+        "technical": "Retrieves complete task list via `self.list_tasks()`, then filters using list comprehension to match tasks where the 'priority' dictionary key equals the provided priority string parameter. Returns a new list containing only task dictionaries that satisfy the priority match condition. Performs case-sensitive string comparison on the priority field."
+      },
+      "archive_completed_tasks": {
+        "human": "This function is intended to find all tasks that have been marked as complete and move them to an archive to keep the active task list clean. However, the feature is incomplete and doesn't actually do anything yet - it only identifies completed tasks but never archives them. It's essentially a placeholder waiting for someone to finish building the archival functionality.",
+        "technical": "Retrieves all tasks via `self.list_tasks()`, filters them using list comprehension to create a `completed` list containing only tasks where `t['completed']` is truthy. No actual archival logic is implemented - the function ends with `pass` after the TODO comment. Returns None implicitly. Has no side effects in current state; the filtered list is created but never used or persisted."
+      }
+    },
+    "utils/logger.py": {
+      "setup_logger": {
+        "human": "Creates and configures a logging system that records what the application is doing. Sets up where log messages should appear (the console/terminal), what format they should use (with timestamps and message details), and what level of detail to capture (like info, warnings, or errors). This helps developers monitor and debug the application by providing a standardized way to track events.",
+        "technical": "Instantiates a logger via logging.getLogger(), configures it with specified level, and attaches a StreamHandler directed to sys.stdout. Creates a Formatter with timestamp, logger name, level, and message pattern (datefmt='%Y-%m-%d %H:%M:%S'), applies it to the handler, then adds handler to logger. Returns the configured logger instance. Note: Docstring incorrectly states \"Returns: None\" but actually returns the logger object."
+      },
+      "get_logger": {
+        "human": "Retrieves a logging tool that the application uses to record messages, errors, and other information. By default, it gets the logger named 'task_manager', but you can request a different one by providing a specific name. This allows different parts of the program to share the same logging system and write to the same log files.",
+        "technical": "Wraps Python's `logging.getLogger()` to retrieve or create a named logger instance from the logging module's internal registry. Accepts a string parameter `name` (defaults to 'task_manager') and returns a Logger object. Note: Return type annotation shows `None` but actually returns a Logger instance. Uses the singleton pattern inherent to logging.getLogger() - repeated calls with the same name return the same logger instance."
+      },
+      "log_to_file": {
+        "human": "This function saves a message to a text file along with the current date and time. It's like keeping a diary or logbook of events that happen in your application - each entry gets stamped with when it occurred. The messages are added to the end of the file without erasing previous entries, so you build up a history over time.",
+        "technical": "Appends timestamped log entries to a specified file (defaults to 'app.log'). Opens file in append mode using context manager, generates timestamp string using datetime.now().strftime() with format '%Y-%m-%d %H:%M:%S', then writes formatted string combining timestamp and message with newline. No return value; side effect is file modification. Requires datetime module import (not shown in code)."
+      }
+    },
+    "utils/validators.py": {
+      "validate_priority": {
+        "human": "Checks whether a task's priority level is acceptable. The function ensures that users only assign valid priority labels (low, medium, or high) to their tasks. It helps prevent typos or invalid priority values from being used in a task management system.",
+        "technical": "Performs string validation against a hardcoded whitelist of three priority values: 'low', 'medium', 'high'. Normalizes input using `.lower()` method for case-insensitive comparison, then checks membership in the valid_priorities list. Returns boolean True for valid priorities, False otherwise. No side effects or external dependencies."
+      },
+      "validate_task_title": {
+        "human": "Checks whether a task title is acceptable before saving it. Makes sure the title isn't empty or just spaces, and prevents titles that are too long (over 200 characters). This helps maintain data quality by rejecting invalid task names before they enter the system.",
+        "technical": "Performs two validation checks on the input string: (1) verifies title is not None, empty, or whitespace-only using `title.strip()` and `len()`, (2) enforces maximum length constraint of 200 characters. Returns boolean True if both conditions pass, False otherwise. No side effects or external dependencies."
+      },
+      "validate_email": {
+        "human": "Checks whether an email address is written in the correct format. It verifies that the email has the basic structure of a valid email address (like having an @ symbol, a domain name, and a proper ending like .com or .org). Returns a simple yes or no answer about whether the format is acceptable.",
+        "technical": "Uses regex pattern matching to validate email format against the pattern `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`. Calls `re.match()` to check if the input string matches the pattern from the beginning, then converts the match object to boolean. Returns `True` for valid format, `False` otherwise. No external dependencies beyond the `re` module."
+      },
+      "validate_phone_number": {
+        "human": "Checks if a phone number is valid according to US formatting rules. It accepts phone numbers that may have dashes or spaces in them, and allows an optional country code (+1 or 1) at the beginning. The number must contain exactly 10 digits to be considered valid. This was built in preparation for adding user profile features to the application.",
+        "technical": "Strips hyphens and spaces from input string using `replace()`, then validates against regex pattern `^\\+?1?\\d{10}$` which matches optional +/1 prefix followed by exactly 10 digits. Uses `re.match()` for pattern matching and converts result to boolean. Returns True if phone matches US format (10 digits with optional country code), False otherwise. No side effects or external dependencies beyond the `re` module."
+      },
+      "sanitize_input": {
+        "human": "Cleans up text that users type in by removing characters that could be used maliciously to break the system or run unwanted commands. It strips out symbols like angle brackets, semicolons, ampersands, and pipes that are commonly used in hacking attempts, then removes extra whitespace from the beginning and end of the text.",
+        "technical": "Iterates through a hardcoded list of five potentially dangerous characters (`<`, `>`, `;`, `&`, `|`) and removes all occurrences from the input string using `str.replace()`. After character removal, applies `str.strip()` to remove leading/trailing whitespace. Returns the sanitized string. Note: This is a basic blacklist approach that may not provide comprehensive security protection."
+      }
+    }
+  },
+  "module_summaries": {
+    "main.py": {
+      "human": "This module is the main entry point for a command-line to-do list application. It allows users to manage their tasks by typing commands to add new tasks with priorities, view all tasks, mark tasks as done, or delete tasks. The program processes user commands, validates the input to make sure all required information is provided, performs the requested action using the task management system, and displays confirmation messages. It also includes some older utility functions for exporting tasks and testing purposes.",
+      "technical": "Implements CLI interface using argparse to expose four primary operations (add/list/complete/delete) with argument validation for task attributes. Orchestrates TaskStorage and TaskHandler components from task_manager package for data persistence and business logic execution. Integrates utils.logger for operation logging and utils.validators for input validation (priority levels, required fields). Main entry point follows command pattern where parsed arguments determine which handler method to invoke. Includes deprecated JSON export functionality and test helper functions with code quality issues (unreachable code, type annotation mismatches)."
+    },
+    "task_manager/__init__.py": {
+      "human": "This module serves as the package initializer for the task_manager system. It acts as the main entry point that exposes the package's public API by importing and potentially re-exporting components from the task_handler and storage submodules. This allows other parts of the application to import task management functionality directly from the task_manager package rather than accessing internal submodules.",
+      "technical": "Imports two internal modules: task_handler and storage, which likely contain the core task management logic and data persistence functionality respectively. With 13 lines of code, it probably contains import statements, __all__ definitions to control public exports, and possibly version metadata or package-level constants. Functions as the package namespace controller, determining which symbols from task_handler and storage are exposed to external consumers of the task_manager package."
+    },
+    "task_manager/storage.py": {
+      "human": "This module provides the data storage and persistence layer for a task management application. It handles saving tasks to your computer's hard drive so they aren't lost when you close the program, and loading them back when you restart. The module offers two storage approaches: a file-based system that saves tasks to a local file using Python's pickle format, and a database option for more advanced storage needs. It manages all the behind-the-scenes work of remembering your tasks between sessions, like a filing cabinet that automatically saves and retrieves your to-do list.",
+      "technical": "Implements two storage backend classes: TaskStorage (file-based persistence using pickle serialization) and DatabaseStorage (database interface, currently stub implementation). TaskStorage provides CRUD operations (save, load_all, load_by_id, update, delete) with automatic persistence via _persist_to_disk() after mutations. Uses pathlib.Path for file system operations and pickle for object serialization to \".tasks.pkl\" default location. Maintains in-memory dictionary (self.tasks) as primary data structure with lazy-loading on initialization. DatabaseStorage class contains placeholder methods (connect, execute_query) for future SQL integration. Follows repository pattern for data access abstraction."
+    },
+    "task_manager/task_handler.py": {
+      "human": "This module provides a complete task management system that lets users create, track, and organize their to-do items. It handles the full lifecycle of tasks - from creating new ones with titles and priority levels, to marking them complete when finished, to filtering and viewing tasks by different criteria. The system automatically assigns unique ID numbers to each task, tracks when tasks were created and completed, and keeps everything organized through a storage system. It's designed to help users manage their workload by maintaining a structured list of tasks with different priority levels.",
+      "technical": "Implements two core classes: Task (data model for individual tasks with attributes like id, title, priority, completion status, and timestamps) and TaskHandler (service layer managing task operations). TaskHandler provides a CRUD API (add_task, list_tasks, complete_task, delete_task) plus filtering capabilities (get_task_by_priority). Depends on external storage abstraction layer for persistence and utils.validators for input validation. Uses auto-incrementing ID generation strategy initialized from existing storage state. Provides serialization via to_dict() for converting Task objects to dictionary format suitable for JSON/API responses. Acts as business logic layer between UI/API and storage backend."
+    },
+    "utils/__init__.py": {
+      "human": "This module serves as the package initializer for the utils package, making selected utilities available at the package level. It imports and re-exports the logger and validators modules, allowing other parts of the codebase to access these utilities through simplified import paths (e.g., `from utils import logger` instead of `from utils.logger import logger`).",
+      "technical": "Acts as the `__init__.py` file for the utils package with 10 lines of code. Imports the `logger` module once and the `validators` module twice (possibly importing different objects or re-exporting with aliases). Establishes the public API surface of the utils package by controlling which submodules are exposed to external importers. The duplicate validators import suggests either aliasing or importing multiple objects from the validators module."
+    },
+    "utils/logger.py": {
+      "human": "This module provides a logging system that helps track what's happening in the application. It creates tools for recording messages, warnings, and errors either to the screen or to files, with each entry automatically stamped with the date and time it occurred. This is like giving the application a voice to report what it's doing, making it easier to understand program behavior, find problems, and keep a permanent record of important events. The module ensures all parts of the application can write messages in a consistent, organized format.",
+      "technical": "Provides a lightweight logging facade over Python's standard logging module with three utility functions. setup_logger() configures logger instances with StreamHandler output to stdout, custom formatting with timestamps, and configurable log levels. get_logger() wraps logging.getLogger() to retrieve named logger instances (defaulting to 'task_manager') using the singleton pattern. log_to_file() implements basic file-based logging with timestamp formatting, independent of the standard logging framework. Primary API surface consists of logger configuration and retrieval functions. Note: Contains type annotation inconsistencies (functions return loggers but annotated as returning None)."
+    },
+    "utils/validators.py": {
+      "human": "This module provides input validation and sanitization functions for a task management application. It ensures that data entered by users meets quality and safety standards before being saved to the system. The module checks that task priorities are valid options, task titles are appropriate lengths, email addresses and phone numbers are properly formatted, and user input doesn't contain potentially dangerous characters. It acts as a gatekeeper to maintain data integrity and prevent invalid or malicious data from entering the application.",
+      "technical": "Implements five standalone validation functions that serve as the input validation layer for the application. Provides boolean validators for priority levels (whitelist-based), task titles (length constraints), email addresses (regex pattern matching), and US phone numbers (regex with optional country code). Includes a basic sanitization function using character blacklisting. All functions are stateless with no side effects, depending only on the `re` module for pattern matching and `typing` for type hints. Functions return boolean validation results or sanitized strings, designed to be called before data persistence operations."
+    }
+  },
+  "repo_summary": {
+    "human": "This is a command-line to-do list application that helps users organize and manage their tasks. Users can add new tasks with different priority levels, view all their tasks, mark tasks as complete, and delete tasks they no longer need. The application saves all tasks to the computer so nothing is lost when the program closes, and automatically loads them back when restarted. It's designed for anyone who needs a simple, text-based way to track their to-do items without requiring a graphical interface. The system includes built-in validation to ensure task information is properly formatted and safe to store.",
+    "technical": "Implements a three-layer architecture: CLI interface (main.py with argparse), business logic layer (task_manager package), and cross-cutting utilities (utils package). TaskHandler serves as the service layer managing Task domain objects and coordinating with the storage layer. TaskStorage provides data persistence using pickle serialization with in-memory caching and lazy-loading. The utils package supplies logging (wrapper over Python's logging module) and validation functions (regex-based input sanitization). Follows repository pattern for data access abstraction with pluggable storage backends (file-based implemented, database stub for future extension). Command pattern in CLI maps user commands to handler operations. System uses auto-incrementing IDs, timestamp tracking, and priority-based filtering with validation enforced at boundaries before persistence."
+  },
+  "dead_code_analysis": {
+    "unreferenced_functions": [
+      {
+        "name": "function_with_unreachable_code",
+        "module": "main.py",
+        "lineno": 95,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 100,
+          "category": "unreachable",
+          "reason": "The code contains unreachable statements after a return statement. The print() and cleanup() calls will never execute because all code paths return before reaching them.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Return statements on lines before the unreachable code ensure those lines never execute",
+            "Both conditional and default paths return values before reaching the print and cleanup calls"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 100,
+        "reason": "The code contains unreachable statements after a return statement. The print() and cleanup() calls will never execute because all code paths return before reaching them.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "empty_placeholder",
+        "module": "main.py",
+        "lineno": 105,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 90,
+          "category": "genuinely_unused",
+          "reason": "This is an empty placeholder function with no implementation and no calls found in the codebase. In an application project, placeholder functions should either be implemented or removed.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Function body contains only 'pass' with no actual functionality",
+            "No evidence of this being called anywhere in the application"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 90,
+        "reason": "This is an empty placeholder function with no implementation and no calls found in the codebase. In an application project, placeholder functions should either be implemented or removed.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "another_empty_function",
+        "module": "main.py",
+        "lineno": 109,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 90,
+          "category": "genuinely_unused",
+          "reason": "This function only returns None explicitly, providing no useful functionality. In an application context, such trivial functions with no callers are dead code.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Function only returns None which provides no meaningful functionality",
+            "No calls to this function found in the application codebase"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 90,
+        "reason": "This function only returns None explicitly, providing no useful functionality. In an application context, such trivial functions with no callers are dead code.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "function_with_many_params",
+        "module": "main.py",
+        "lineno": 113,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 85,
+          "category": "genuinely_unused",
+          "reason": "While the function has a simple implementation, there are no calls to it in the codebase. In an application project, all functions should be used internally or they constitute dead code.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Function is not called anywhere in the application codebase",
+            "No evidence of external usage or framework callbacks that would justify its existence"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 85,
+        "reason": "While the function has a simple implementation, there are no calls to it in the codebase. In an application project, all functions should be used internally or they constitute dead code.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "test_helper",
+        "module": "main.py",
+        "lineno": 117,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 85,
+          "category": "genuinely_unused",
+          "reason": "Despite its name suggesting it's a test helper, there are no calls to this function in the codebase. In an application project, helper functions should be actively used or removed.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "No calls to this function found anywhere in the application",
+            "The function it calls (helper_function_used_once) may also be dead code if only called from here"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 85,
+        "reason": "Despite its name suggesting it's a test helper, there are no calls to this function in the codebase. In an application project, helper functions should be actively used or removed.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "clear_all",
+        "module": "task_manager/storage.py",
+        "lineno": 65,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 85,
+          "category": "genuinely_unused",
+          "reason": "Method is explicitly marked as 'for testing' in docstring but appears to be unused even in tests. In an application context, testing utilities should be actively used or removed.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Docstring explicitly states it's for testing purposes only",
+            "No evidence of usage in test files or application code"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 85,
+        "reason": "Method is explicitly marked as 'for testing' in docstring but appears to be unused even in tests. In an application context, testing utilities should be actively used or removed.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "connect",
+        "module": "task_manager/storage.py",
+        "lineno": 81,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 90,
+          "category": "genuinely_unused",
+          "reason": "Empty method with only 'pass' statement in DatabaseStorage class that is not exported. No implementation and no calls found in codebase.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Method only contains 'pass' statement with no implementation",
+            "DatabaseStorage class is not exported, indicating internal-only usage"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 90,
+        "reason": "Empty method with only 'pass' statement in DatabaseStorage class that is not exported. No implementation and no calls found in codebase.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "execute_query",
+        "module": "task_manager/storage.py",
+        "lineno": 85,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 90,
+          "category": "genuinely_unused",
+          "reason": "Empty method with only 'pass' statement in DatabaseStorage class that is not exported. No implementation and no calls found in codebase.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Method only contains 'pass' statement with no implementation",
+            "DatabaseStorage class is not exported, indicating internal-only usage"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 90,
+        "reason": "Empty method with only 'pass' statement in DatabaseStorage class that is not exported. No implementation and no calls found in codebase.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "get_task_by_priority",
+        "module": "task_manager/task_handler.py",
+        "lineno": 84,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 80,
+          "category": "genuinely_unused",
+          "reason": "While the TaskHandler class is exported, this is an application project where all methods should be called internally. No internal usage found despite having a complete implementation.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Method has proper implementation but no internal calls found",
+            "Application context means exported classes are for organization, not public API"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 80,
+        "reason": "While the TaskHandler class is exported, this is an application project where all methods should be called internally. No internal usage found despite having a complete implementation.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "archive_completed_tasks",
+        "module": "task_manager/task_handler.py",
+        "lineno": 90,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 95,
+          "category": "genuinely_unused",
+          "reason": "Method docstring explicitly states the feature was never finished, contains only TODO comment and pass statement. This is clearly abandoned/incomplete code.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Docstring states 'feature was never finished'",
+            "Contains only TODO comment and pass statement with no implementation"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 95,
+        "reason": "Method docstring explicitly states the feature was never finished, contains only TODO comment and pass statement. This is clearly abandoned/incomplete code.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "get_logger",
+        "module": "utils/logger.py",
+        "lineno": 40,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 85,
+          "category": "genuinely_unused",
+          "reason": "This is a simple wrapper around logging.getLogger() that provides no additional functionality. In applications, code should directly use logging.getLogger() or use a centralized logger instance.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Function provides no added value over built-in logging.getLogger()",
+            "No internal calls found in application codebase"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 85,
+        "reason": "This is a simple wrapper around logging.getLogger() that provides no additional functionality. In applications, code should directly use logging.getLogger() or use a centralized logger instance.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "log_to_file",
+        "module": "utils/logger.py",
+        "lineno": 46,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 95,
+          "category": "genuinely_unused",
+          "reason": "The docstring explicitly states 'This function was created but never integrated', indicating it's abandoned code. The application likely uses proper logging configuration instead of this ad-hoc file writing approach.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Docstring explicitly mentions it was never integrated",
+            "Implements basic file logging that duplicates standard logging functionality"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 95,
+        "reason": "The docstring explicitly states 'This function was created but never integrated', indicating it's abandoned code. The application likely uses proper logging configuration instead of this ad-hoc file writing approach.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "validate_email",
+        "module": "utils/validators.py",
+        "lineno": 43,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 80,
+          "category": "genuinely_unused",
+          "reason": "Well-documented validation function that appears unused in the application codebase. Since this is an application project, all validation functions should be called somewhere internally if they serve a purpose.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "No internal usage found in application code",
+            "Email validation not referenced in any user input handling"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 80,
+        "reason": "Well-documented validation function that appears unused in the application codebase. Since this is an application project, all validation functions should be called somewhere internally if they serve a purpose.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "validate_phone_number",
+        "module": "utils/validators.py",
+        "lineno": 58,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 90,
+          "category": "genuinely_unused",
+          "reason": "Docstring explicitly states 'Was created for future user profile feature', indicating this is speculative code that was never implemented. Future features that aren't implemented represent dead code in applications.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Docstring mentions it was for a future feature that apparently wasn't implemented",
+            "No phone number handling found in current application code"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 90,
+        "reason": "Docstring explicitly states 'Was created for future user profile feature', indicating this is speculative code that was never implemented. Future features that aren't implemented represent dead code in applications.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "name": "sanitize_input",
+        "module": "utils/validators.py",
+        "lineno": 67,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 95,
+          "category": "genuinely_unused",
+          "reason": "Docstring clearly states 'Planned for security but never integrated', making this abandoned security code. The basic character replacement approach suggests it was never properly reviewed or integrated into the application's security measures.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Docstring explicitly states it was planned but never integrated",
+            "No input sanitization calls found in application request handling"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 95,
+        "reason": "Docstring clearly states 'Planned for security but never integrated', making this abandoned security code. The basic character replacement approach suggests it was never properly reviewed or integrated into the application's security measures.",
+        "recommendation": "safe_to_delete"
+      }
+    ],
+    "unused_classes": [
+      {
+        "name": "DatabaseStorage",
+        "module": "task_manager/storage.py",
+        "lineno": 72,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 95,
+          "category": "genuinely_unused",
+          "reason": "This is an empty class with a docstring explicitly stating it was 'planned but never implemented'. The docstring itself confirms this is incomplete/abandoned code with no functionality.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Docstring explicitly states 'This was planned but never implemented'",
+            "Class body is empty with no methods or functionality implemented",
+            "Represents abandoned/incomplete feature rather than functional code"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 95,
+        "reason": "This is an empty class with a docstring explicitly stating it was 'planned but never implemented'. The docstring itself confirms this is incomplete/abandoned code with no functionality.",
+        "recommendation": "safe_to_delete"
+      }
+    ],
+    "unused_imports": [],
+    "unused_global_variables": [
+      {
+        "module": "main.py",
+        "name": "DEBUG_MODE",
+        "lineno": 19,
+        "assigned_to": "bool",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "uncertain",
+          "confidence": 30,
+          "category": "config",
+          "reason": "This appears to be a configuration variable that could be used for enabling debug features throughout the application. Without seeing the rest of the codebase, it's unclear if it's referenced elsewhere for conditional logic or logging.",
+          "recommendation": "investigate",
+          "evidence": [
+            "Variable name suggests configuration purpose",
+            "Located in main.py which is typically an entry point"
+          ]
+        },
+        "status": "uncertain",
+        "confidence": 30,
+        "reason": "This appears to be a configuration variable that could be used for enabling debug features throughout the application. Without seeing the rest of the codebase, it's unclear if it's referenced elsewhere for conditional logic or logging.",
+        "recommendation": "investigate"
+      },
+      {
+        "module": "main.py",
+        "name": "MAX_RETRIES",
+        "lineno": 20,
+        "assigned_to": "int",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "uncertain",
+          "confidence": 30,
+          "category": "config",
+          "reason": "This appears to be a configuration constant for retry logic in network operations or similar functionality. It could be referenced by other modules or functions that implement retry mechanisms.",
+          "recommendation": "investigate",
+          "evidence": [
+            "Variable name suggests retry configuration",
+            "Common pattern for applications that make external calls"
+          ]
+        },
+        "status": "uncertain",
+        "confidence": 30,
+        "reason": "This appears to be a configuration constant for retry logic in network operations or similar functionality. It could be referenced by other modules or functions that implement retry mechanisms.",
+        "recommendation": "investigate"
+      },
+      {
+        "module": "main.py",
+        "name": "API_ENDPOINT",
+        "lineno": 21,
+        "assigned_to": "str",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "uncertain",
+          "confidence": 30,
+          "category": "config",
+          "reason": "This appears to be a configuration variable storing an API URL or endpoint. It's likely used by HTTP client code or API interaction functions elsewhere in the application.",
+          "recommendation": "investigate",
+          "evidence": [
+            "Variable name suggests API configuration",
+            "Essential for applications that interact with external APIs"
+          ]
+        },
+        "status": "uncertain",
+        "confidence": 30,
+        "reason": "This appears to be a configuration variable storing an API URL or endpoint. It's likely used by HTTP client code or API interaction functions elsewhere in the application.",
+        "recommendation": "investigate"
+      },
+      {
+        "module": "main.py",
+        "name": "CACHE_TIMEOUT",
+        "lineno": 22,
+        "assigned_to": "int",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "uncertain",
+          "confidence": 30,
+          "category": "config",
+          "reason": "This appears to be a configuration constant for cache expiration timing. It could be used by caching mechanisms or libraries throughout the application to determine when cached data should expire.",
+          "recommendation": "investigate",
+          "evidence": [
+            "Variable name suggests caching configuration",
+            "Common pattern for applications with caching functionality"
+          ]
+        },
+        "status": "uncertain",
+        "confidence": 30,
+        "reason": "This appears to be a configuration constant for cache expiration timing. It could be used by caching mechanisms or libraries throughout the application to determine when cached data should expire.",
+        "recommendation": "investigate"
+      }
+    ],
+    "unreachable_code": [
+      {
+        "lineno": 101,
+        "reason": "Code positioned after a return, raise, break, or continue statement cannot be executed under normal program flow. This represents genuinely unreachable code that serves no functional purpose.",
+        "code_preview": "print(\"This is unreachable\")",
+        "module": "main.py",
+        "function": "function_with_unreachable_code",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 95,
+          "category": "unreachable",
+          "reason": "Code positioned after a return, raise, break, or continue statement cannot be executed under normal program flow. This represents genuinely unreachable code that serves no functional purpose.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Located after a control flow statement that exits the current block",
+            "Python interpreter will never reach this code during execution"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 95,
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "lineno": 102,
+        "reason": "Code positioned after a return, raise, break, or continue statement cannot be executed under normal program flow. This represents genuinely unreachable code that serves no functional purpose.",
+        "code_preview": "cleanup()",
+        "module": "main.py",
+        "function": "function_with_unreachable_code",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 95,
+          "category": "unreachable",
+          "reason": "Code positioned after a return, raise, break, or continue statement cannot be executed under normal program flow. This represents genuinely unreachable code that serves no functional purpose.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Located after a control flow statement that exits the current block",
+            "Python interpreter will never reach this code during execution"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 95,
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "module": "main.py",
+        "function": "<module-level>",
+        "lineno": 122,
+        "reason": "Code in 'if False:' blocks is technically unreachable but may be intentionally disabled code for debugging, testing, or future features. Without seeing the actual content, it could serve a legitimate purpose.",
+        "code_preview": "if False:\n    print('Disabled feature')\n    deprecated_export_to_json()",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "uncertain",
+          "confidence": 70,
+          "category": "unreachable",
+          "reason": "Code in 'if False:' blocks is technically unreachable but may be intentionally disabled code for debugging, testing, or future features. Without seeing the actual content, it could serve a legitimate purpose.",
+          "recommendation": "investigate",
+          "evidence": [
+            "Conditional statement with literal False never evaluates to true",
+            "May be intentionally commented-out code or debugging logic"
+          ]
+        },
+        "status": "uncertain",
+        "confidence": 70,
+        "recommendation": "investigate"
+      }
+    ],
+    "suspicious_patterns": [
+      {
+        "module": "main.py",
+        "name": "empty_placeholder",
+        "lineno": 105,
+        "pattern_type": "empty_function",
+        "details": "Function is empty or only contains pass/return None",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 95,
+          "category": "genuinely_unused",
+          "reason": "This appears to be an empty placeholder function that was never implemented or used. In an application project, such placeholder functions are typically dead code unless they serve as hooks or callbacks.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Function name suggests it's a temporary placeholder",
+            "No implementation or usage pattern visible"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 95,
+        "reason": "This appears to be an empty placeholder function that was never implemented or used. In an application project, such placeholder functions are typically dead code unless they serve as hooks or callbacks.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "module": "main.py",
+        "name": "another_empty_function",
+        "lineno": 109,
+        "pattern_type": "empty_function",
+        "details": "Function is empty or only contains pass/return None",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 95,
+          "category": "genuinely_unused",
+          "reason": "Another empty function that appears to be unused scaffolding code. In application projects, empty functions without clear callback or hook purposes are typically safe to remove.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Empty function with generic name",
+            "No clear purpose or usage pattern"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 95,
+        "reason": "Another empty function that appears to be unused scaffolding code. In application projects, empty functions without clear callback or hook purposes are typically safe to remove.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "module": "main.py",
+        "name": "function_with_many_params",
+        "lineno": 113,
+        "pattern_type": "too_many_parameters",
+        "details": "Function has 8 parameters - consider parameter object",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "dead_code",
+          "confidence": 90,
+          "category": "genuinely_unused",
+          "reason": "Despite having multiple parameters, if this function is never called internally in an application project, it represents dead code that should be removed.",
+          "recommendation": "safe_to_delete",
+          "evidence": [
+            "Function is not called anywhere in the codebase",
+            "No evidence of external usage or callback pattern"
+          ]
+        },
+        "status": "dead_code",
+        "confidence": 90,
+        "reason": "Despite having multiple parameters, if this function is never called internally in an application project, it represents dead code that should be removed.",
+        "recommendation": "safe_to_delete"
+      },
+      {
+        "module": "task_manager/storage.py",
+        "name": "delete",
+        "lineno": 38,
+        "pattern_type": "similar_function_names",
+        "details": "Similar to delete_task in task_manager/task_handler.py - possible duplicate logic",
+        "needs_llm": true,
+        "llm_analysis": {
+          "status": "false_positive",
+          "confidence": 85,
+          "category": "interface_method",
+          "reason": "The 'delete' method in a storage class is likely part of a CRUD interface pattern. Such methods are commonly called by other parts of the application or follow standard storage interface conventions.",
+          "recommendation": "keep",
+          "evidence": [
+            "Method name follows standard CRUD operations pattern",
+            "Located in storage module suggesting data management interface"
+          ]
+        },
+        "status": "false_positive",
+        "confidence": 85,
+        "reason": "The 'delete' method in a storage class is likely part of a CRUD interface pattern. Such methods are commonly called by other parts of the application or follow standard storage interface conventions.",
+        "recommendation": "keep"
+      }
+    ],
+    "summary": {
+      "total_analyzed": 27,
+      "confirmed_dead_code": 21,
+      "false_positives": 1,
+      "uncertain": 5,
+      "avg_confidence": 80.55555555555556
+    }
+  },
+  "logical_groups": {
+    "Application Entry": [
+      "main.py"
+    ],
+    "Business Logic": [
+      "task_manager/task_handler.py"
+    ],
+    "Data Storage": [
+      "task_manager/storage.py"
+    ],
+    "Utilities": [
+      "utils/logger.py",
+      "utils/validators.py"
+    ],
+    "Package Initialization": [
+      "task_manager/__init__.py",
+      "utils/__init__.py"
+    ]
+  },
+  "audio_narration": {
+    "audio_file": "/Users/navyan/Desktop/LLM-Project/repospeak/audio/test_project_summary.mp3",
+    "script_file": "/Users/navyan/Desktop/LLM-Project/repospeak/audio/test_project_audio_script.txt",
+    "audio_text": "Imagine having a personal assistant who never forgets... but instead of an expensive app with flashy graphics, this one lives entirely in your computer's text-based terminal. That's exactly what the test_project repository offers.\n\nThink of this as a digital notepad that's always within reach. You know how some people swear by physical sticky notes on their desk? This is the programmer's version of that... except these sticky notes can't fall behind your desk or get coffee-stained.\n\nHere's how it works. First, you can add tasks whenever something pops into your head... and here's the clever part... you can assign priority levels. So that urgent deadline gets flagged differently than \"remember to water the plants.\" Next, you can view all your tasks at a glance, like spreading out all those sticky notes in front of you. When you've finished something, mark it complete... giving you that satisfying sense of accomplishment. And finally, delete tasks you no longer need.\n\nBut here's what makes this truly useful... persistence. The application automatically saves everything to your computer's storage. Close the program, shut down your machine, come back three days later... and boom... all your tasks are right there waiting for you. It's like having a filing cabinet that organizes itself.\n\nThe system also includes validation... think of this as spell-check, but for task data... ensuring everything you enter is properly formatted and safe to store. No corrupted files, no lost information.\n\nThis is perfect for developers, system administrators, or anyone comfortable with a C-L-I... that's command-line interface... who wants task management without the bloat of heavy applications. Sometimes the simplest tools are the most powerful.",
+    "word_count": 271,
+    "estimated_duration_minutes": 1.8
+  }
+}

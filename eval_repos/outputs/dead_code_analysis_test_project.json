@@ -1,0 +1,587 @@
+{
+  "unreferenced_functions": [
+    {
+      "name": "function_with_unreachable_code",
+      "module": "main.py",
+      "lineno": 95,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 100,
+        "category": "unreachable",
+        "reason": "The code contains unreachable statements after a return statement. The print() and cleanup() calls will never execute because all code paths return before reaching them.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Return statements on lines before the unreachable code ensure those lines never execute",
+          "Both conditional and default paths return values before reaching the print and cleanup calls"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 100,
+      "reason": "The code contains unreachable statements after a return statement. The print() and cleanup() calls will never execute because all code paths return before reaching them.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "empty_placeholder",
+      "module": "main.py",
+      "lineno": 105,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 90,
+        "category": "genuinely_unused",
+        "reason": "This is an empty placeholder function with no implementation and no calls found in the codebase. In an application project, placeholder functions should either be implemented or removed.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Function body contains only 'pass' with no actual functionality",
+          "No evidence of this being called anywhere in the application"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 90,
+      "reason": "This is an empty placeholder function with no implementation and no calls found in the codebase. In an application project, placeholder functions should either be implemented or removed.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "another_empty_function",
+      "module": "main.py",
+      "lineno": 109,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 90,
+        "category": "genuinely_unused",
+        "reason": "This function only returns None explicitly, providing no useful functionality. In an application context, such trivial functions with no callers are dead code.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Function only returns None which provides no meaningful functionality",
+          "No calls to this function found in the application codebase"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 90,
+      "reason": "This function only returns None explicitly, providing no useful functionality. In an application context, such trivial functions with no callers are dead code.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "function_with_many_params",
+      "module": "main.py",
+      "lineno": 113,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 85,
+        "category": "genuinely_unused",
+        "reason": "While the function has a simple implementation, there are no calls to it in the codebase. In an application project, all functions should be used internally or they constitute dead code.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Function is not called anywhere in the application codebase",
+          "No evidence of external usage or framework callbacks that would justify its existence"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 85,
+      "reason": "While the function has a simple implementation, there are no calls to it in the codebase. In an application project, all functions should be used internally or they constitute dead code.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "test_helper",
+      "module": "main.py",
+      "lineno": 117,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 85,
+        "category": "genuinely_unused",
+        "reason": "Despite its name suggesting it's a test helper, there are no calls to this function in the codebase. In an application project, helper functions should be actively used or removed.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "No calls to this function found anywhere in the application",
+          "The function it calls (helper_function_used_once) may also be dead code if only called from here"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 85,
+      "reason": "Despite its name suggesting it's a test helper, there are no calls to this function in the codebase. In an application project, helper functions should be actively used or removed.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "clear_all",
+      "module": "task_manager/storage.py",
+      "lineno": 65,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 85,
+        "category": "genuinely_unused",
+        "reason": "Method is explicitly marked as 'for testing' in docstring but appears to be unused even in tests. In an application context, testing utilities should be actively used or removed.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Docstring explicitly states it's for testing purposes only",
+          "No evidence of usage in test files or application code"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 85,
+      "reason": "Method is explicitly marked as 'for testing' in docstring but appears to be unused even in tests. In an application context, testing utilities should be actively used or removed.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "connect",
+      "module": "task_manager/storage.py",
+      "lineno": 81,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 90,
+        "category": "genuinely_unused",
+        "reason": "Empty method with only 'pass' statement in DatabaseStorage class that is not exported. No implementation and no calls found in codebase.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Method only contains 'pass' statement with no implementation",
+          "DatabaseStorage class is not exported, indicating internal-only usage"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 90,
+      "reason": "Empty method with only 'pass' statement in DatabaseStorage class that is not exported. No implementation and no calls found in codebase.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "execute_query",
+      "module": "task_manager/storage.py",
+      "lineno": 85,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 90,
+        "category": "genuinely_unused",
+        "reason": "Empty method with only 'pass' statement in DatabaseStorage class that is not exported. No implementation and no calls found in codebase.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Method only contains 'pass' statement with no implementation",
+          "DatabaseStorage class is not exported, indicating internal-only usage"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 90,
+      "reason": "Empty method with only 'pass' statement in DatabaseStorage class that is not exported. No implementation and no calls found in codebase.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "get_task_by_priority",
+      "module": "task_manager/task_handler.py",
+      "lineno": 84,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 80,
+        "category": "genuinely_unused",
+        "reason": "While the TaskHandler class is exported, this is an application project where all methods should be called internally. No internal usage found despite having a complete implementation.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Method has proper implementation but no internal calls found",
+          "Application context means exported classes are for organization, not public API"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 80,
+      "reason": "While the TaskHandler class is exported, this is an application project where all methods should be called internally. No internal usage found despite having a complete implementation.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "archive_completed_tasks",
+      "module": "task_manager/task_handler.py",
+      "lineno": 90,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 95,
+        "category": "genuinely_unused",
+        "reason": "Method docstring explicitly states the feature was never finished, contains only TODO comment and pass statement. This is clearly abandoned/incomplete code.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Docstring states 'feature was never finished'",
+          "Contains only TODO comment and pass statement with no implementation"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 95,
+      "reason": "Method docstring explicitly states the feature was never finished, contains only TODO comment and pass statement. This is clearly abandoned/incomplete code.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "get_logger",
+      "module": "utils/logger.py",
+      "lineno": 40,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 85,
+        "category": "genuinely_unused",
+        "reason": "This is a simple wrapper around logging.getLogger() that provides no additional functionality. In applications, code should directly use logging.getLogger() or use a centralized logger instance.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Function provides no added value over built-in logging.getLogger()",
+          "No internal calls found in application codebase"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 85,
+      "reason": "This is a simple wrapper around logging.getLogger() that provides no additional functionality. In applications, code should directly use logging.getLogger() or use a centralized logger instance.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "log_to_file",
+      "module": "utils/logger.py",
+      "lineno": 46,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 95,
+        "category": "genuinely_unused",
+        "reason": "The docstring explicitly states 'This function was created but never integrated', indicating it's abandoned code. The application likely uses proper logging configuration instead of this ad-hoc file writing approach.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Docstring explicitly mentions it was never integrated",
+          "Implements basic file logging that duplicates standard logging functionality"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 95,
+      "reason": "The docstring explicitly states 'This function was created but never integrated', indicating it's abandoned code. The application likely uses proper logging configuration instead of this ad-hoc file writing approach.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "validate_email",
+      "module": "utils/validators.py",
+      "lineno": 43,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 80,
+        "category": "genuinely_unused",
+        "reason": "Well-documented validation function that appears unused in the application codebase. Since this is an application project, all validation functions should be called somewhere internally if they serve a purpose.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "No internal usage found in application code",
+          "Email validation not referenced in any user input handling"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 80,
+      "reason": "Well-documented validation function that appears unused in the application codebase. Since this is an application project, all validation functions should be called somewhere internally if they serve a purpose.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "validate_phone_number",
+      "module": "utils/validators.py",
+      "lineno": 58,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 90,
+        "category": "genuinely_unused",
+        "reason": "Docstring explicitly states 'Was created for future user profile feature', indicating this is speculative code that was never implemented. Future features that aren't implemented represent dead code in applications.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Docstring mentions it was for a future feature that apparently wasn't implemented",
+          "No phone number handling found in current application code"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 90,
+      "reason": "Docstring explicitly states 'Was created for future user profile feature', indicating this is speculative code that was never implemented. Future features that aren't implemented represent dead code in applications.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "name": "sanitize_input",
+      "module": "utils/validators.py",
+      "lineno": 67,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 95,
+        "category": "genuinely_unused",
+        "reason": "Docstring clearly states 'Planned for security but never integrated', making this abandoned security code. The basic character replacement approach suggests it was never properly reviewed or integrated into the application's security measures.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Docstring explicitly states it was planned but never integrated",
+          "No input sanitization calls found in application request handling"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 95,
+      "reason": "Docstring clearly states 'Planned for security but never integrated', making this abandoned security code. The basic character replacement approach suggests it was never properly reviewed or integrated into the application's security measures.",
+      "recommendation": "safe_to_delete"
+    }
+  ],
+  "unused_classes": [
+    {
+      "name": "DatabaseStorage",
+      "module": "task_manager/storage.py",
+      "lineno": 72,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 95,
+        "category": "genuinely_unused",
+        "reason": "This is an empty class with a docstring explicitly stating it was 'planned but never implemented'. The docstring itself confirms this is incomplete/abandoned code with no functionality.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Docstring explicitly states 'This was planned but never implemented'",
+          "Class body is empty with no methods or functionality implemented",
+          "Represents abandoned/incomplete feature rather than functional code"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 95,
+      "reason": "This is an empty class with a docstring explicitly stating it was 'planned but never implemented'. The docstring itself confirms this is incomplete/abandoned code with no functionality.",
+      "recommendation": "safe_to_delete"
+    }
+  ],
+  "unused_imports": [],
+  "unused_global_variables": [
+    {
+      "module": "main.py",
+      "name": "DEBUG_MODE",
+      "lineno": 19,
+      "assigned_to": "bool",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "uncertain",
+        "confidence": 30,
+        "category": "config",
+        "reason": "This appears to be a configuration variable that could be used for enabling debug features throughout the application. Without seeing the rest of the codebase, it's unclear if it's referenced elsewhere for conditional logic or logging.",
+        "recommendation": "investigate",
+        "evidence": [
+          "Variable name suggests configuration purpose",
+          "Located in main.py which is typically an entry point"
+        ]
+      },
+      "status": "uncertain",
+      "confidence": 30,
+      "reason": "This appears to be a configuration variable that could be used for enabling debug features throughout the application. Without seeing the rest of the codebase, it's unclear if it's referenced elsewhere for conditional logic or logging.",
+      "recommendation": "investigate"
+    },
+    {
+      "module": "main.py",
+      "name": "MAX_RETRIES",
+      "lineno": 20,
+      "assigned_to": "int",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "uncertain",
+        "confidence": 30,
+        "category": "config",
+        "reason": "This appears to be a configuration constant for retry logic in network operations or similar functionality. It could be referenced by other modules or functions that implement retry mechanisms.",
+        "recommendation": "investigate",
+        "evidence": [
+          "Variable name suggests retry configuration",
+          "Common pattern for applications that make external calls"
+        ]
+      },
+      "status": "uncertain",
+      "confidence": 30,
+      "reason": "This appears to be a configuration constant for retry logic in network operations or similar functionality. It could be referenced by other modules or functions that implement retry mechanisms.",
+      "recommendation": "investigate"
+    },
+    {
+      "module": "main.py",
+      "name": "API_ENDPOINT",
+      "lineno": 21,
+      "assigned_to": "str",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "uncertain",
+        "confidence": 30,
+        "category": "config",
+        "reason": "This appears to be a configuration variable storing an API URL or endpoint. It's likely used by HTTP client code or API interaction functions elsewhere in the application.",
+        "recommendation": "investigate",
+        "evidence": [
+          "Variable name suggests API configuration",
+          "Essential for applications that interact with external APIs"
+        ]
+      },
+      "status": "uncertain",
+      "confidence": 30,
+      "reason": "This appears to be a configuration variable storing an API URL or endpoint. It's likely used by HTTP client code or API interaction functions elsewhere in the application.",
+      "recommendation": "investigate"
+    },
+    {
+      "module": "main.py",
+      "name": "CACHE_TIMEOUT",
+      "lineno": 22,
+      "assigned_to": "int",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "uncertain",
+        "confidence": 30,
+        "category": "config",
+        "reason": "This appears to be a configuration constant for cache expiration timing. It could be used by caching mechanisms or libraries throughout the application to determine when cached data should expire.",
+        "recommendation": "investigate",
+        "evidence": [
+          "Variable name suggests caching configuration",
+          "Common pattern for applications with caching functionality"
+        ]
+      },
+      "status": "uncertain",
+      "confidence": 30,
+      "reason": "This appears to be a configuration constant for cache expiration timing. It could be used by caching mechanisms or libraries throughout the application to determine when cached data should expire.",
+      "recommendation": "investigate"
+    }
+  ],
+  "unreachable_code": [
+    {
+      "lineno": 101,
+      "reason": "Code positioned after a return, raise, break, or continue statement cannot be executed under normal program flow. This represents genuinely unreachable code that serves no functional purpose.",
+      "code_preview": "print(\"This is unreachable\")",
+      "module": "main.py",
+      "function": "function_with_unreachable_code",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 95,
+        "category": "unreachable",
+        "reason": "Code positioned after a return, raise, break, or continue statement cannot be executed under normal program flow. This represents genuinely unreachable code that serves no functional purpose.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Located after a control flow statement that exits the current block",
+          "Python interpreter will never reach this code during execution"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 95,
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "lineno": 102,
+      "reason": "Code positioned after a return, raise, break, or continue statement cannot be executed under normal program flow. This represents genuinely unreachable code that serves no functional purpose.",
+      "code_preview": "cleanup()",
+      "module": "main.py",
+      "function": "function_with_unreachable_code",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 95,
+        "category": "unreachable",
+        "reason": "Code positioned after a return, raise, break, or continue statement cannot be executed under normal program flow. This represents genuinely unreachable code that serves no functional purpose.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Located after a control flow statement that exits the current block",
+          "Python interpreter will never reach this code during execution"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 95,
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "module": "main.py",
+      "function": "<module-level>",
+      "lineno": 122,
+      "reason": "Code in 'if False:' blocks is technically unreachable but may be intentionally disabled code for debugging, testing, or future features. Without seeing the actual content, it could serve a legitimate purpose.",
+      "code_preview": "if False:\n    print('Disabled feature')\n    deprecated_export_to_json()",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "uncertain",
+        "confidence": 70,
+        "category": "unreachable",
+        "reason": "Code in 'if False:' blocks is technically unreachable but may be intentionally disabled code for debugging, testing, or future features. Without seeing the actual content, it could serve a legitimate purpose.",
+        "recommendation": "investigate",
+        "evidence": [
+          "Conditional statement with literal False never evaluates to true",
+          "May be intentionally commented-out code or debugging logic"
+        ]
+      },
+      "status": "uncertain",
+      "confidence": 70,
+      "recommendation": "investigate"
+    }
+  ],
+  "suspicious_patterns": [
+    {
+      "module": "main.py",
+      "name": "empty_placeholder",
+      "lineno": 105,
+      "pattern_type": "empty_function",
+      "details": "Function is empty or only contains pass/return None",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 95,
+        "category": "genuinely_unused",
+        "reason": "This appears to be an empty placeholder function that was never implemented or used. In an application project, such placeholder functions are typically dead code unless they serve as hooks or callbacks.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Function name suggests it's a temporary placeholder",
+          "No implementation or usage pattern visible"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 95,
+      "reason": "This appears to be an empty placeholder function that was never implemented or used. In an application project, such placeholder functions are typically dead code unless they serve as hooks or callbacks.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "module": "main.py",
+      "name": "another_empty_function",
+      "lineno": 109,
+      "pattern_type": "empty_function",
+      "details": "Function is empty or only contains pass/return None",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 95,
+        "category": "genuinely_unused",
+        "reason": "Another empty function that appears to be unused scaffolding code. In application projects, empty functions without clear callback or hook purposes are typically safe to remove.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Empty function with generic name",
+          "No clear purpose or usage pattern"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 95,
+      "reason": "Another empty function that appears to be unused scaffolding code. In application projects, empty functions without clear callback or hook purposes are typically safe to remove.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "module": "main.py",
+      "name": "function_with_many_params",
+      "lineno": 113,
+      "pattern_type": "too_many_parameters",
+      "details": "Function has 8 parameters - consider parameter object",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 90,
+        "category": "genuinely_unused",
+        "reason": "Despite having multiple parameters, if this function is never called internally in an application project, it represents dead code that should be removed.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Function is not called anywhere in the codebase",
+          "No evidence of external usage or callback pattern"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 90,
+      "reason": "Despite having multiple parameters, if this function is never called internally in an application project, it represents dead code that should be removed.",
+      "recommendation": "safe_to_delete"
+    },
+    {
+      "module": "task_manager/storage.py",
+      "name": "delete",
+      "lineno": 38,
+      "pattern_type": "similar_function_names",
+      "details": "Similar to delete_task in task_manager/task_handler.py - possible duplicate logic",
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "false_positive",
+        "confidence": 85,
+        "category": "interface_method",
+        "reason": "The 'delete' method in a storage class is likely part of a CRUD interface pattern. Such methods are commonly called by other parts of the application or follow standard storage interface conventions.",
+        "recommendation": "keep",
+        "evidence": [
+          "Method name follows standard CRUD operations pattern",
+          "Located in storage module suggesting data management interface"
+        ]
+      },
+      "status": "false_positive",
+      "confidence": 85,
+      "reason": "The 'delete' method in a storage class is likely part of a CRUD interface pattern. Such methods are commonly called by other parts of the application or follow standard storage interface conventions.",
+      "recommendation": "keep"
+    }
+  ],
+  "summary": {
+    "total_analyzed": 27,
+    "confirmed_dead_code": 21,
+    "false_positives": 1,
+    "uncertain": 5,
+    "avg_confidence": 80.55555555555556
+  }
+}

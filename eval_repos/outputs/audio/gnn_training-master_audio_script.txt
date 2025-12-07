@@ -1,0 +1,11 @@
+Imagine you're trying to understand how things connect... like how your friends know each other, or how different research papers reference one another. That's exactly what this toolkit helps computers understand.
+
+Think of this as a specialized teaching system for artificial intelligence. But instead of teaching it to recognize cats in photos, we're teaching it to understand relationships and connections. You know how you can look at a group of friends and predict who might get along based on their mutual connections? That's essentially what graph neural networks... or GNNs... do with data.
+
+Here's where it gets practical. First, this toolkit focuses on two real-world challenges. The first is node classification... imagine you're at a massive academic conference with thousands of research papers, and you need to categorize them by topic. Instead of reading each one individually, you could look at which papers cite each other... papers that reference similar work probably belong to similar categories. That's node classification in action.
+
+Next, there's molecular property prediction. Picture a chemist trying to determine if a new molecule will make a good medicine. Atoms are like tiny LEGO blocks connected by chemical bonds... and this toolkit helps predict what properties that structure might have... without expensive lab experiments.
+
+Finally, what makes this repository valuable is that it's ready to use right out of the box. Researchers and data scientists don't need to build everything from scratch. It handles the entire pipeline... loading your network data, training the AI model to recognize patterns, and evaluating how well it performs.
+
+Whether you're analyzing social networks, citation patterns, or molecular structures... this toolkit gives you the foundation to teach machines how to think about connections.

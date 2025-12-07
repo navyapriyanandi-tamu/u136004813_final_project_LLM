@@ -1,0 +1,14 @@
+graph TD
+    subgraph gnn_training-master
+        g_Application_315bb4c3["Application Entry - inference.py, main.py, qm9_train.py"]
+        style g_Application_315bb4c3 fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Models_25ac429f["Models - model.py, qm9_model.py"]
+        style g_Models_25ac429f fill:#9B59B6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Utilities_ceba282b["Utilities - utils.py"]
+        style g_Utilities_ceba282b fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Application_315bb4c3 --> g_Models_25ac429f
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

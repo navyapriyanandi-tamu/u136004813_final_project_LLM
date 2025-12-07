@@ -1,0 +1,45 @@
+graph TD
+    subgraph click_repo
+        g_Documentation_32b4555d["Documentation and Configuration - conf.py"]
+        style g_Documentation_32b4555d fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Core_5f3c0b9a["Core Framework Engine - __init__.py, core.py, decorators.py, globals.py, parser.py"]
+        style g_Core_5f3c0b9a fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Type_5f58a874["Type System and Validation - exceptions.py, types.py"]
+        style g_Type_5f58a874 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Terminal_002cbb92["Terminal UI and Interaction - _termui_impl.py, _textwrap.py, formatting.py, termui.py"]
+        style g_Terminal_002cbb92 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Platform_47021db9["Platform Compatibility - _compat.py, _utils.py, _winconsole.py, utils.py"]
+        style g_Platform_47021db9 fill:#5DADE2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Shell_a783223f["Shell Integration - shell_completion.py"]
+        style g_Shell_a783223f fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Testing_40f60f59["Testing Infrastructure - testing.py"]
+        style g_Testing_40f60f59 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example_4d22ea81["Example Applications - Simple CLI Tools - colors.py, inout.py, naval.py, validation.py"]
+        style g_Example_4d22ea81 fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example_13e5ac26["Example Applications - Advanced Features - aliases.py, completion.py, imagepipe.py, repo.py, termui.py"]
+        style g_Example_13e5ac26 fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example_99219591["Example Applications - Complex Architecture - __init__.py, __init__.py, cli.py, cmd_init.py, cmd_status.py"]
+        style g_Example_99219591 fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Core_5f3c0b9a --> g_Shell_a783223f
+    g_Core_5f3c0b9a --> g_Type_5f58a874
+    g_Core_5f3c0b9a --> g_Platform_47021db9
+    g_Core_5f3c0b9a --> g_Terminal_002cbb92
+    g_Platform_47021db9 --> g_Type_5f58a874
+    g_Platform_47021db9 --> g_Core_5f3c0b9a
+    g_Terminal_002cbb92 --> g_Type_5f58a874
+    g_Terminal_002cbb92 --> g_Platform_47021db9
+    g_Terminal_002cbb92 --> g_Core_5f3c0b9a
+    g_Type_5f58a874 --> g_Platform_47021db9
+    g_Type_5f58a874 --> g_Core_5f3c0b9a
+    g_Type_5f58a874 --> g_Shell_a783223f
+    g_Shell_a783223f --> g_Platform_47021db9
+    g_Shell_a783223f --> g_Core_5f3c0b9a
+    g_Testing_40f60f59 --> g_Platform_47021db9
+    g_Testing_40f60f59 --> g_Type_5f58a874
+    g_Testing_40f60f59 --> g_Core_5f3c0b9a
+    g_Testing_40f60f59 --> g_Terminal_002cbb92
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

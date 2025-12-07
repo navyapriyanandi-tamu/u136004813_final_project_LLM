@@ -1,0 +1,61 @@
+graph TD
+    subgraph requests
+        g_Package_6605bb06["Package Distribution and Setup - __version__.py, packages.py, setup.py"]
+        style g_Package_6605bb06 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Documentation_5b6cf869["Documentation - conf.py, flask_theme_support.py"]
+        style g_Documentation_5b6cf869 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Library_fad831ce["Library Initialization and Compatibility - __init__.py, compat.py"]
+        style g_Library_fad831ce fill:#5DADE2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Core_ad99bf6f["Core HTTP Request/Response - api.py, models.py, sessions.py"]
+        style g_Core_ad99bf6f fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Network_39f4db0a["Network Transport and Adapters - adapters.py"]
+        style g_Network_39f4db0a fill:#E67E22,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Authentication_342fcf96["Authentication and Security - auth.py, certs.py"]
+        style g_Authentication_342fcf96 fill:#E74C3C,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_State_deff2cd7["State Management - cookies.py, structures.py"]
+        style g_State_deff2cd7 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Error_ef432366["Error Handling - exceptions.py"]
+        style g_Error_ef432366 fill:#C0392B,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_HTTP_0bb98c4f["HTTP Standards and Conventions - status_codes.py"]
+        style g_HTTP_0bb98c4f fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Utilities_b95e0d68["Utilities and Helpers - _internal_utils.py, hooks.py, utils.py"]
+        style g_Utilities_b95e0d68 fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Diagnostics_b5a8bf8e["Diagnostics and Troubleshooting - help.py"]
+        style g_Diagnostics_b5a8bf8e fill:#C0392B,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Library_fad831ce --> g_Package_6605bb06
+    g_Library_fad831ce --> g_HTTP_0bb98c4f
+    g_Library_fad831ce --> g_Error_ef432366
+    g_Library_fad831ce --> g_Utilities_b95e0d68
+    g_Library_fad831ce --> g_Core_ad99bf6f
+    g_Utilities_b95e0d68 --> g_Package_6605bb06
+    g_Utilities_b95e0d68 --> g_Authentication_342fcf96
+    g_Utilities_b95e0d68 --> g_Library_fad831ce
+    g_Utilities_b95e0d68 --> g_Error_ef432366
+    g_Utilities_b95e0d68 --> g_State_deff2cd7
+    g_Network_39f4db0a --> g_Authentication_342fcf96
+    g_Network_39f4db0a --> g_Library_fad831ce
+    g_Network_39f4db0a --> g_Error_ef432366
+    g_Network_39f4db0a --> g_State_deff2cd7
+    g_Network_39f4db0a --> g_Utilities_b95e0d68
+    g_Network_39f4db0a --> g_Core_ad99bf6f
+    g_Core_ad99bf6f --> g_Authentication_342fcf96
+    g_Core_ad99bf6f --> g_Network_39f4db0a
+    g_Core_ad99bf6f --> g_HTTP_0bb98c4f
+    g_Core_ad99bf6f --> g_Library_fad831ce
+    g_Core_ad99bf6f --> g_Error_ef432366
+    g_Core_ad99bf6f --> g_State_deff2cd7
+    g_Core_ad99bf6f --> g_Utilities_b95e0d68
+    g_Authentication_342fcf96 --> g_State_deff2cd7
+    g_Authentication_342fcf96 --> g_Utilities_b95e0d68
+    g_Authentication_342fcf96 --> g_Library_fad831ce
+    g_State_deff2cd7 --> g_Utilities_b95e0d68
+    g_State_deff2cd7 --> g_Library_fad831ce
+    g_Error_ef432366 --> g_Library_fad831ce
+    g_Diagnostics_b5a8bf8e --> g_Package_6605bb06
+    g_Package_6605bb06 --> g_Library_fad831ce
+    g_HTTP_0bb98c4f --> g_State_deff2cd7
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

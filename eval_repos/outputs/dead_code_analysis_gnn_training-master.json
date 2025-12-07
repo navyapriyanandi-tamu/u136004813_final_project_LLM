@@ -1,0 +1,38 @@
+{
+  "unreferenced_functions": [],
+  "unused_classes": [],
+  "unused_imports": [],
+  "unused_global_variables": [
+    {
+      "module": "qm9_train.py",
+      "name": "num_targets",
+      "lineno": 15,
+      "assigned_to": null,
+      "needs_llm": true,
+      "llm_analysis": {
+        "status": "dead_code",
+        "confidence": 85,
+        "category": "genuinely_unused",
+        "reason": "Variable is defined at line 15 but never referenced anywhere in the codebase. This appears to be leftover from development or refactoring.",
+        "recommendation": "safe_to_delete",
+        "evidence": [
+          "Variable defined but no usage found in any code paths",
+          "No evidence of external usage or framework integration"
+        ]
+      },
+      "status": "dead_code",
+      "confidence": 85,
+      "reason": "Variable is defined at line 15 but never referenced anywhere in the codebase. This appears to be leftover from development or refactoring.",
+      "recommendation": "safe_to_delete"
+    }
+  ],
+  "unreachable_code": [],
+  "suspicious_patterns": [],
+  "summary": {
+    "total_analyzed": 1,
+    "confirmed_dead_code": 1,
+    "false_positives": 0,
+    "uncertain": 0,
+    "avg_confidence": 85.0
+  }
+}

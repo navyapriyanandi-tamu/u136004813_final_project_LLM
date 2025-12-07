@@ -1,0 +1,913 @@
+{
+  "inference.py": {
+    "filepath": "../gnn_training-master/inference.py",
+    "module_docstring": null,
+    "functions": [],
+    "classes": [],
+    "imports": [
+      {
+        "module": "torch",
+        "alias": null,
+        "lineno": 1,
+        "type": "import"
+      },
+      {
+        "module": "model",
+        "name": "GCN",
+        "alias": null,
+        "lineno": 2,
+        "type": "from_import"
+      },
+      {
+        "module": "torch_geometric.datasets",
+        "name": "Planetoid",
+        "alias": null,
+        "lineno": 3,
+        "type": "from_import"
+      },
+      {
+        "module": "torch_geometric.transforms",
+        "name": "NormalizeFeatures",
+        "alias": null,
+        "lineno": 4,
+        "type": "from_import"
+      }
+    ],
+    "variables": [
+      {
+        "name": "dataset",
+        "assigned_to": "Planetoid",
+        "lineno": 6
+      },
+      {
+        "name": "data",
+        "assigned_to": null,
+        "lineno": 7
+      },
+      {
+        "name": "device",
+        "assigned_to": "torch.device",
+        "lineno": 10
+      },
+      {
+        "name": "model",
+        "assigned_to": "unknown.to",
+        "lineno": 11
+      }
+    ],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [
+        "model.load_state_dict",
+        "GCN",
+        "dataset.num_node_features",
+        "data.to",
+        "torch.no_grad",
+        "torch.cuda.is_available",
+        "unknown.to",
+        "device",
+        "torch.load",
+        "print",
+        "Planetoid",
+        "predictions.tolist",
+        "NormalizeFeatures",
+        "model",
+        "logits.argmax",
+        "dataset.num_classes",
+        "torch.device",
+        "model.eval"
+      ],
+      "class_instantiations": [
+        "NormalizeFeatures",
+        "GCN",
+        "Planetoid"
+      ]
+    },
+    "dependency_classification": {
+      "stdlib": [],
+      "third_party": {
+        "ai": [
+          "torch"
+        ],
+        "other": [
+          "model",
+          "torch_geometric"
+        ]
+      },
+      "tech_stack": [
+        "Ai"
+      ]
+    },
+    "line_count": 21
+  },
+  "main.py": {
+    "filepath": "../gnn_training-master/main.py",
+    "module_docstring": null,
+    "functions": [
+      {
+        "name": "train",
+        "args": [],
+        "return_type": null,
+        "lineno": 21,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "F.nll_loss",
+          "optimizer.zero_grad",
+          "loss.backward",
+          "loss.item",
+          "optimizer.step",
+          "model.train",
+          "model",
+          "data"
+        ],
+        "docstring": null,
+        "code": "def train():\n    model.train()\n    optimizer.zero_grad()\n    out = model(data)\n    loss = F.nll_loss(out[data.train_mask], data.y[data.train_mask])  # Loss only on training nodes\n    loss.backward()\n    optimizer.step()\n    return loss.item()",
+        "line_count": 8,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "evaluate",
+        "args": [],
+        "return_type": null,
+        "lineno": 31,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "data.test_mask.sum",
+          "torch.no_grad",
+          "unknown.item",
+          "unknown.sum",
+          "logits.argmax",
+          "model",
+          "data",
+          "model.eval"
+        ],
+        "docstring": null,
+        "code": "def evaluate():\n    model.eval()\n    with torch.no_grad():\n        logits = model(data)\n        pred = logits.argmax(dim=1)  # Get class with highest probability\n        acc = (pred[data.test_mask] == data.y[data.test_mask]).sum().item() / data.test_mask.sum().item()\n    return acc",
+        "line_count": 7,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [],
+    "imports": [
+      {
+        "module": "torch",
+        "alias": null,
+        "lineno": 1,
+        "type": "import"
+      },
+      {
+        "module": "torch.nn.functional",
+        "alias": "F",
+        "lineno": 2,
+        "type": "import"
+      },
+      {
+        "module": "torch_geometric.datasets",
+        "name": "Planetoid",
+        "alias": null,
+        "lineno": 3,
+        "type": "from_import"
+      },
+      {
+        "module": "torch_geometric.loader",
+        "name": "DataLoader",
+        "alias": null,
+        "lineno": 4,
+        "type": "from_import"
+      },
+      {
+        "module": "torch_geometric.transforms",
+        "name": "NormalizeFeatures",
+        "alias": null,
+        "lineno": 5,
+        "type": "from_import"
+      },
+      {
+        "module": "torch.optim",
+        "name": "Adam",
+        "alias": null,
+        "lineno": 6,
+        "type": "from_import"
+      },
+      {
+        "module": "model",
+        "name": "GCN",
+        "alias": null,
+        "lineno": 7,
+        "type": "from_import"
+      }
+    ],
+    "variables": [
+      {
+        "name": "dataset",
+        "assigned_to": "Planetoid",
+        "lineno": 10
+      },
+      {
+        "name": "device",
+        "assigned_to": "torch.device",
+        "lineno": 13
+      },
+      {
+        "name": "model",
+        "assigned_to": "unknown.to",
+        "lineno": 14
+      },
+      {
+        "name": "data",
+        "assigned_to": "unknown.to",
+        "lineno": 15
+      },
+      {
+        "name": "optimizer",
+        "assigned_to": "Adam",
+        "lineno": 18
+      },
+      {
+        "name": "best_acc",
+        "assigned_to": "int",
+        "lineno": 40
+      }
+    ],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [
+        "GCN",
+        "dataset.num_node_features",
+        "train",
+        "model.parameters",
+        "torch.cuda.is_available",
+        "unknown.to",
+        "device",
+        "evaluate",
+        "Adam",
+        "Planetoid",
+        "print",
+        "NormalizeFeatures",
+        "torch.save",
+        "acc",
+        "dataset.num_classes",
+        "model.state_dict",
+        "torch.device",
+        "range"
+      ],
+      "class_instantiations": [
+        "Adam",
+        "NormalizeFeatures",
+        "GCN",
+        "Planetoid"
+      ]
+    },
+    "dependency_classification": {
+      "stdlib": [],
+      "third_party": {
+        "ai": [
+          "torch"
+        ],
+        "other": [
+          "torch_geometric",
+          "model"
+        ]
+      },
+      "tech_stack": [
+        "Ai"
+      ]
+    },
+    "line_count": 52
+  },
+  "model.py": {
+    "filepath": "../gnn_training-master/model.py",
+    "module_docstring": null,
+    "functions": [
+      {
+        "name": "__init__",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "num_node_features"
+          },
+          {
+            "name": "num_classes"
+          }
+        ],
+        "return_type": null,
+        "lineno": 6,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "super",
+          "GCN",
+          "GCNConv",
+          "self",
+          "num_node_features",
+          "unknown.__init__",
+          "num_classes"
+        ],
+        "docstring": null,
+        "code": "def __init__(self, num_node_features, num_classes):\n        super(GCN, self).__init__()\n        self.conv1 = GCNConv(num_node_features, 16)\n        self.conv2 = GCNConv(16, num_classes)",
+        "line_count": 4,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "forward",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "data"
+          }
+        ],
+        "return_type": null,
+        "lineno": 11,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.conv1",
+          "x",
+          "self.conv2",
+          "F.relu",
+          "F.log_softmax",
+          "edge_index"
+        ],
+        "docstring": null,
+        "code": "def forward(self, data):\n        x, edge_index = data.x, data.edge_index\n        x = self.conv1(x, edge_index)\n        x = F.relu(x)\n        x = self.conv2(x, edge_index)\n        return F.log_softmax(x, dim=1)",
+        "line_count": 6,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [
+      {
+        "name": "GCN",
+        "methods": [
+          "__init__",
+          "forward"
+        ],
+        "base_classes": [
+          "torch.nn.Module"
+        ],
+        "lineno": 5,
+        "docstring": null
+      }
+    ],
+    "imports": [
+      {
+        "module": "torch",
+        "alias": null,
+        "lineno": 1,
+        "type": "import"
+      },
+      {
+        "module": "torch.nn.functional",
+        "alias": "F",
+        "lineno": 2,
+        "type": "import"
+      },
+      {
+        "module": "torch_geometric.nn",
+        "name": "GCNConv",
+        "alias": null,
+        "lineno": 3,
+        "type": "from_import"
+      }
+    ],
+    "variables": [],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [],
+      "third_party": {
+        "ai": [
+          "torch"
+        ],
+        "other": [
+          "torch_geometric"
+        ]
+      },
+      "tech_stack": [
+        "Ai"
+      ]
+    },
+    "line_count": 17
+  },
+  "qm9_model.py": {
+    "filepath": "../gnn_training-master/qm9_model.py",
+    "module_docstring": null,
+    "functions": [
+      {
+        "name": "__init__",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "num_node_features"
+          },
+          {
+            "name": "num_classes"
+          }
+        ],
+        "return_type": null,
+        "lineno": 6,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "super",
+          "GCNConv",
+          "self",
+          "QM9_GCN",
+          "num_node_features",
+          "unknown.__init__",
+          "num_classes"
+        ],
+        "docstring": null,
+        "code": "def __init__(self, num_node_features, num_classes):\n        super(QM9_GCN, self).__init__()\n        self.conv1 = GCNConv(num_node_features, 32)  \n        self.conv2 = GCNConv(32, 32)  \n        self.conv3 = GCNConv(32, num_classes)",
+        "line_count": 5,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "forward",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "data"
+          }
+        ],
+        "return_type": null,
+        "lineno": 12,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "self.conv1",
+          "x",
+          "self.conv2",
+          "F.relu",
+          "self.conv3",
+          "F.log_softmax",
+          "edge_index"
+        ],
+        "docstring": null,
+        "code": "def forward(self, data):\n        x, edge_index, edge_attr = data.x, data.edge_index, data.edge_attr\n        x = self.conv1(x, edge_index)\n        x = F.relu(x)\n        x = self.conv2(x, edge_index)\n        x = F.relu(x)\n        x = self.conv3(x, edge_index)\n        return F.log_softmax(x, dim=1)",
+        "line_count": 8,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [
+      {
+        "name": "QM9_GCN",
+        "methods": [
+          "__init__",
+          "forward"
+        ],
+        "base_classes": [
+          "torch.nn.Module"
+        ],
+        "lineno": 5,
+        "docstring": null
+      }
+    ],
+    "imports": [
+      {
+        "module": "torch",
+        "alias": null,
+        "lineno": 1,
+        "type": "import"
+      },
+      {
+        "module": "torch.nn.functional",
+        "alias": "F",
+        "lineno": 2,
+        "type": "import"
+      },
+      {
+        "module": "torch_geometric.nn",
+        "name": "GCNConv",
+        "alias": null,
+        "lineno": 3,
+        "type": "from_import"
+      }
+    ],
+    "variables": [],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [],
+      "third_party": {
+        "ai": [
+          "torch"
+        ],
+        "other": [
+          "torch_geometric"
+        ]
+      },
+      "tech_stack": [
+        "Ai"
+      ]
+    },
+    "line_count": 20
+  },
+  "qm9_train.py": {
+    "filepath": "../gnn_training-master/qm9_train.py",
+    "module_docstring": null,
+    "functions": [
+      {
+        "name": "train",
+        "args": [],
+        "return_type": null,
+        "lineno": 59,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "unknown.squeeze",
+          "optimizer.zero_grad",
+          "data.to",
+          "loss.backward",
+          "loss.item",
+          "optimizer.step",
+          "train_loader",
+          "device",
+          "F.mse_loss",
+          "model",
+          "len",
+          "model.train",
+          "out",
+          "data"
+        ],
+        "docstring": null,
+        "code": "def train():\n    model.train()\n    total_loss = 0\n    for data in train_loader:\n        data = data.to(device)\n        optimizer.zero_grad()\n        out = model(data).squeeze()  \n        loss = F.mse_loss(out, data.y[:, 0])  \n        loss.backward()\n        optimizer.step()\n        total_loss += loss.item()\n    return total_loss / len(train_loader)",
+        "line_count": 12,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "evaluate",
+        "args": [
+          {
+            "name": "loader"
+          }
+        ],
+        "return_type": null,
+        "lineno": 73,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "unknown.squeeze",
+          "data.to",
+          "loader",
+          "loss.item",
+          "torch.no_grad",
+          "device",
+          "F.mse_loss",
+          "model",
+          "len",
+          "mae.item",
+          "out",
+          "mae_metric",
+          "data",
+          "model.eval"
+        ],
+        "docstring": null,
+        "code": "def evaluate(loader):\n    model.eval()\n    total_loss = 0\n    total_mae = 0\n    with torch.no_grad():\n        for data in loader:\n            data = data.to(device)\n            out = model(data).squeeze()\n            loss = F.mse_loss(out, data.y[:, 0])\n            total_loss += loss.item()\n            \n            mae = mae_metric(out, data.y[:, 0])\n            total_mae += mae.item()\n\n    avg_loss = total_loss / len(loader)\n    avg_mae = total_mae / len(loader)\n    return avg_loss, avg_mae",
+        "line_count": 17,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "__init__",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "num_node_features"
+          },
+          {
+            "name": "hidden_dim"
+          },
+          {
+            "name": "output_dim"
+          }
+        ],
+        "return_type": null,
+        "lineno": 33,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "super",
+          "GCN",
+          "GCNConv",
+          "hidden_dim",
+          "self",
+          "num_node_features",
+          "unknown.__init__",
+          "output_dim"
+        ],
+        "docstring": null,
+        "code": "def __init__(self, num_node_features, hidden_dim, output_dim):\n        super(GCN, self).__init__()\n        self.conv1 = GCNConv(num_node_features, hidden_dim)\n        self.conv2 = GCNConv(hidden_dim, output_dim)",
+        "line_count": 4,
+        "needs_llm_summary": true
+      },
+      {
+        "name": "forward",
+        "args": [
+          {
+            "name": "self"
+          },
+          {
+            "name": "data"
+          }
+        ],
+        "return_type": null,
+        "lineno": 38,
+        "decorators": [],
+        "is_async": false,
+        "calls": [
+          "data.batch",
+          "self.conv1",
+          "global_mean_pool",
+          "x",
+          "self.conv2",
+          "F.relu",
+          "edge_index"
+        ],
+        "docstring": null,
+        "code": "def forward(self, data):\n        x, edge_index = data.x, data.edge_index\n        x = self.conv1(x, edge_index)\n        x = F.relu(x)\n        x = self.conv2(x, edge_index)\n\n        # Aggregate node features correctly for batch processing\n        x = global_mean_pool(x, data.batch)  \n        return x",
+        "line_count": 9,
+        "needs_llm_summary": true
+      }
+    ],
+    "classes": [
+      {
+        "name": "GCN",
+        "methods": [
+          "__init__",
+          "forward"
+        ],
+        "base_classes": [
+          "torch.nn.Module"
+        ],
+        "lineno": 32,
+        "docstring": null
+      }
+    ],
+    "imports": [
+      {
+        "module": "torch",
+        "alias": null,
+        "lineno": 1,
+        "type": "import"
+      },
+      {
+        "module": "torch.nn.functional",
+        "alias": "F",
+        "lineno": 2,
+        "type": "import"
+      },
+      {
+        "module": "torch_geometric.datasets",
+        "name": "QM9",
+        "alias": null,
+        "lineno": 3,
+        "type": "from_import"
+      },
+      {
+        "module": "torch_geometric.loader",
+        "name": "DataLoader",
+        "alias": null,
+        "lineno": 4,
+        "type": "from_import"
+      },
+      {
+        "module": "torch_geometric.nn",
+        "name": "GCNConv",
+        "alias": null,
+        "lineno": 5,
+        "type": "from_import"
+      },
+      {
+        "module": "torch_geometric.nn",
+        "name": "global_mean_pool",
+        "alias": null,
+        "lineno": 6,
+        "type": "from_import"
+      },
+      {
+        "module": "torch.optim",
+        "name": "Adam",
+        "alias": null,
+        "lineno": 7,
+        "type": "from_import"
+      },
+      {
+        "module": "torchmetrics.regression",
+        "name": "MeanAbsoluteError",
+        "alias": null,
+        "lineno": 8,
+        "type": "from_import"
+      }
+    ],
+    "variables": [
+      {
+        "name": "dataset",
+        "assigned_to": "QM9",
+        "lineno": 11
+      },
+      {
+        "name": "num_features",
+        "assigned_to": null,
+        "lineno": 14
+      },
+      {
+        "name": "num_targets",
+        "assigned_to": null,
+        "lineno": 15
+      },
+      {
+        "name": "num_train",
+        "assigned_to": "int",
+        "lineno": 19
+      },
+      {
+        "name": "num_val",
+        "assigned_to": "int",
+        "lineno": 20
+      },
+      {
+        "name": "num_test",
+        "assigned_to": null,
+        "lineno": 21
+      },
+      {
+        "name": "batch_size",
+        "assigned_to": "int",
+        "lineno": 26
+      },
+      {
+        "name": "train_loader",
+        "assigned_to": "DataLoader",
+        "lineno": 27
+      },
+      {
+        "name": "val_loader",
+        "assigned_to": "DataLoader",
+        "lineno": 28
+      },
+      {
+        "name": "test_loader",
+        "assigned_to": "DataLoader",
+        "lineno": 29
+      },
+      {
+        "name": "device",
+        "assigned_to": "torch.device",
+        "lineno": 51
+      },
+      {
+        "name": "model",
+        "assigned_to": "unknown.to",
+        "lineno": 52
+      },
+      {
+        "name": "optimizer",
+        "assigned_to": "Adam",
+        "lineno": 55
+      },
+      {
+        "name": "mae_metric",
+        "assigned_to": "unknown.to",
+        "lineno": 56
+      },
+      {
+        "name": "best_val_loss",
+        "assigned_to": "float",
+        "lineno": 92
+      }
+    ],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [
+        "train",
+        "model.parameters",
+        "test_loader",
+        "print",
+        "torch.manual_seed",
+        "dataset",
+        "batch_size",
+        "QM9",
+        "MeanAbsoluteError",
+        "num_features",
+        "dataset.num_node_features",
+        "Adam",
+        "val_loss",
+        "torch.device",
+        "DataLoader",
+        "train_dataset",
+        "range",
+        "GCN",
+        "torch.cuda.is_available",
+        "device",
+        "val_dataset",
+        "torch.save",
+        "len",
+        "model.state_dict",
+        "float",
+        "test_dataset",
+        "torch.utils.data.random_split",
+        "unknown.to",
+        "int",
+        "evaluate",
+        "val_loader"
+      ],
+      "class_instantiations": [
+        "GCN",
+        "MeanAbsoluteError",
+        "Adam",
+        "QM9",
+        "DataLoader"
+      ]
+    },
+    "dependency_classification": {
+      "stdlib": [],
+      "third_party": {
+        "ai": [
+          "torch"
+        ],
+        "other": [
+          "torch_geometric",
+          "torchmetrics"
+        ]
+      },
+      "tech_stack": [
+        "Ai"
+      ]
+    },
+    "line_count": 107
+  },
+  "utils.py": {
+    "filepath": "../gnn_training-master/utils.py",
+    "module_docstring": null,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "variables": [],
+    "is_entry_point": false,
+    "main_block_calls": [],
+    "module_level_calls": {
+      "function_calls": [],
+      "class_instantiations": []
+    },
+    "dependency_classification": {
+      "stdlib": [],
+      "third_party": {},
+      "tech_stack": []
+    },
+    "line_count": 1
+  },
+  "__analysis_summary__": {
+    "total_modules": 5,
+    "total_functions": 4,
+    "total_classes": 2,
+    "dead_code_candidates": {
+      "unreferenced_functions": [],
+      "unused_classes": [],
+      "unused_imports": [
+        {
+          "module": "main.py",
+          "import_statement": "import torch_geometric.loader",
+          "lineno": 4,
+          "imported_module": "torch_geometric.loader",
+          "symbols": [
+            "DataLoader"
+          ],
+          "needs_llm": false
+        }
+      ],
+      "unused_global_variables": [
+        {
+          "module": "qm9_train.py",
+          "name": "num_targets",
+          "lineno": 15,
+          "assigned_to": null,
+          "needs_llm": true
+        }
+      ],
+      "unreachable_code": [],
+      "suspicious_patterns": []
+    }
+  }
+}
